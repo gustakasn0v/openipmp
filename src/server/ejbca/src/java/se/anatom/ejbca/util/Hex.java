@@ -24,7 +24,7 @@ public class Hex {
     };
 
     /**
-     * Encodar binärt till hex
+     * Encodar binÃ¤rt till hex
      *
      *@param dataStr bin-representation av data
      *@return Hex-representation av data
@@ -41,10 +41,10 @@ public class Hex {
     }
 
     /**
-     * Decodar hex till binärt
+     * Decodar hex till binÃ¤rt
      *
-     *@param dataStr Sträng innehållande hex-representation av data
-     *@return byte[] innhållande binär representation av data
+     *@param dataStr StrÃ¤ng innehÃ¥llande hex-representation av data
+     *@return byte[] innhÃ¥llande binÃ¤r representation av data
      **/
     public static byte[] decode(String dataStr) {
 

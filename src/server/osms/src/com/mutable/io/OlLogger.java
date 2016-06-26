@@ -514,15 +514,15 @@ public class OlLogger
 
 			BufferedWriter[] array= new BufferedWriter[m_vector.size()];
 
-			Enumeration enum = m_vector.elements();
+			Enumeration enume = m_vector.elements();
 
 			int i=0;
 
-			while (enum.hasMoreElements())
+			while (enume.hasMoreElements())
 
 			{
 
-				Object item = enum.nextElement();
+				Object item = enume.nextElement();
 
 				array[i]=(BufferedWriter)item;
 

@@ -29,7 +29,7 @@ import junit.framework.*;
  */
 public class TestCertificateData extends TestCase {
 
-    static byte[] testcert = Base64.decode(
+    static byte[] testcert = se.anatom.ejbca.util.Base64.decode(
     ("MIICETCCAXqgAwIBAgIIEzy5vc2xpOIwDQYJKoZIhvcNAQEFBQAwLjEOMAwGA1UE"
     +"AxMFZWpiY2ExDzANBgNVBAoTBkFuYVRvbTELMAkGA1UEBhMCU0UwHhcNMDExMTE0"
     +"MTMxODU5WhcNMDMxMTE0MTMyODU5WjAsMQwwCgYDVQQDEwNmb28xDzANBgNVBAoT"

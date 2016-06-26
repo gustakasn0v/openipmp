@@ -36,7 +36,7 @@ import junit.framework.*;
  */
 public class TestSignSession extends TestCase {
 
-    static byte[] keytoolp10 = Base64.decode(
+    static byte[] keytoolp10 = se.anatom.ejbca.util.Base64.decode(
     ("MIIBbDCB1gIBADAtMQ0wCwYDVQQDEwRUZXN0MQ8wDQYDVQQKEwZBbmFUb20xCzAJBgNVBAYTAlNF"
     +"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDY+ATE4ZB0oKfmXStu8J+do0GhTag6rOGtoydI"
     +"eNX9DdytlsmXDyONKl8746478/3HXdx9rA0RevUizKSataMpDsb3TjprRjzBTvYPZSIfzko6s8g6"
@@ -45,7 +45,7 @@ public class TestSignSession extends TestCase {
     +"kFLbpn0guEzhxPBbL6mhhmDDE4hbbHJp1Kh6gZ4Bmbb5FrwpvUyrSjTIwwRC7GAT00A1kOjl9jCC"
     +"XCfJkJH2QleCy7eKANq+DDTXzpEOvL/UqN0=").getBytes());
 
-    static byte[] oldbcp10 = Base64.decode(
+    static byte[] oldbcp10 = se.anatom.ejbca.util.Base64.decode(
     ("MIIBbDCB1gIBADAtMQswCQYDVQQGEwJTRTEPMA0GA1UEChMGQW5hVG9tMQ0wCwYDVQQDEwRUZXN0"
     +"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCzN9nDdwmq23/RLGisvR3CRO9JSem2QZ7JC7nr"
     +"NlbxQBLVqlkypT/lxMMur+lTX1S+jBaqXjtirhZTVaV5C/+HObWZ5vrj30lmsCdgzFybSzVxBz0l"
@@ -54,7 +54,7 @@ public class TestSignSession extends TestCase {
     +"7Ak5sv5NJew1XGkM4mGpF9cfcVshxLVlW+cgq0749fWbyS8KlgQP/ANh3DkLl8k5E+3Wnbi0JjCV"
     +"Xe1s44+K2solX8jOtryoR4TMJ6p9HpsuO68=").getBytes());
 
-    static byte[] iep10 = Base64.decode(
+    static byte[] iep10 = se.anatom.ejbca.util.Base64.decode(
     ("MIICnTCCAgYCAQAwGzEZMBcGA1UEAxMQNkFFSzM0N2Z3OHZXRTQyNDCBnzANBgkq"
     +"hkiG9w0BAQEFAAOBjQAwgYkCgYEAukW70HN9bt5x2AiSZm7y8GXQuyp1jN2OIvqU"
     +"sr0dzLIOFt1H8GPJkL80wx3tLDj3xJfWJdww3TqExsxMSP+qScoYKIOeNBb/2OMW"

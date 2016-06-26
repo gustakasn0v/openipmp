@@ -12,7 +12,7 @@
 
 *
 
-* IMPORTANT: READ THIS AGREEMENT (ìAGREEMENTî) CAREFULLY. THIS SOFTWARE IS LICENSED
+* IMPORTANT: READ THIS AGREEMENT (‚ÄúAGREEMENT‚Äù) CAREFULLY. THIS SOFTWARE IS LICENSED
 
 * TO YOU SUBJECT TO THIS AGREEMENT.
 
@@ -42,7 +42,7 @@
 
 * LIMITED VERSION WHICH CONTENTGUARD HAS NOT RELEASED FOR COMMERCIAL USE. THIS
 
-* SOFTWARE MAY INCUR OPERATING DIFFICULTIES BEYOND YOUR OR CONTENTGUARDíS
+* SOFTWARE MAY INCUR OPERATING DIFFICULTIES BEYOND YOUR OR CONTENTGUARD‚ÄôS
 
 * EXPECTATIONS AND THE FINAL OR COMPLETE VERSIONS OF THE SOFTWARE WHICH
 
@@ -60,13 +60,13 @@
 
 * 2. License Grant: ContentGuard, Inc. ("ContentGuard") hereby grants to you a
 
-* royalty-free, non-exclusive, license to use, reproduce, ìModifyî, display,
+* royalty-free, non-exclusive, license to use, reproduce, ‚ÄúModify‚Äù, display,
 
-* perform, sublicense and distribute the Software. ìModifyî means to make any
+* perform, sublicense and distribute the Software. ‚ÄúModify‚Äù means to make any
 
 * additions to or deletions from the source code of the Software and
 
-* ìModificationî means any such additions or deletions. No right or license is
+* ‚ÄúModification‚Äù means any such additions or deletions. No right or license is
 
 * granted herein by ContentGuard other than those which are expressly and
 
@@ -172,7 +172,7 @@
 
 * otherwise, for commercial licensing. This software may incur operating
 
-* difficulties beyond your or ContentGuardís expectations and ContentGuard does
+* difficulties beyond your or ContentGuard‚Äôs expectations and ContentGuard does
 
 * not warrant that the Software will be free of design errors or bugs. THE
 

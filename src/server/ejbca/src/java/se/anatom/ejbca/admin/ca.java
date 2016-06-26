@@ -287,7 +287,7 @@ public class ca {
                 X509Certificate cert = (X509Certificate) ss.createCertificate(username, password, buffer);
                 FileOutputStream fos = new FileOutputStream(outfile);
                 fos.write("-----BEGIN CERTIFICATE-----\n".getBytes());
-                fos.write(Base64.encode(cert.getEncoded()));
+                fos.write(se.anatom.ejbca.util.Base64.encode(cert.getEncoded()));
                 fos.write("\n-----END CERTIFICATE-----\n".getBytes());
                 fos.close();
                 System.out.println("Wrote certificate to file " + outfile);
@@ -488,7 +488,7 @@ public class ca {
         }
         FileOutputStream os1 = new FileOutputStream(reqfile);
         os1.write("-----BEGIN CERTIFICATE REQUEST-----\n".getBytes());
-        os1.write(Base64.encode(bOut.toByteArray()));
+        os1.write(se.anatom.ejbca.util.Base64.encode(bOut.toByteArray()));
         os1.write("\n-----END CERTIFICATE REQUEST-----\n".getBytes());
         os1.close();
         System.out.println("CertificationRequest '"+reqfile+"' generated succefully.");
