@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="urn:mpeg:mpeg21:2002:01-REL-NS" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:r="http://www.xrml.org/schema/2002/05/xrml2core" xmlns:sx="http://www.xrml.org/schema/2002/05/xrml2sx" xmlns:mx="urn:mpeg:mpeg21:2002:01-REL-NS" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:import namespace="http://www.xrml.org/schema/2002/05/xrml2sx" schemaLocation="xrml2sx.xsd"/>
+	<xsd:import namespace="http://www.xrml.org/schema/2002/05/xrml2core" schemaLocation="xrml2core.xsd"/>
+	<xsd:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="http://www.w3.org/TR/2002/REC-xmldsig-core-20020212/xmldsig-core-schema.xsd"/>
+	<!-- -->
+	<!-- === Rights === -->
+	<!-- -->
+	<xsd:complexType name="Modify">
+		<xsd:complexContent>
+			<xsd:extension base="r:Right"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Enlarge">
+		<xsd:complexContent>
+			<xsd:extension base="r:Right"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Reduce">
+		<xsd:complexContent>
+			<xsd:extension base="r:Right"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Move">
+		<xsd:complexContent>
+			<xsd:extension base="r:Right"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Adapt">
+		<xsd:complexContent>
+			<xsd:extension base="r:Right"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Extract">
+		<xsd:complexContent>
+			<xsd:extension base="r:Right"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Embed">
+		<xsd:complexContent>
+			<xsd:extension base="r:Right"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Play">
+		<xsd:complexContent>
+			<xsd:extension base="r:Right"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Print">
+		<xsd:complexContent>
+			<xsd:extension base="r:Right"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Execute">
+		<xsd:complexContent>
+			<xsd:extension base="r:Right"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Install">
+		<xsd:complexContent>
+			<xsd:extension base="r:Right"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Uninstall">
+		<xsd:complexContent>
+			<xsd:extension base="r:Right"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Delete">
+		<xsd:complexContent>
+			<xsd:extension base="r:Right"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="modify" type="mx:Modify" substitutionGroup="r:right"/>
+	<xsd:element name="enlarge" type="mx:Enlarge" substitutionGroup="r:right"/>
+	<xsd:element name="reduce" type="mx:Reduce" substitutionGroup="r:right"/>
+	<xsd:element name="move" type="mx:Move" substitutionGroup="r:right"/>
+	<xsd:element name="adapt" type="mx:Adapt" substitutionGroup="r:right"/>
+	<xsd:element name="extract" type="mx:Extract" substitutionGroup="r:right"/>
+	<xsd:element name="embed" type="mx:Embed" substitutionGroup="r:right"/>
+	<xsd:element name="play" type="mx:Play" substitutionGroup="r:right"/>
+	<xsd:element name="print" type="mx:Print" substitutionGroup="r:right"/>
+	<xsd:element name="execute" type="mx:Execute" substitutionGroup="r:right"/>
+	<xsd:element name="install" type="mx:Install" substitutionGroup="r:right"/>
+	<xsd:element name="uninstall" type="mx:Uninstall" substitutionGroup="r:right"/>
+	<xsd:element name="delete" type="mx:Delete" substitutionGroup="r:right"/>
+	<!-- -->
+	<!-- === Resources === -->
+	<!-- -->
+	<!-- Digital Item Resources -->
+	<xsd:complexType name="DiReference">
+		<xsd:complexContent>
+			<xsd:extension base="r:Resource">
+				<xsd:sequence minOccurs="0">
+					<xsd:element name="identifier" type="xsd:anyURI"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="diReference" type="mx:DiReference" substitutionGroup="r:resource"/>
+	<!-- -->
+	<!-- === Conditions === -->
+	<!-- -->
+	<!-- Digital Item Conditions -->
+	<xsd:complexType name="DiCriteria">
+		<xsd:complexContent>
+			<xsd:extension base="r:Condition">
+				<xsd:sequence minOccurs="0">
+					<xsd:element ref="mx:diReference"/>
+					<xsd:element ref="r:anXmlPatternAbstract" maxOccurs="unbounded"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="DiPartOf">
+		<xsd:complexContent>
+			<xsd:extension base="r:Condition">
+				<xsd:sequence minOccurs="0">
+					<xsd:element ref="mx:diReference"/>
+					<xsd:element ref="mx:diReference"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="diCriteria" type="mx:DiCriteria" substitutionGroup="r:condition"/>
+	<xsd:element name="diPartOf" type="mx:DiPartOf" substitutionGroup="r:condition"/>
+	<!-- Marking Conditions -->
+	<xsd:complexType name="IsMarked">
+		<xsd:complexContent>
+			<xsd:extension base="r:Condition">
+				<xsd:sequence minOccurs="0">
+					<xsd:element ref="r:resource"/>
+					<xsd:any namespace="##any" processContents="lax"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Mark">
+		<xsd:complexContent>
+			<xsd:extension base="r:Condition">
+				<xsd:sequence minOccurs="0">
+					<xsd:element ref="r:resource"/>
+					<xsd:any namespace="##any" processContents="lax"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="isMarked" type="mx:IsMarked" substitutionGroup="r:condition"/>
+	<xsd:element name="mark" type="mx:Mark" substitutionGroup="r:condition"/>
+	<!-- Security Conditions -->
+	<xsd:complexType name="Source">
+		<xsd:complexContent>
+			<xsd:extension base="r:Condition">
+				<xsd:sequence minOccurs="0">
+					<xsd:element ref="r:principal"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Destination">
+		<xsd:complexContent>
+			<xsd:extension base="r:Condition">
+				<xsd:sequence minOccurs="0">
+					<xsd:element ref="r:principal"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Helper">
+		<xsd:complexContent>
+			<xsd:extension base="r:Condition">
+				<xsd:sequence minOccurs="0">
+					<xsd:element ref="r:principal" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="wildcard" minOccurs="0" maxOccurs="unbounded">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element ref="r:anXmlPatternAbstract" minOccurs="0" maxOccurs="unbounded"/>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Renderer">
+		<xsd:complexContent>
+			<xsd:extension base="r:Condition">
+				<xsd:sequence minOccurs="0">
+					<xsd:element ref="r:principal"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ResourceSignedBy">
+		<xsd:complexContent>
+			<xsd:extension base="r:Condition">
+				<xsd:sequence minOccurs="0">
+					<xsd:element ref="dsig:CanonicalizationMethod"/>
+					<xsd:element ref="dsig:SignatureMethod"/>
+					<xsd:element ref="r:resource"/>
+					<xsd:element ref="dsig:Transforms" minOccurs="0"/>
+					<xsd:element ref="dsig:DigestMethod"/>
+					<xsd:element ref="r:principal"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="source" type="mx:Source" substitutionGroup="r:condition"/>
+	<xsd:element name="destination" type="mx:Destination" substitutionGroup="r:condition"/>
+	<xsd:element name="helper" type="mx:Helper" substitutionGroup="r:condition"/>
+	<xsd:element name="renderer" type="mx:Renderer" substitutionGroup="r:condition"/>
+	<xsd:element name="resourceSignedBy" type="mx:ResourceSignedBy" substitutionGroup="r:condition"/>
+	<!-- Transactional Conditions -->
+	<xsd:complexType name="Transaction">
+		<xsd:complexContent>
+			<xsd:extension base="r:Condition">
+				<xsd:sequence minOccurs="0">
+					<xsd:element ref="r:serviceReference"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="transaction" type="mx:Transaction" substitutionGroup="r:condition"/>
+	<!-- Resource Attribute Conditions -->
+	<xsd:complexType name="RequiredAttributeChanges">
+		<xsd:complexContent>
+			<xsd:extension base="r:Condition">
+				<xsd:choice minOccurs="0" maxOccurs="unbounded">
+					<xsd:element ref="mx:complement"/>
+					<xsd:element ref="mx:intersection"/>
+					<xsd:element ref="mx:set"/>
+					<xsd:element ref="mx:union"/>
+				</xsd:choice>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ProhibitedAttributeChanges">
+		<xsd:complexContent>
+			<xsd:extension base="r:Condition">
+				<xsd:choice minOccurs="0" maxOccurs="unbounded">
+					<xsd:element ref="mx:complement"/>
+					<xsd:element ref="mx:intersection"/>
+					<xsd:element ref="mx:set"/>
+					<xsd:element ref="mx:union"/>
+				</xsd:choice>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="requiredAttributeChanges" type="mx:RequiredAttributeChanges" substitutionGroup="r:condition"/>
+	<xsd:element name="prohibitedAttributeChanges" type="mx:ProhibitedAttributeChanges" substitutionGroup="r:condition"/>
+	<!-- Resource Attribute Set Definitions -->
+	<xsd:element name="complement">
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="r:LicensePart">
+					<xsd:choice minOccurs="0">
+						<xsd:element ref="mx:complement"/>
+						<xsd:element ref="mx:intersection"/>
+						<xsd:element ref="mx:set"/>
+						<xsd:element ref="mx:union"/>
+					</xsd:choice>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="intersection">
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="r:LicensePart">
+					<xsd:choice minOccurs="0" maxOccurs="unbounded">
+						<xsd:element ref="mx:complement"/>
+						<xsd:element ref="mx:intersection"/>
+						<xsd:element ref="mx:set"/>
+						<xsd:element ref="mx:union"/>
+					</xsd:choice>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="set">
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="r:LicensePart">
+					<xsd:sequence minOccurs="0">
+						<xsd:any namespace="##any" maxOccurs="unbounded"/>
+					</xsd:sequence>
+					<xsd:attribute name="definition" type="xsd:anyURI" use="optional"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="union">
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="r:LicensePart">
+					<xsd:choice minOccurs="0" maxOccurs="unbounded">
+						<xsd:element ref="mx:complement"/>
+						<xsd:element ref="mx:intersection"/>
+						<xsd:element ref="mx:set"/>
+						<xsd:element ref="mx:union"/>
+					</xsd:choice>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

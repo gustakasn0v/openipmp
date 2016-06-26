@@ -1,0 +1,1024 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.xrml.org/schema/2002/05/xrml2core" xmlns:sccns="urn:uddi-org:schemaCentricC14N:2002-07-10" xmlns:r="http://www.xrml.org/schema/2002/05/xrml2core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:enc="http://www.w3.org/2001/04/xmlenc#" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/xml.xsd"/>
+	<xsd:import namespace="http://www.w3.org/2001/04/xmlenc#" schemaLocation="http://www.w3.org/TR/2002/REC-xmlenc-core-20021210/xenc-schema.xsd"/>
+	<xsd:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="http://www.w3.org/TR/2002/REC-xmldsig-core-20020212/xmldsig-core-schema.xsd"/>
+	<xsd:import namespace="urn:uddi-org:schemaCentricC14N:2002-07-10" schemaLocation="SchemaCentricCanonicalization.xsd"/>
+	<!-- Elements -->
+	<xsd:element name="allConditions" type="r:AllConditions" substitutionGroup="r:condition">
+		<xsd:annotation>
+			<xsd:documentation>A container of other conditions, all of which must be met simultaneously.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="allPrincipals" type="r:AllPrincipals" substitutionGroup="r:principal">
+		<xsd:annotation>
+			<xsd:documentation>Identifies a principal who must present several credentials to be authenticated.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="condition" type="r:Condition" substitutionGroup="r:licensePart">
+		<xsd:annotation>
+			<xsd:documentation>Specifies the terms, conditions, and obligations under which rights can be exercised. The conditions in a grant can have a known structure specifying that they all must be met simultaneously (a conjunction) or only one of them must be met. This known structure enables a generic engine with no specific knowledge of the semantics of the rights or conditions to compute the grants in effect through a chain of delegated rights.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="conditionPattern" type="r:ConditionPattern">
+		<xsd:annotation>
+			<xsd:documentation>Optional constraint on the conditions of the grant. This pattern is evaluated against the subtree of the grant rooted at the condition.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="conditionPatternAbstract" type="r:ConditionPatternAbstract" substitutionGroup="r:anXmlPatternAbstract">
+		<xsd:annotation>
+			<xsd:documentation>A substitution head for condition patterns. Elements that replace this element must represent a pattern that identifies conditions based pattern matching.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="datum" type="r:Datum">
+		<xsd:annotation>
+			<xsd:documentation>Defines one raw parameter to be passed to the service.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="delegationControl" type="r:DelegationControl" substitutionGroup="r:licensePart">
+		<xsd:annotation>
+			<xsd:documentation>Specifies the circumstances under which an associated grant may be delegated. If delegationControl is absent for a grant, that grant may not be delegated (unless that permission is conveyed by some other mechanism not yet defined).</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="digitalResource" type="r:DigitalResource" substitutionGroup="r:resource">
+		<xsd:annotation>
+			<xsd:documentation>Provides the means to identify and retrieve the bits that comprise a particular digital resource.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="everyone" type="r:Everyone" substitutionGroup="r:principalPatternAbstract">
+		<xsd:annotation>
+			<xsd:documentation>Identifies a possibly qualified universe of principals. The propertyAbstract qualification under this element enables the specification of prerequisiteRight conditions similar to "everyone, possessProperty, propertyAbstract".</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="exerciseMechanism" type="r:ExerciseMechanism" substitutionGroup="r:condition">
+		<xsd:annotation>
+			<xsd:documentation>Indicates the mechanism by which a right must be exercised.  This is extensible to allow for other such mechanism.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="existsRight" type="r:ExistsRight" substitutionGroup="r:condition">
+		<xsd:annotation>
+			<xsd:documentation>Requires that a grant or grantGroup exists that is the specified grant or grantGroup or matches the specified grantPattern or grantGroupPattern and that is issued (as one of the license's direct children) by one of the identified trusted issuers.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="forAll" block="#all" substitutionGroup="r:licensePart" final="#all">
+		<xsd:annotation>
+			<xsd:documentation>Applies a universal quantifier to the referenced licensePart.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="r:LicensePart">
+					<xsd:sequence>
+						<xsd:element ref="r:anXmlPatternAbstract" minOccurs="0" maxOccurs="unbounded"/>
+					</xsd:sequence>
+					<xsd:attribute name="varName" type="r:VariableName"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="fulfiller" type="r:Fulfiller" substitutionGroup="r:condition">
+		<xsd:annotation>
+			<xsd:documentation>Specifies that the fulfiller of an exercise must be the principal specified herein.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="grant" type="r:Grant" substitutionGroup="r:resource">
+		<xsd:annotation>
+			<xsd:documentation>The quantum within the license that bestows an authorization upon some principal. It conveys to a particular principal the sanction to exercise an identified right against an identified resource, possibly subject to first fulfilling some conditions.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="grantGroup" type="r:GrantGroup" substitutionGroup="r:resource">
+		<xsd:annotation>
+			<xsd:documentation>A container of several grants. A grantGroup does not define any semantic association, ordering relationship, and so on, between the grants it contains.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="grantGroupPattern" type="r:GrantGroupPattern" substitutionGroup="r:resourcePatternAbstract">
+		<xsd:annotation>
+			<xsd:documentation>A structure representing a predicate expression that can be evaluated against a grantGroup. All conditions imposed by this element's children are ANDed together to form the overall grantGroupPattern. Children that are singleton principals, conditions, grants, and so on, are compared for equality against their resource by canonicalizing both using a canonicalization algorithm and comparing the output as binary bit streams. </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="grantPattern" type="r:GrantPattern" substitutionGroup="r:resourcePatternAbstract">
+		<xsd:annotation>
+			<xsd:documentation>Represents a predicate expression that can be evaluated against a grant. All conditions imposed by this element's children are ANDed together to form the overall grantPattern. Children that are singleton rights, resources, and so on are compared for equality against their resource by canonicalizing both using a canonicalization algorithm and comparing the output as binary bit streams. </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="issue" type="r:Issue" substitutionGroup="r:right">
+		<xsd:annotation>
+			<xsd:documentation>Represents the right to issue licenses corresponding to the attached resource, which must be a grant or grantGroup. This right can be used to embody the notion of being a certificate authority.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="issuer" type="r:Issuer">
+		<xsd:annotation>
+			<xsd:documentation>Identifies the entity who signs the license, attesting to its validity. If more than one issuer signs the license, it is as if each signed it independently; one license with several issuers is equivalent to several copies of the same license, each with one issuer. Indeed, such a syntactic transformation can feasibly be made while preserving the signature validity.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="keyHolder" type="r:KeyHolder" substitutionGroup="r:principal">
+		<xsd:annotation>
+			<xsd:documentation>Identifies a principal who possesses a particular key. Typically, the key is a private key corresponding to a public key identified by this element, but it may be a symmetric key. The public key can be identified by several mechanisms defined in the XML Digital Signature specification. </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="license" type="r:License">
+		<xsd:annotation>
+			<xsd:documentation>A container of one or more grants, each of which conveys to a principal a right to a resource under certain conditions. The license also specifies its issuer and other administrative information.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="licenseGroup" type="r:LicenseGroup">
+		<xsd:annotation>
+			<xsd:documentation>A container of licenses. A licenseGroup does not define any semantic association, ordering relationship, and so on, between the licenses it contains.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="licensePart" type="r:LicensePart">
+		<xsd:annotation>
+			<xsd:documentation>An abstract element from which the various specific parts of a license are derived. This element defines attributes common to all parts of a license.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="obtain" type="r:Obtain" substitutionGroup="r:right">
+		<xsd:annotation>
+			<xsd:documentation>Represents the right to obtain the grant, grantGroup, or grantPattern specified as a resource associated with this right. Typically, this right is associated with conditions, such as a fee or validity interval. </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="patternFromLicensePart" type="r:PatternFromLicensePart" substitutionGroup="r:anXmlPatternAbstract">
+		<xsd:annotation>
+			<xsd:documentation>A structure representing a predicate expression that can be evaluated against any license part. A comparison is made to the contained licensePart using the REL equality comparison.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="possessProperty" type="r:PossessProperty" substitutionGroup="r:right">
+		<xsd:annotation>
+			<xsd:documentation>Represents the right to claim ownership of particular characteristics, which are listed as resources associated with this right.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="prerequisiteRight" type="r:PrerequisiteRight" substitutionGroup="r:condition">
+		<xsd:annotation>
+			<xsd:documentation>Requires that another right be possessed before exercising the associated right.  The specified principal must be able to exercise the right on the resource under the authorization of the trustedIssuer.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="principal" type="r:Principal" substitutionGroup="r:resource">
+		<xsd:annotation>
+			<xsd:documentation>Represents the unique identification of a party involved in granting or exercising rights. Each principal identifies exactly one party.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="principalPattern" type="r:PrincipalPattern">
+		<xsd:annotation>
+			<xsd:documentation>Optional constraint on the principal of the grant.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="principalPatternAbstract" type="r:PrincipalPatternAbstract" substitutionGroup="r:resourcePatternAbstract">
+		<xsd:annotation>
+			<xsd:documentation>A substitution head for principal patterns. Elements that replace this element must represent a pattern that identifies principals based pattern matching.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="propertyAbstract" type="r:PropertyAbstract" substitutionGroup="r:resource">
+		<xsd:annotation>
+			<xsd:documentation>A substitution head for properties that can be possessed via PossessProperty.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="resource" type="r:Resource" substitutionGroup="r:licensePart">
+		<xsd:annotation>
+			<xsd:documentation>The "noun" to which a principal can be granted a right. A resource can be a digital work (such as an e-book, an audio or video file, or an image), a service (such as an email service or B2B transaction service), or even a piece of information that can be owned by a principal (such as a name or an email address). </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="resourcePattern" type="r:ResourcePattern">
+		<xsd:annotation>
+			<xsd:documentation>Optional constraint on the resource of the grant. This pattern is evaluated against the subtree of the grant rooted at the resource.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="resourcePatternAbstract" type="r:ResourcePatternAbstract" substitutionGroup="r:anXmlPatternAbstract">
+		<xsd:annotation>
+			<xsd:documentation>A substitution head for resource patterns. Elements that replace this element must represent a pattern that identifies resources based pattern matching.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="revocationFreshness" type="r:RevocationFreshness" substitutionGroup="r:condition">
+		<xsd:annotation>
+			<xsd:documentation>A maximum interval specifying how recently a signature on the license containing this grant must be checked for revocation. Beyond this interval, the grant may not be used as part of a proof of authorization.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="revoke" type="r:Revoke" substitutionGroup="r:right">
+		<xsd:annotation>
+			<xsd:documentation>Represents the right to revoke a statement that one has made previously. The act of issuing a license implicitly grants one the right to revoke it. With this right, one may explicitly delegate that right to others.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="right" type="r:Right" substitutionGroup="r:licensePart">
+		<xsd:annotation>
+			<xsd:documentation>The "verb" that a principal can be granted to exercise against some resource under some condition. Typically, a right specifies an action (or activity) or a class of actions that a principal may perform on or using the associated resource. </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="rightPattern" type="r:RightPattern">
+		<xsd:annotation>
+			<xsd:documentation>Optional constraint on the right of the grant. This pattern is evaluated against the subtree of the grant rooted at the right.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="rightPatternAbstract" type="r:RightPatternAbstract" substitutionGroup="r:anXmlPatternAbstract">
+		<xsd:annotation>
+			<xsd:documentation>A substitution head for right patterns. Elements that replace this element must represent a pattern that identifies rights based pattern matching.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="serviceDescription" type="r:ServiceDescription">
+		<xsd:annotation>
+			<xsd:documentation>Identifies the metadata and location of a service.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="serviceReference" type="r:ServiceReference" substitutionGroup="r:resource">
+		<xsd:annotation>
+			<xsd:documentation>Provides the means to locate and interact with a concrete service. Specifically, this element identifies both an endpoint/address at which the service is located and meta information by which the type or interface for the endpoint can be understood.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="trustedIssuer" type="r:TrustedPrincipal">
+		<xsd:annotation>
+			<xsd:documentation>Defines a trust model based on a principal or set of principals who are trusted.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="validityInterval" type="r:ValidityInterval" substitutionGroup="r:condition">
+		<xsd:annotation>
+			<xsd:documentation>Identifies the time interval during which the associated right is valid.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="anXmlPatternAbstract" type="r:AnXmlPatternAbstract" substitutionGroup="r:resource">
+		<xsd:annotation>
+			<xsd:documentation>Elements that replace this element must represent a pattern that identifies a set of valid XML trees based pattern matching.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="anXmlExpression" type="r:AnXmlExpression" substitutionGroup="r:anXmlPatternAbstract">
+		<xsd:annotation>
+			<xsd:documentation>A Boolean expression in some identified XML expression language. The default language is XPath1.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!--Complex Types-->
+	<xsd:complexType name="AllConditions">
+		<xsd:annotation>
+			<xsd:documentation>A container of other conditions, all of which must be met simultaneously.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:Condition">
+				<xsd:sequence>
+					<xsd:element ref="r:condition" minOccurs="0" maxOccurs="unbounded"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="AllPrincipals">
+		<xsd:annotation>
+			<xsd:documentation>Identifies a principal who must present several credentials to be authenticated.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:Principal">
+				<xsd:sequence>
+					<xsd:element ref="r:principal" minOccurs="0" maxOccurs="unbounded"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Condition">
+		<xsd:annotation>
+			<xsd:documentation>Specifies the terms, conditions, and obligations under which rights can be exercised. The conditions in a grant can have a known structure specifying that they all must be met simultaneously (a conjunction) or only one of them must be met. This known structure enables a generic engine with no specific knowledge of the semantics of the rights or conditions to compute the grants in effect through a chain of delegated rights.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:LicensePart"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ConditionPattern">
+		<xsd:annotation>
+			<xsd:documentation>Optional constraint on the conditions of the grant. This pattern is evaluated against the subtree of the grant rooted at the condition.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:choice minOccurs="0" maxOccurs="unbounded">
+			<xsd:element ref="r:anXmlExpression"/>
+			<xsd:element ref="r:conditionPatternAbstract"/>
+		</xsd:choice>
+	</xsd:complexType>
+	<xsd:complexType name="ConditionPatternAbstract">
+		<xsd:annotation>
+			<xsd:documentation>A substitution head for condition patterns. Elements that replace this element must represent a pattern that identifies conditions based pattern matching.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:AnXmlPatternAbstract"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Datum">
+		<xsd:annotation>
+			<xsd:documentation>Defines one raw parameter to be passed to the service.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:LicensePart">
+				<xsd:sequence minOccurs="0">
+					<xsd:any namespace="##any" processContents="lax"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="DelegationControl">
+		<xsd:annotation>
+			<xsd:documentation>Specifies the circumstances under which an associated grant may be delegated. If delegationControl is absent for a grant, that grant may not be delegated (unless that permission is conveyed by some other mechanism not yet defined).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:LicensePart">
+				<xsd:sequence>
+					<xsd:choice>
+						<xsd:element name="maxDepth" type="xsd:nonNegativeInteger">
+							<xsd:annotation>
+								<xsd:documentation>Specifies the maximum depth of delegation chaining. A value of zero indicates that this grant may not be delegated. When a grant with this constraint is delegated, the contained count must be decremented by one.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="infinite">
+							<xsd:annotation>
+								<xsd:documentation>Specifies that an infinite chain of delegation is permitted.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:choice>
+					<xsd:element name="additionalConditionsProhibited" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Indicates whether the delegated copy can specify conditions not contained in the original copy. If omitted, additional conditions can be specified; if present, the delegated copy must contain the same conditions as the original copy.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element ref="r:forAll" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="to" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation>Specifies a principal to whom the grant may be delegated. If more than one "to" element is specified, the principal may be any of those identified: all the "to" elements are ORed together.</xsd:documentation>
+						</xsd:annotation>
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element ref="r:principal"/>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="DigitalResource">
+		<xsd:annotation>
+			<xsd:documentation>Provides the means to identify and retrieve the bits that comprise a particular digital resource.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:Resource">
+				<xsd:choice minOccurs="0">
+					<xsd:element name="nonSecureIndirect" type="r:NonSecureReference">
+						<xsd:annotation>
+							<xsd:documentation>A non-cryptographically-secure reference to the bits that comprise a digital resource. </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="secureIndirect" type="dsig:ReferenceType">
+						<xsd:annotation>
+							<xsd:documentation>An indirect, non-URI reference to the digital resource. The coupling to the referenced resource is made secure and unambiguous using cryptographic techniques.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="binary" type="xsd:base64Binary">
+						<xsd:annotation>
+							<xsd:documentation>The bits that comprise the digital resource.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="anXml">
+						<xsd:annotation>
+							<xsd:documentation>An embedded digital resource, cast as an XML document fragment, within the current document. There is no standard way to embed an arbitrary full XML document within another due to issues such as local entities, character set differences, and document-global ID scope.</xsd:documentation>
+						</xsd:annotation>
+						<xsd:complexType mixed="true">
+							<xsd:sequence>
+								<xsd:any namespace="##any" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:any namespace="##other" processContents="lax">
+						<xsd:annotation>
+							<xsd:documentation>A locator scheme invented by others. </xsd:documentation>
+						</xsd:annotation>
+					</xsd:any>
+				</xsd:choice>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="EncryptedContent">
+		<xsd:annotation>
+			<xsd:documentation>Represents an encryption of the XML element's contents.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="enc:EncryptedDataType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Everyone">
+		<xsd:annotation>
+			<xsd:documentation>Identifies a possibly qualified universe of principals. The propertyAbstract qualification under this element enables the specification of prerequisiteRight conditions similar to "everyone, possessProperty, propertyAbstract".</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:PrincipalPatternAbstract">
+				<xsd:sequence minOccurs="0">
+					<xsd:element ref="r:propertyAbstract"/>
+					<xsd:element ref="r:trustedIssuer" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ExerciseMechanism">
+		<xsd:annotation>
+			<xsd:documentation>Indicates the mechanism by which a right must be exercised.  This is extensible to allow for other such mechanism.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:Condition">
+				<xsd:choice minOccurs="0">
+					<xsd:element name="exerciseService">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element ref="r:serviceReference"/>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:any namespace="##other" processContents="lax"/>
+				</xsd:choice>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ExistsRight">
+		<xsd:annotation>
+			<xsd:documentation>Requires that a grant or grantGroup exist and that is issued (as one of the license's direct children) by one of the identified trusted issuers.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:Condition">
+				<xsd:sequence minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>The grant element identifies shape grant that expresses the right which must be held in order to satisfy the existsRight. The trustedIssuer identifies one or more principals trusted to issue the right.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:choice>
+						<xsd:element ref="r:grant"/>
+						<xsd:element ref="r:grantPattern"/>
+						<xsd:element ref="r:grantGroup"/>
+						<xsd:element ref="r:grantGroupPattern"/>
+					</xsd:choice>
+					<xsd:element ref="r:trustedIssuer" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Fulfiller">
+		<xsd:annotation>
+			<xsd:documentation>Specifies that the fulfiller of an exercise must be the principal specified herein.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:Condition">
+				<xsd:sequence minOccurs="0">
+					<xsd:element ref="r:principal"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Grant">
+		<xsd:annotation>
+			<xsd:documentation>The quantum within the license that bestows an authorization upon some principal. It conveys to a particular principal the sanction to exercise an identified right against an identified resource, possibly subject to first fulfilling some conditions.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:Resource">
+				<xsd:choice minOccurs="0">
+					<xsd:sequence>
+						<xsd:element ref="r:forAll" minOccurs="0" maxOccurs="unbounded"/>
+						<xsd:element ref="r:delegationControl" minOccurs="0"/>
+						<xsd:element ref="r:principal" minOccurs="0"/>
+						<xsd:element ref="r:right"/>
+						<xsd:element ref="r:resource" minOccurs="0"/>
+						<xsd:element ref="r:condition" minOccurs="0"/>
+					</xsd:sequence>
+					<xsd:element name="encryptedGrant" type="r:EncryptedContent">
+						<xsd:annotation>
+							<xsd:documentation>The encrypted contents of a grant. When decrypted, the clear text logically becomes the entire contents of the grant, replacing this encryptedGrant element. As specified in XML ENCRYPT, the encyptedGrant element must contain the "type" attribute with a value of "http://www.w3.org/2001/04/xmlenc#Content Type".</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="GrantGroup">
+		<xsd:annotation>
+			<xsd:documentation>A container of several grants. A grantGroup does not define any semantic association, ordering relationship, and so on, between the grants it contains.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:Resource">
+				<xsd:choice minOccurs="0">
+					<xsd:sequence>
+						<xsd:element ref="r:forAll" minOccurs="0" maxOccurs="unbounded"/>
+						<xsd:element ref="r:delegationControl" minOccurs="0"/>
+						<xsd:element ref="r:principal" minOccurs="0"/>
+						<xsd:element ref="r:condition" minOccurs="0"/>
+						<xsd:choice maxOccurs="unbounded">
+							<xsd:element ref="r:grant"/>
+							<xsd:element ref="r:grantGroup"/>
+						</xsd:choice>
+					</xsd:sequence>
+					<xsd:element name="encryptedGrantGroup" type="r:EncryptedContent">
+						<xsd:annotation>
+							<xsd:documentation>The encrypted contents of a grantGroup. When decrypted, the clear text logically becomes the entire contents of the grantGroup, replacing this encryptedGrantGroup element. As specified in XML ENCRYPT, the encyptedGrantGroup element must contain the "type" attribute with a value of "http://www.w3.org/2001/04/xmlenc#Content Type".</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="GrantGroupPattern">
+		<xsd:annotation>
+			<xsd:documentation>A structure representing a predicate expression that can be evaluated against a grantGroup. All conditions imposed by this element's children are ANDed together to form the overall grantGroupPattern. Children that are singleton principals, conditions, grants, and so on, are compared for equality against their resource by canonicalizing both using a canonicalization algorithm and comparing the output as binary bit streams. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:ResourcePatternAbstract">
+				<xsd:sequence>
+					<xsd:choice minOccurs="0">
+						<xsd:element ref="r:principal"/>
+						<xsd:element ref="r:principalPattern"/>
+					</xsd:choice>
+					<xsd:choice minOccurs="0">
+						<xsd:element ref="r:condition"/>
+						<xsd:element ref="r:conditionPattern"/>
+					</xsd:choice>
+					<xsd:choice maxOccurs="unbounded">
+						<xsd:choice>
+							<xsd:element ref="r:grant"/>
+							<xsd:element ref="r:grantPattern"/>
+						</xsd:choice>
+						<xsd:choice>
+							<xsd:element ref="r:grantGroup"/>
+							<xsd:element ref="r:grantGroupPattern"/>
+						</xsd:choice>
+					</xsd:choice>
+					<xsd:element name="wholeGrantGroupExpression" type="r:AnXmlExpression" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation>Optional constraint imposed on the grantGroup as a whole, evaluated against the subtree rooted at the grantGroup. This element specifies a  pattern (such as an Xpath) to evaluate against the resource grantGroup as a whole.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="GrantPattern">
+		<xsd:annotation>
+			<xsd:documentation>Represents a predicate expression that can be evaluated against a grant. All conditions imposed by this element's children are ANDed together to form the overall grantPattern. Children that are singleton rights, resources, and so on are compared for equality against their resource by canonicalizing both using a canonicalization algorithm and comparing the output as binary bit streams. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:ResourcePatternAbstract">
+				<xsd:sequence>
+					<xsd:choice minOccurs="0">
+						<xsd:element ref="r:principal"/>
+						<xsd:element ref="r:principalPattern"/>
+					</xsd:choice>
+					<xsd:choice>
+						<xsd:element ref="r:right"/>
+						<xsd:element ref="r:rightPattern"/>
+					</xsd:choice>
+					<xsd:choice minOccurs="0">
+						<xsd:element ref="r:resource"/>
+						<xsd:element ref="r:resourcePattern"/>
+					</xsd:choice>
+					<xsd:choice minOccurs="0">
+						<xsd:element ref="r:condition"/>
+						<xsd:element ref="r:conditionPattern"/>
+					</xsd:choice>
+					<xsd:element name="wholeGrantExpression" type="r:AnXmlExpression" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation>Optional constraint imposed on the grant as a whole, evaluated against the subtree rooted at the grant. This element specifies a  pattern (such as an Xpath) to evaluate against the resource grant as a whole.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Inventory">
+		<xsd:annotation>
+			<xsd:documentation>A container used to define elements frequently used throughout a license. These elements are defined in the inventory, and then referenced by ID wherever they are needed within the license.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:choice minOccurs="0" maxOccurs="unbounded">
+				<xsd:element ref="r:licensePart"/>
+			</xsd:choice>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Issue">
+		<xsd:annotation>
+			<xsd:documentation>Represents the right to issue licenses corresponding to the attached resource, which must be a grant or grantGroup. This right can be used to embody the notion of being a certificate authority.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:Right"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Issuer">
+		<xsd:annotation>
+			<xsd:documentation>Describes information associated with each issuer (signer) of a license. The SignedInfo in the Signature must contain a Reference that covers the whole license except for its immediate issuer children. Optionally, the SignedInfo may contain a second Reference that covers the details of the specific issuer. Boilerplate XPATH Transforms can be used for each Reference.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:choice minOccurs="0">
+				<xsd:element ref="dsig:Signature"/>
+				<xsd:element ref="r:principal"/>
+			</xsd:choice>
+			<xsd:element name="details" type="r:IssuerDetails" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Issuer-specific contributions to the license.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="IssuerDetails">
+		<xsd:annotation>
+			<xsd:documentation>Issuer-specific contributions to the license.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="timeOfIssue" type="xsd:dateTime" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>The date at which the license was issued, as attested to by this issuer. For many purposes, validators cannot rely on this assertion, but instead require some disinterested third part to attest to the date of issuance.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="revocationMechanism" type="r:RevocationMechanism" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>A mechanism by which the issuer may post notice of license revocation. Software checking for revocation may use any one of the identified mechanisms to check for revocation.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="KeyHolder">
+		<xsd:annotation>
+			<xsd:documentation>Identifies a principal who possesses a particular key. Typically, the key is a private key corresponding to a public key identified by this element, but it may be a symmetric key. The public key can be identified by several mechanisms defined in the XML Digital Signature specification. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:Principal">
+				<xsd:sequence minOccurs="0">
+					<xsd:element name="info" type="dsig:KeyInfoType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="License">
+		<xsd:annotation>
+			<xsd:documentation>A container of one or more grants, each of which conveys to a principal a right to a resource under certain conditions. The license also specifies its issuer and other administrative information. The optional licenseID attribute uniquely and globally identify this license over space and time. Note (by way of comparison to validity intervals in, say, X509) that as a pragmatic matter, each right in a license usually contains a time condition to limit its validity time.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:choice>
+			<xsd:sequence>
+				<xsd:element name="title" type="r:LinguisticString" minOccurs="0" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>A handy set of phrases that describe this license. The intent is that these can be shown to human beings in user interfaces in which licenses need to be managed, such as pick-lists.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="inventory" type="r:Inventory" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>A container used to define elements frequently used throughout a license. These elements are defined in the inventory, and then referenced by ID wherever they are needed within the license.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:choice minOccurs="0" maxOccurs="unbounded">
+					<xsd:element ref="r:grant"/>
+					<xsd:element ref="r:grantGroup"/>
+				</xsd:choice>
+				<xsd:element ref="r:issuer" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element name="otherInfo" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Specifies any other information to be conveyed in a license, such as information peripherally related to authentication and authorization, but not part of the core infrastructure. These extended elements typically fall under the license signature(s). However,  recipients at their discretion can and will choose to ignore these extensions.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:any namespace="##any" processContents="lax" maxOccurs="unbounded"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+			<xsd:element name="encryptedLicense" type="r:EncryptedContent">
+				<xsd:annotation>
+					<xsd:documentation>The encrypted contents of a License. When decrypted, the clear text logically becomes the entire contents of the License, replacing this encryptedData element. The encyptedLicense element must, per XML ENCRYPT, contain the 'type' attribute of 'http://www.w3.org/2001/04/xmlenc#Content Type'.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:choice>
+		<xsd:attribute name="licenseId" type="xsd:anyURI" use="optional"/>
+		<xsd:anyAttribute namespace="##other" processContents="lax"/>
+	</xsd:complexType>
+	<xsd:complexType name="LicenseGroup">
+		<xsd:annotation>
+			<xsd:documentation>A container of licenses. A licenseGroup does not define any semantic association, ordering relationship, and so on, between the licenses it contains.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element ref="r:license" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="LicensePart">
+		<xsd:annotation>
+			<xsd:documentation>An abstract element from which the various specific parts of a license are derived. This element defines attributes common to all parts of a license. A license part can have an identifier or reference an identifier defined elsewhere in this license. This mechanism reduces verbosity by defining commonly-used elements in one place and referencing them elsewhere.  However, this is a purely syntactic shorthand; no semantic connection between the definition site and use site is implied. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="licensePartId" type="r:LicensePartId" use="optional"/>
+		<xsd:attribute name="licensePartIdRef" type="r:LicensePartId" use="optional"/>
+		<xsd:attribute name="varRef" type="r:VariableName" use="optional"/>
+	</xsd:complexType>
+	<xsd:complexType name="LinguisticString" mixed="true">
+		<xsd:annotation>
+			<xsd:documentation>A string and an optional xml:lang indication of the language in which it resides, which enables embedded XML structured content.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent mixed="true">
+			<xsd:restriction base="xsd:anyType">
+				<xsd:sequence>
+					<xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+				</xsd:sequence>
+				<xsd:attribute ref="xml:lang"/>
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="NonSecureReference">
+		<xsd:annotation>
+			<xsd:documentation>A reference similar to dsig:ReferenceType, but lacking the cryptographic connection.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element ref="dsig:Transforms" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="Id" type="xsd:ID" use="optional"/>
+		<xsd:attribute name="URI" type="xsd:anyURI" use="optional"/>
+		<xsd:attribute name="Type" type="xsd:anyURI" use="optional"/>
+	</xsd:complexType>
+	<xsd:complexType name="Obtain">
+		<xsd:annotation>
+			<xsd:documentation>Represents the right to obtain the grant, grantGroup, or grantPattern specified as a resource associated with this right. Typically, this right is associated with conditions, such as a fee or validity interval. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:Right"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="PatternFromLicensePart">
+		<xsd:annotation>
+			<xsd:documentation>A structure representing a predicate expression that can be evaluated against any license part. A comparison is made to the contained licensePart using the REL equality comparison.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:AnXmlPatternAbstract">
+				<xsd:sequence>
+					<xsd:element ref="r:licensePart"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="PossessProperty">
+		<xsd:annotation>
+			<xsd:documentation>Represents the right to claim ownership of particular characteristics, which are listed as resources associated with this right.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:Right"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="PrerequisiteRight">
+		<xsd:annotation>
+			<xsd:documentation>Requires that another right be possessed before exercising the associated right.  The specified principal must be able to exercise the right on the resource under the authorization of the trustedIssuer.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:Condition">
+				<xsd:sequence minOccurs="0">
+					<xsd:element ref="r:principal" minOccurs="0"/>
+					<xsd:element ref="r:right"/>
+					<xsd:element ref="r:resource" minOccurs="0"/>
+					<xsd:element ref="r:trustedIssuer" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Principal">
+		<xsd:annotation>
+			<xsd:documentation>Represents the unique identification of a party involved in granting or exercising rights. Each principal identifies exactly one party.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:Resource"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="PrincipalPattern">
+		<xsd:annotation>
+			<xsd:documentation>Optional constraint on the principal of the grant.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:choice minOccurs="0" maxOccurs="unbounded">
+			<xsd:element ref="r:anXmlExpression"/>
+			<xsd:element ref="r:principalPatternAbstract"/>
+		</xsd:choice>
+	</xsd:complexType>
+	<xsd:complexType name="PrincipalPatternAbstract">
+		<xsd:annotation>
+			<xsd:documentation>A substitution head for principal patterns. Elements that replace this element must represent a pattern that identifies principals based pattern matching.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:ResourcePatternAbstract"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="PropertyAbstract">
+		<xsd:annotation>
+			<xsd:documentation>An abstract type for properties that can be possessed via PossessProperty.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:Resource"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Resource">
+		<xsd:annotation>
+			<xsd:documentation>The "noun" to which a principal can be granted a right. A resource can be a digital work (such as an e-book, an audio or video file, or an image), a service (such as an email service or B2B transaction service), or even a piece of information that can be owned by a principal (such as a name or an email address). </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:LicensePart"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ResourcePattern">
+		<xsd:annotation>
+			<xsd:documentation>Optional constraint on the resource of the grant. This pattern is evaluated against the subtree of the grant rooted at the resource.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:choice minOccurs="0" maxOccurs="unbounded">
+			<xsd:element ref="r:anXmlExpression"/>
+			<xsd:element ref="r:resourcePatternAbstract"/>
+		</xsd:choice>
+	</xsd:complexType>
+	<xsd:complexType name="ResourcePatternAbstract">
+		<xsd:annotation>
+			<xsd:documentation>A substitution head for resource patterns. Elements that replace this element must represent a pattern that identifies resources based pattern matching.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:AnXmlPatternAbstract"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="RevocationFreshness">
+		<xsd:annotation>
+			<xsd:documentation>A maximum interval specifying how recently a signature on the license containing this grant must be checked for revocation. Beyond this interval, the grant may not be used as part of a proof of authorization.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:Condition">
+				<xsd:sequence minOccurs="0">
+					<xsd:choice>
+						<xsd:element name="maxIntervalSinceLastCheck" type="xsd:duration">
+							<xsd:annotation>
+								<xsd:documentation>Indicates the maximum amount of time that may elapse since the last time the grant was checked for revocation. A value of zero indicates that the grant must be explicitly checked each time it is exercised.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="noCheckNecessary">
+							<xsd:annotation>
+								<xsd:documentation>Indicates that for this use of this condition, a check for revocation is not needed.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:choice>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="RevocationMechanism">
+		<xsd:annotation>
+			<xsd:documentation>Indicates a mechanism through which notice of revocation of licenses may be communicated. To allow others to define their own revocation communication mechanism, this element is extensible.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:choice>
+			<xsd:element name="querySignature">
+				<xsd:annotation>
+					<xsd:documentation>Indicates a service instance  to query for the status of a signature.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="r:serviceReference"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="revocationListDistributionPoint">
+				<xsd:annotation>
+					<xsd:documentation>Indicates a service through which to obtain a revocation list.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="r:serviceReference"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:any namespace="##other" processContents="lax">
+				<xsd:annotation>
+					<xsd:documentation>Represents revocation mechanisms invented by others.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:any>
+		</xsd:choice>
+	</xsd:complexType>
+	<xsd:complexType name="Revoke">
+		<xsd:annotation>
+			<xsd:documentation>Represents the right to revoke a statement that one has made previously. The act of issuing a license implicitly grants one the right to revoke it. With this right, one may explicitly delegate that right to others.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:Right"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Right">
+		<xsd:annotation>
+			<xsd:documentation>The "verb" that a principal can be granted to exercise against some resource under some condition. Typically, a right specifies an action (or activity) or a class of actions that a principal may perform on or using the associated resource. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:LicensePart"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="RightPattern">
+		<xsd:annotation>
+			<xsd:documentation>Optional constraint on the right of the grant. This pattern is evaluated against the subtree of the grant rooted at the right.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:choice minOccurs="0" maxOccurs="unbounded">
+			<xsd:element ref="r:anXmlExpression"/>
+			<xsd:element ref="r:rightPatternAbstract"/>
+		</xsd:choice>
+	</xsd:complexType>
+	<xsd:complexType name="RightPatternAbstract">
+		<xsd:annotation>
+			<xsd:documentation>A substitution head for right patterns. Elements that replace this element must represent a pattern that identifies rights based pattern matching.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:AnXmlPatternAbstract"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ServiceDescription">
+		<xsd:annotation>
+			<xsd:documentation>Identifies the metadata and location of a service.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:LicensePart"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ServiceReference">
+		<xsd:annotation>
+			<xsd:documentation>Provides the means to locate and interact with a concrete service. Specifically, this element identifies both an endpoint/address at which the service is located and meta information by which the type or interface for the endpoint can be understood.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:Resource">
+				<xsd:sequence minOccurs="0">
+					<xsd:element ref="r:serviceDescription"/>
+					<xsd:element name="serviceParameters" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Provides contextual parameters that may be needed to interact with the service. The exact interpretation of each parameter is specific to the semantics of the service and is not specified here.</xsd:documentation>
+						</xsd:annotation>
+						<xsd:complexType>
+							<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+								<xsd:element ref="r:datum"/>
+								<xsd:element name="transforms" type="dsig:TransformsType" minOccurs="0">
+									<xsd:annotation>
+										<xsd:documentation>Lists optional transformations to be applied in sequence over datum.</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="TrustedPrincipal">
+		<xsd:annotation>
+			<xsd:documentation>Indicates the means for identifying a principal trusted to perform a certain action. Extensions to this type might specify additional policies not articulated here.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:LicensePart">
+				<xsd:choice minOccurs="0">
+					<xsd:element ref="r:principal"/>
+					<xsd:element name="any">
+						<xsd:annotation>
+							<xsd:documentation>Specifies a list of principals, any of which can be used.</xsd:documentation>
+						</xsd:annotation>
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element ref="r:principal" maxOccurs="unbounded"/>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ValidityInterval">
+		<xsd:annotation>
+			<xsd:documentation>Identifies the time interval during which the associated right is valid.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:Condition">
+				<xsd:sequence>
+					<xsd:element name="notBefore" type="xsd:dateTime" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Identifies the beginning of the interval.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="notAfter" type="xsd:dateTime" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Identifies the end of the interval.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="AnXmlPatternAbstract">
+		<xsd:annotation>
+			<xsd:documentation>The substitution head for all patterns in XrML. Elements that replace this element must represent a pattern that identifies a set of valid XML trees based pattern matching.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:Resource"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="AnXmlExpression" mixed="true" sccns:embeddedLangAttribute="r:lang">
+		<xsd:annotation>
+			<xsd:documentation>A Boolean expression in some identified XML expression language. The default language is XPath1.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent mixed="true">
+			<xsd:extension base="r:AnXmlPatternAbstract">
+				<xsd:attribute name="lang" type="xsd:anyURI" default="http://www.w3.org/TR/1999/REC-xpath-19991116"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!-- Simple Types-->
+	<xsd:simpleType name="LicensePartId">
+		<xsd:annotation>
+			<xsd:documentation>Identifier for a license part. Using this identifier, commonly-used elements can be defined in one place and referenced elsewhere, thus reducing verbosity.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:NCName"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="VariableName">
+		<xsd:annotation>
+			<xsd:documentation>The name of a variable.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:NCName"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="Uuid">
+		<xsd:annotation>
+			<xsd:documentation>A DCE Uuid. For example, 1FAC02A2-9C46-4ceb-ABD2-9D569A379218</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:length value="36"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

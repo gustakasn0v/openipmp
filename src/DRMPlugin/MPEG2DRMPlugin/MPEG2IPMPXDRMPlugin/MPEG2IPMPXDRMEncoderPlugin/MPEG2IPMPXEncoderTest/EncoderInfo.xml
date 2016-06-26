@@ -1,0 +1,78 @@
+<EncoderInfo>
+ <!-- Rights host address-->
+ <RightsHostURL>localhost:8080</RightsHostURL>
+ <!-- OMA silent header-->
+ <SilentHeader>Silent:on-demand;www.silent.com</SilentHeader>
+ <!-- OMA preview header-->
+ <PreviewHeader>Preview:instant;www.preview.com</PreviewHeader>
+ <!-- OMA content URL header-->
+ <ContentURLHeader>ContentURL:www.content.com</ContentURLHeader>
+ <!-- OMA content version header-->
+ <ContentVersionHeader>ContentVersion:original-content-identifier:1.1</ContentVersionHeader>
+ <!-- OMA content location header-->
+ <ContentLocationHeader>Content-Location:www.content.com</ContentLocationHeader>
+ <!-- OpenIPMP p12 file path-->
+ <P12FilePath>\p12\</P12FilePath>
+ <!-- OpenIPMP random number file-->
+ <RandomNumberFilePath>.\entropy.dat</RandomNumberFilePath>
+ <!-- Content title, used by DOI content info manager-->
+ <ContentTitle></ContentTitle>
+ <!-- DOI content information-->
+ <doi:KernelMetadata xmlns:doi="http://www.doi.org/">
+  <DOI>TBD</DOI>
+  <Identifiers>
+   <Identifier>
+    <IdentifierType>ISWC</IdentifierType>
+    <IdentifierValue>T-034.524.680</IdentifierValue>
+   </Identifier>
+  </Identifiers>
+  <Titles>
+   <Title>
+    <TitleValue>title</TitleValue>
+    <Language>en</Language>
+   </Title>
+  </Titles>
+  <StructuralType>visual</StructuralType>
+  <Modes>
+   <Mode>visual</Mode>
+  </Modes>
+  <PrimaryAgents>
+   <Agent sequence="1">
+    <Name>
+     <NameType>Person</NameType>
+     <NameValue>Matt Witte</NameValue>
+    </Name>
+    <Roles>
+     <Role>Artist</Role>
+    </Roles>
+   </Agent>
+   <Agent sequence="2">
+    <Name>
+     <NameType>Person</NameType>
+     <NameValue>Freddy</NameValue>
+    </Name>
+    <Roles>
+     <Role>Directory</Role>
+    </Roles>
+   </Agent>
+  </PrimaryAgents>
+  <Assertor>
+   <Registrant>
+    <Name>
+     <NameType>Person</NameType>
+     <NameValue>Persons Name Here</NameValue>
+    </Name>
+    <Identifier>
+     <IdentifierType>PublisherCode</IdentifierType>
+     <IdentifierValue>9901</IdentifierValue>
+    </Identifier>
+   </Registrant>
+   <Authority>
+    <Name>
+     <NameType>Organization</NameType>
+     <NameValue>Objectlab</NameValue>
+    </Name>
+   </Authority>
+  </Assertor>
+ </doi:KernelMetadata>
+</EncoderInfo>

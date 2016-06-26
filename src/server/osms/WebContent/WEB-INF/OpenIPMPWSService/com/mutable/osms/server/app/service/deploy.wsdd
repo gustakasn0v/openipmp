@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from OpenIPMPWSService WSDL service -->
+
+  <service name="OpenIPMPWS" provider="java:RPC" style="rpc" use="encoded">
+      <parameter name="wsdlTargetNamespace" value="http://service.app.server.osms.mutable.com"/>
+      <parameter name="wsdlServiceElement" value="OpenIPMPWSService"/>
+      <parameter name="schemaUnqualified" value="http://service.app.server.osms.mutable.com"/>
+      <parameter name="wsdlServicePort" value="OpenIPMPWS"/>
+      <parameter name="className" value="com.mutable.osms.server.app.service.OpenIPMPWS"/>
+      <parameter name="wsdlPortType" value="OpenIPMPWS"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://service.app.server.osms.mutable.com" name="ping" qname="operNS:ping" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://service.app.server.osms.mutable.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="login" qname="operNS:login" returnQName="loginReturn" returnType="rtns:int" soapAction="">
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userName" type="tns:string"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="passwd" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://service.app.server.osms.mutable.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="packageSecureContentWithParams" qname="operNS:packageSecureContentWithParams" returnQName="packageSecureContentWithParamsReturn" returnType="rtns:int" soapAction="">
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="agentUserName" type="tns:string"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="agentPassword" type="tns:string"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="sourceFileURL" type="tns:string"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="destinationFileURL" type="tns:string"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="contentOwnerAppId" type="tns:string"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="contentOwnerUserId" type="tns:string"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="transactionID" type="tns:string"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="validityStartDate" type="tns:string"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="validityEndDate" type="tns:string"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="validityDays" type="tns:int"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="validityPlaycount" type="tns:int"/>
+        <parameter xmlns:tns="http://service.app.server.osms.mutable.com" qname="grantUsers" type="tns:ArrayOf_xsd_string"/>
+      </operation>
+      <operation xmlns:operNS="http://service.app.server.osms.mutable.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="packageSecureContentWithParamsForSingleUser" qname="operNS:packageSecureContentWithParamsForSingleUser" returnQName="packageSecureContentWithParamsForSingleUserReturn" returnType="rtns:int" soapAction="">
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="agentUserName" type="tns:string"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="agentPassword" type="tns:string"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="sourceFileURL" type="tns:string"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="destinationFileURL" type="tns:string"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="contentOwnerAppId" type="tns:string"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="contentOwnerUserId" type="tns:string"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="transactionID" type="tns:string"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="validityStartDate" type="tns:string"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="validityEndDate" type="tns:string"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="validityDays" type="tns:int"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="validityPlaycount" type="tns:int"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="grantUser" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://service.app.server.osms.mutable.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="packageSecureContentWithMPEG_REL" qname="operNS:packageSecureContentWithMPEG_REL" returnQName="packageSecureContentWithMPEG_RELReturn" returnType="rtns:int" soapAction="">
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="agentUserName" type="tns:string"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="agentPassword" type="tns:string"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="contentOwnerAppId" type="tns:string"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="contentOwnerUserId" type="tns:string"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="transactionID" type="tns:string"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="mpegREL" type="tns:string"/>
+      </operation>
+      <parameter name="allowedMethods" value="packageSecureContentWithParams login packageSecureContentWithMPEG_REL packageSecureContentWithParamsForSingleUser ping"/>
+
+      <arrayMapping xmlns:ns="http://service.app.server.osms.mutable.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_string" type="java:java.lang.String[]" innerType="cmp-ns:string" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+  </service>
+</deployment>

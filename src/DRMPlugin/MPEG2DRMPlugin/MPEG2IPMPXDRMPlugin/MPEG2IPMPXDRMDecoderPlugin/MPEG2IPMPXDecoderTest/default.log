@@ -1,0 +1,116 @@
+<<DEBUG>> 2006-05-28 14:00:44 - 	BlockingSocket::write() - Sending the following 429 bytes =============================================
+<<DEBUG>> 2006-05-28 14:00:44 - POST /openipmp/servlet/SimpleServletServer HTTP/1.0
+Content-Type: text/html
+Content-Length: 284
+User-Agent: OpenIPMP/1.0 (ObjectLab, LCC.)
+
+00000276<?xml version="1.0"?>
+<com.objectlab.osms.common.io.message.osmsMessageUserLoginRequest><MessageType type="int">1</MessageType><UserName type="char[]">danijelk</UserName><Password type="char[]">ipmp</Password></com.objectlab.osms.common.io.message.osmsMessageUserLoginRequest>
+<<DEBUG>> 2006-05-28 14:00:44 - 	BlockingSocket::write() - Sent the data =============================================
+<<DEBUG>> 2006-05-28 14:00:46 - 	BlockingSocket::write() - Sending the following 500 bytes =============================================
+<<DEBUG>> 2006-05-28 14:00:46 - POST /openipmp/servlet/SimpleServletServer HTTP/1.0
+Content-Type: text/html
+Content-Length: 294
+User-Agent: OpenIPMP/1.0 (ObjectLab, LCC.)
+Cookie: JSESSIONID=234E8BC74087478935AFCD6A9B5E5A6C; Path=/
+
+00000286<?xml version="1.0"?>
+<com.objectlab.osms.common.io.message.osmsMessageLicenseRequest><MessageType type="int">204</MessageType><ContentId type="char[]">10.9901/12.i.1</ContentId><RightsInfo type="char[]">PLAY</RightsInfo></com.objectlab.osms.common.io.message.osmsMessageLicenseRequest>
+<<DEBUG>> 2006-05-28 14:00:46 - 	BlockingSocket::write() - Sent the data =============================================
+<<DEBUG>> 2006-05-28 14:00:46 - 	BlockingSocket::write() - Sending the following 417 bytes =============================================
+<<DEBUG>> 2006-05-28 14:00:46 - POST /openipmp/servlet/SimpleServletServer HTTP/1.0
+Content-Type: text/html
+Content-Length: 211
+User-Agent: OpenIPMP/1.0 (ObjectLab, LCC.)
+Cookie: JSESSIONID=234E8BC74087478935AFCD6A9B5E5A6C; Path=/
+
+00000203<?xml version="1.0"?>
+<com.objectlab.osms.common.io.message.osmsMessageUserLogoutRequest> 			 		<MessageType type="int">4</MessageType></com.objectlab.osms.common.io.message.osmsMessageUserLogoutRequest>
+<<DEBUG>> 2006-05-28 14:00:46 - 	BlockingSocket::write() - Sent the data =============================================
+<<DEBUG>> 2006-05-28 14:01:02 - 	BlockingSocket::write() - Sending the following 429 bytes =============================================
+<<DEBUG>> 2006-05-28 14:01:02 - POST /openipmp/servlet/SimpleServletServer HTTP/1.0
+Content-Type: text/html
+Content-Length: 284
+User-Agent: OpenIPMP/1.0 (ObjectLab, LCC.)
+
+00000276<?xml version="1.0"?>
+<com.objectlab.osms.common.io.message.osmsMessageUserLoginRequest><MessageType type="int">1</MessageType><UserName type="char[]">danijelk</UserName><Password type="char[]">ipmp</Password></com.objectlab.osms.common.io.message.osmsMessageUserLoginRequest>
+<<DEBUG>> 2006-05-28 14:01:02 - 	BlockingSocket::write() - Sent the data =============================================
+<<DEBUG>> 2006-05-28 14:01:02 - 	BlockingSocket::write() - Sending the following 500 bytes =============================================
+<<DEBUG>> 2006-05-28 14:01:02 - POST /openipmp/servlet/SimpleServletServer HTTP/1.0
+Content-Type: text/html
+Content-Length: 294
+User-Agent: OpenIPMP/1.0 (ObjectLab, LCC.)
+Cookie: JSESSIONID=6A05D9BFBEDA771E6C52DF5753E1A005; Path=/
+
+00000286<?xml version="1.0"?>
+<com.objectlab.osms.common.io.message.osmsMessageLicenseRequest><MessageType type="int">204</MessageType><ContentId type="char[]">10.9901/12.i.2</ContentId><RightsInfo type="char[]">PLAY</RightsInfo></com.objectlab.osms.common.io.message.osmsMessageLicenseRequest>
+<<DEBUG>> 2006-05-28 14:01:02 - 	BlockingSocket::write() - Sent the data =============================================
+<<DEBUG>> 2006-05-28 14:01:02 - 	BlockingSocket::write() - Sending the following 417 bytes =============================================
+<<DEBUG>> 2006-05-28 14:01:02 - POST /openipmp/servlet/SimpleServletServer HTTP/1.0
+Content-Type: text/html
+Content-Length: 211
+User-Agent: OpenIPMP/1.0 (ObjectLab, LCC.)
+Cookie: JSESSIONID=6A05D9BFBEDA771E6C52DF5753E1A005; Path=/
+
+00000203<?xml version="1.0"?>
+<com.objectlab.osms.common.io.message.osmsMessageUserLogoutRequest> 			 		<MessageType type="int">4</MessageType></com.objectlab.osms.common.io.message.osmsMessageUserLogoutRequest>
+<<DEBUG>> 2006-05-28 14:01:02 - 	BlockingSocket::write() - Sent the data =============================================
+<<DEBUG>> 2006-05-28 14:02:11 - 	BlockingSocket::write() - Sending the following 429 bytes =============================================
+<<DEBUG>> 2006-05-28 14:02:11 - POST /openipmp/servlet/SimpleServletServer HTTP/1.0
+Content-Type: text/html
+Content-Length: 284
+User-Agent: OpenIPMP/1.0 (ObjectLab, LCC.)
+
+00000276<?xml version="1.0"?>
+<com.objectlab.osms.common.io.message.osmsMessageUserLoginRequest><MessageType type="int">1</MessageType><UserName type="char[]">danijelk</UserName><Password type="char[]">ipmp</Password></com.objectlab.osms.common.io.message.osmsMessageUserLoginRequest>
+<<DEBUG>> 2006-05-28 14:02:11 - 	BlockingSocket::write() - Sent the data =============================================
+<<DEBUG>> 2006-05-28 14:02:11 - 	BlockingSocket::write() - Sending the following 500 bytes =============================================
+<<DEBUG>> 2006-05-28 14:02:11 - POST /openipmp/servlet/SimpleServletServer HTTP/1.0
+Content-Type: text/html
+Content-Length: 294
+User-Agent: OpenIPMP/1.0 (ObjectLab, LCC.)
+Cookie: JSESSIONID=FC10F59E66F0A75086D87AD5441631C0; Path=/
+
+00000286<?xml version="1.0"?>
+<com.objectlab.osms.common.io.message.osmsMessageLicenseRequest><MessageType type="int">204</MessageType><ContentId type="char[]">10.9901/12.i.3</ContentId><RightsInfo type="char[]">PLAY</RightsInfo></com.objectlab.osms.common.io.message.osmsMessageLicenseRequest>
+<<DEBUG>> 2006-05-28 14:02:11 - 	BlockingSocket::write() - Sent the data =============================================
+<<DEBUG>> 2006-05-28 14:02:11 - 	BlockingSocket::write() - Sending the following 417 bytes =============================================
+<<DEBUG>> 2006-05-28 14:02:11 - POST /openipmp/servlet/SimpleServletServer HTTP/1.0
+Content-Type: text/html
+Content-Length: 211
+User-Agent: OpenIPMP/1.0 (ObjectLab, LCC.)
+Cookie: JSESSIONID=FC10F59E66F0A75086D87AD5441631C0; Path=/
+
+00000203<?xml version="1.0"?>
+<com.objectlab.osms.common.io.message.osmsMessageUserLogoutRequest> 			 		<MessageType type="int">4</MessageType></com.objectlab.osms.common.io.message.osmsMessageUserLogoutRequest>
+<<DEBUG>> 2006-05-28 14:02:11 - 	BlockingSocket::write() - Sent the data =============================================
+<<DEBUG>> 2006-05-28 14:02:20 - 	BlockingSocket::write() - Sending the following 429 bytes =============================================
+<<DEBUG>> 2006-05-28 14:02:20 - POST /openipmp/servlet/SimpleServletServer HTTP/1.0
+Content-Type: text/html
+Content-Length: 284
+User-Agent: OpenIPMP/1.0 (ObjectLab, LCC.)
+
+00000276<?xml version="1.0"?>
+<com.objectlab.osms.common.io.message.osmsMessageUserLoginRequest><MessageType type="int">1</MessageType><UserName type="char[]">danijelk</UserName><Password type="char[]">ipmp</Password></com.objectlab.osms.common.io.message.osmsMessageUserLoginRequest>
+<<DEBUG>> 2006-05-28 14:02:20 - 	BlockingSocket::write() - Sent the data =============================================
+<<DEBUG>> 2006-05-28 14:02:20 - 	BlockingSocket::write() - Sending the following 500 bytes =============================================
+<<DEBUG>> 2006-05-28 14:02:20 - POST /openipmp/servlet/SimpleServletServer HTTP/1.0
+Content-Type: text/html
+Content-Length: 294
+User-Agent: OpenIPMP/1.0 (ObjectLab, LCC.)
+Cookie: JSESSIONID=A21AAA068806966EC16D5DF7BA30C347; Path=/
+
+00000286<?xml version="1.0"?>
+<com.objectlab.osms.common.io.message.osmsMessageLicenseRequest><MessageType type="int">204</MessageType><ContentId type="char[]">10.9901/12.i.4</ContentId><RightsInfo type="char[]">PLAY</RightsInfo></com.objectlab.osms.common.io.message.osmsMessageLicenseRequest>
+<<DEBUG>> 2006-05-28 14:02:20 - 	BlockingSocket::write() - Sent the data =============================================
+<<DEBUG>> 2006-05-28 14:02:20 - 	BlockingSocket::write() - Sending the following 417 bytes =============================================
+<<DEBUG>> 2006-05-28 14:02:20 - POST /openipmp/servlet/SimpleServletServer HTTP/1.0
+Content-Type: text/html
+Content-Length: 211
+User-Agent: OpenIPMP/1.0 (ObjectLab, LCC.)
+Cookie: JSESSIONID=A21AAA068806966EC16D5DF7BA30C347; Path=/
+
+00000203<?xml version="1.0"?>
+<com.objectlab.osms.common.io.message.osmsMessageUserLogoutRequest> 			 		<MessageType type="int">4</MessageType></com.objectlab.osms.common.io.message.osmsMessageUserLogoutRequest>
+<<DEBUG>> 2006-05-28 14:02:20 - 	BlockingSocket::write() - Sent the data =============================================

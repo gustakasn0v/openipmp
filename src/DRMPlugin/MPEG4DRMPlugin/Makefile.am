@@ -1,0 +1,1 @@
+SUBDIRS = MPEG4SinfDRMPlugin

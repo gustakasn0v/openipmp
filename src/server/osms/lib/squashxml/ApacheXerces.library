@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library>
+  <!--JBuilder Library Definition File-->
+  <fullname>ApacheXerces</fullname>
+  <class>
+    <path>[ext/xerces.jar]</path>
+  </class>
+</library>

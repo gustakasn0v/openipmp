@@ -1,0 +1,1 @@
+SUBDIRS = OMADRMServer OMADRMMQDecCommHandler OMADRMMQEncCommHandler

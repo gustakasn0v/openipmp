@@ -1,0 +1,1 @@
+SUBDIRS = ISMADRMEncManagerFactory OMADRMEncCommHandlerFactory OMADRMEncManagerFactory OpenIPMPDRMEncManagerFactory ContentInfoManagerFactory

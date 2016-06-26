@@ -1,0 +1,42 @@
+<o-ex:agreement>
+	<o-ex:context>
+		<o-dd:uid>XXXI SEE YOU XXXXXXXXXXXXX</o-dd:uid>
+		<o-dd:remark>OpenIPMP License Identifier</o-dd:remark>
+	</o-ex:context>
+	<o-ex:asset>
+		<o-ex:context>
+			<o-dd:uid>
+				<o-doi:DOI>XXXXXXXXXXXXXXXXXXXXX</o-doi:DOI>
+			</o-dd:uid>
+		</o-ex:context>
+
+		<ds:KeyInfo>
+			<enc:EncryptedKey>
+				<enc:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-1_5/"></enc:EncryptionMethod>
+				<ds:KeyInfo>
+					<ds:X509Data>
+						<ds:X509Certificate>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</ds:X509Certificate>
+					</ds:X509Data>
+					<enc:CipherData>
+						<enc:CipherValue>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx</enc:CipherValue>
+					</enc:CipherData>
+				</ds:KeyInfo>
+			</enc:EncryptedKey>
+		</ds:KeyInfo>
+	</o-ex:asset>
+	<o-ex:permission>
+		<o-dd:play>
+			<o-ex:constraint>
+				<o-dd:datetime>
+					<o-dd:start>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX1999-11-24T18:20:00XXXXXXXXXXXXXXXXXXXXXXXXXXX</o-dd:start>
+					<o-dd:end>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX2003-11-25T18:20:00XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx</o-dd:end>
+				</o-dd:datetime>
+			</o-ex:constraint>
+		</o-dd:play>
+	</o-ex:permission>
+	<o-ex:party>
+		<o-ex:context>
+			<o-dd:uid>Unique ID of the user?  Should be the user's public key here?</o-dd:uid>
+		</o-ex:context>
+	</o-ex:party>
+</o-ex:agreement>

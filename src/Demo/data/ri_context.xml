@@ -1,0 +1,26 @@
+<RIContext>
+		<id>
+			<keyIdentifier xsi:type="roap:X509SPKIHash" algorithm="http://www.w3.org/2000/09/xmldsig#sha1">
+					<hash>TNqX1eQAt875qkr0mDqrOF20tv4=</hash>
+			</keyIdentifier>
+		</id>
+		<trustedAuthorities>
+			<keyIdentifier xsi:type="roap:X509SPKIHash" algorithm="http://www.w3.org/2000/09/xmldsig#sha1">
+					<hash>pYG4x0XH9NZjFTcRkfGXW/BXLuk=</hash>
+			</keyIdentifier>
+		</trustedAuthorities>
+		<algorithms>
+			<algorithm>md5</algorithm>
+			<algorithm>rsa</algorithm>
+		</algorithms>
+		<version>1.0</version>
+		<extensions>
+			<extension xsi:type="roap:CertificateCaching" critical="false"></extension>
+			<extension xsi:type="roap:DeviceDetails" critical="true"></extension>
+			<extension xsi:type="roap:DomainNameWhiteList" critical="false">
+				<dn>YWJjZA==</dn>
+			</extension>
+		</extensions>
+		<ocspResponse>YWJjZA==</ocspResponse>
+		<serverInfo>b21hZHJtX3NlcnZlcg==</serverInfo>
+</RIContext>

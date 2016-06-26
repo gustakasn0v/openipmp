@@ -1,0 +1,878 @@
+Microsoft Developer Studio Workspace File, Format Version 6.00
+# WARNING: DO NOT EDIT OR DELETE THIS WORKSPACE FILE!
+
+###############################################################################
+
+Project: "Base64Factory"=..\Base64Factory\Base64Factory.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "CipherFactory"=..\CipherFactory\CipherFactory.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "ContentInfoManagerFactory"=..\DRMENCODERPLUGIN\ContentInfoManagerFactory\ContentInfoManagerFactory.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name DRMMessenger
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OpenIPMPMessengerFactory
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "DRMPluginAll"=.\DRMPluginAll.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name ContentInfoManagerFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name DecryptorHolder
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ISMADRMDecManagerFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ISMADRMEncManagerFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ISMAMPEG4SinfDRMEncryptor
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OMADRMDecManagerFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OMADRMEncManagerFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OMAMPEG4SinfDRMEncryptor
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OpenIPMPDRMDecManagerFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OpenIPMPDRMEncManagerFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OpenIPMPMPEG4SinfDRMEncryptor
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name PublicCryptoFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ThreadSyncFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name XMLFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OMADRMDeviceIDCalc
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name DecoderIPMPControlInfo
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name DecoderIPMPData
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name IPMPControlInfo
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name IPMPControlInfoParser
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name IPMPCrypto
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name IPMPData
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name IPMPDataParser
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name IPMPToolManager
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name MessageRouter
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name MPEG2IPMPXDRMEncoder
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OpenIPMPTool
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "DecoderIPMPControlInfo"=..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\MPEG2IPMPXDRMDecoderPlugin\DecoderIPMPControlInfo\DecoderIPMPControlInfo.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "DecoderIPMPData"=..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\MPEG2IPMPXDRMDecoderPlugin\DecoderIPMPData\DecoderIPMPData.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "DecryptorHolder"=..\MPEG4DRMPlugin\MPEG4SinfDRMPlugin\MPEG4SINFDRMDECODERPLUGIN\DecryptorHolder\DecryptorHolder.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "IPMPControlInfo"=..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\IPMPControlInfo\IPMPControlInfo.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "IPMPControlInfoParser"=..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\MPEG2IPMPXDRMDecoderPlugin\IPMPControlInfoParser\IPMPControlInfoParser.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "IPMPCrypto"=..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\IPMPCrypto\IPMPCrypto.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "IPMPData"=..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\IPMPData\IPMPData.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "IPMPDataParser"=..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\MPEG2IPMPXDRMDecoderPlugin\IPMPDataParser\IPMPDataParser.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "IPMPToolManager"=..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\MPEG2IPMPXDRMDecoderPlugin\IPMPToolManager\IPMPToolManager.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "ISMADRMDecManagerFactory"=..\DRMDECODERPLUGIN\ISMADRMDecManagerFactory\ISMADRMDecManagerFactory.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name OpenIPMPKeyManager
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name CipherFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OpenIPMPMessengerFactory
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "ISMADRMEncManagerFactory"=..\DRMENCODERPLUGIN\ISMADRMEncManagerFactory\ISMADRMEncManagerFactory.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name OpenIPMPKeyManager
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name CipherFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OpenIPMPMessengerFactory
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "ISMAMPEG4SinfDRMEncryptor"=..\MPEG4DRMPlugin\MPEG4SinfDRMPlugin\MPEG4SinfDRMEncoderPlugin\ISMAMPEG4SinfDRMEncryptor\ISMAMPEG4SinfDRMEncryptor.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name XML
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "MPEG2IPMPXDRMEncoder"=..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\MPEG2IPMPXDRMEncoderPlugin\MPEG2IPMPXDRMEncoder\MPEG2IPMPXDRMEncoder.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name OpenIPMPMPEG2IPMPXDRMEncryptor
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name DOIContentInfoManager
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OpenIPMPDRMEncManager
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OpenIPMPDRMEncManagerFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ContentInfoManagerFactory
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "MessageRouter"=..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\MPEG2IPMPXDRMDecoderPlugin\MessageRouter\MessageRouter.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name ThreadSyncFactory
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "OMADRMCommon"=..\OMADRM\OMADRMCommon\OMADRMCommon.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "OMADRMCrypto"=..\OMADRM\OMADRMCrypto\OMADRMCrypto.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "OMADRMDecCommHandlerFactory"=..\DRMDecoderPlugin\OMADRMDecCommHandlerFactory\OMADRMDecCommHandlerFactory.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name OMADRMMQDecCommHandler
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ROAP
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ROAPParser
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name XMLFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ThreadSyncFactory
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "OMADRMDecManagerFactory"=..\DRMDecoderPlugin\OMADRMDecManagerFactory\OMADRMDecManagerFactory.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name Base64Factory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name CipherFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OMADRMCommon
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OMADRMCrypto
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OMADRMDecCommHandlerFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name PublicCryptoFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ROAP
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ROAPParser
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name XMLFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OpenIPMPKeyManager
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ThreadSyncFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OpenIPMPMessengerFactory
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "OMADRMDeviceIDCalc"=..\OMADRM\OMADRMDeviceIDCalc\OMADRMDeviceIDCalc.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name Base64Factory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name PublicCryptoFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ROAP
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OMADRMCrypto
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "OMADRMEncCommHandlerFactory"=..\DRMEncoderPlugin\OMADRMEncCommHandlerFactory\OMADRMEncCommHandlerFactory.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name OMADRMMQEncCommHandler
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OMADRMWSEncCommHandler
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ROAP
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ROAPParser
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name XMLFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ThreadSyncFactory
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "OMADRMEncManagerFactory"=..\DRMEncoderPlugin\OMADRMEncManagerFactory\OMADRMEncManagerFactory.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name OMADRMEncCommHandlerFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OpenIPMPKeyManager
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name Base64Factory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name CipherFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OMADRMCommon
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OMADRMCrypto
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ROAP
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ThreadSyncFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OpenIPMPMessengerFactory
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "OMADRMMQDecCommHandler"=..\OMADRM\Test\OMADRMMQDecCommHandler\OMADRMMQDecCommHandler.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name Base64Factory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OMADRMServer
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name XML
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OMADRMCommon
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OMADRMCrypto
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name PublicCryptoFactory
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "OMADRMMQEncCommHandler"=..\OMADRM\Test\OMADRMMQEncCommHandler\OMADRMMQEncCommHandler.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name OMADRMServer
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name Base64Factory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name XML
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OMADRMCommon
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OMADRMCrypto
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name PublicCryptoFactory
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "OMADRMServer"=..\OMADRM\Test\OMADRMServer\OMADRMServer.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name XML
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "OMAMPEG4SinfDRMEncryptor"=..\MPEG4DRMPlugin\MPEG4SinfDRMPlugin\MPEG4SinfDRMEncoderPlugin\OMAMPEG4SinfDRMEncryptor\OMAMPEG4SinfDRMEncryptor.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name XML
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "OpenIPMPDRMDecManagerFactory"=..\DRMDECODERPLUGIN\OpenIPMPDRMDecManagerFactory\OpenIPMPDRMDecManagerFactory.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name OpenIPMPKeyManager
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name CipherFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OpenIPMPMessengerFactory
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "OpenIPMPDRMEncManagerFactory"=..\DRMENCODERPLUGIN\OpenIPMPDRMEncManagerFactory\OpenIPMPDRMEncManagerFactory.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name OpenIPMPKeyManager
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name CipherFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OpenIPMPMessengerFactory
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "OpenIPMPKeyManager"=..\OpenIPMPKeyManager\OpenIPMPKeyManager.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name DRMMessenger
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name XML
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "OpenIPMPMPEG2IPMPXDRMEncryptor"=..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\MPEG2IPMPXDRMEncoderPlugin\OpenIPMPMPEG2IPMPXDRMEncryptor\OpenIPMPMPEG2IPMPXDRMEncryptor.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name IPMPControlInfo
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name IPMPData
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name XML
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "OpenIPMPMPEG4SinfDRMEncryptor"=..\MPEG4DRMPlugin\MPEG4SinfDRMPlugin\MPEG4SinfDRMEncoderPlugin\OpenIPMPMPEG4SinfDRMEncryptor\OpenIPMPMPEG4SinfDRMEncryptor.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name XML
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "OpenIPMPMessengerFactory"=..\OpenIPMPMessengerFactory\OpenIPMPMessengerFactory.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name openipmp
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name squashxml
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ThreadSyncFactory
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "OpenIPMPTool"=..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\MPEG2IPMPXDRMDecoderPlugin\OpenIPMPTool\OpenIPMPTool.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name IPMPData
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name IPMPCrypto
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name IPMPDataParser
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name MessageRouter
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OpenIPMPDRMDecManager
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name XML
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name XMLFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OpenIPMPDRMDecManagerFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ThreadSyncFactory
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "PublicCryptoFactory"=..\PublicCryptoFactory\PublicCryptoFactory.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "ROAP"=..\OMADRM\ROAP\ROAP.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "ROAPParser"=..\OMADRM\ROAPParser\ROAPParser.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "ThreadSyncFactory"=..\ThreadSyncFactory\ThreadSyncFactory.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "XMLFactory"=..\XMLFactory\XMLFactory.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "openipmp"=..\openIPMP\openipmp.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "squashxml"=..\squashxml\squashxml.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Global:
+
+Package=<5>
+{{{
+}}}
+
+Package=<3>
+{{{
+}}}
+
+###############################################################################
+

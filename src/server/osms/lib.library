@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library>
+  <!--JBuilder Library Definition File-->
+  <fullname>lib</fullname>
+  <class>
+    <path>lib/ejbca/extra</path>
+    <path>[lib/ejbca/bouncycastle.zip]</path>
+    <path>[lib/ejbca/ca.jar]</path>
+    <path>[lib/ejbca/jboss-j2ee.jar]</path>
+    <path>[lib/ejbca/jce-jdk13-112.jar]</path>
+    <path>[lib/ejbca/servlet.jar]</path>
+    <path>[lib/ejbca/extra/jboss-client.jar]</path>
+    <path>[lib/ejbca/extra/jboss-jaas.jar]</path>
+    <path>[lib/ejbca/extra/jnp-client.jar]</path>
+    <path>[lib/ejbca/extra/log4j.jar]</path>
+    <path>[lib/mysql/mysql-connector-java-2.0.14-bin.jar]</path>
+    <path>[lib/mysql/mysql-connector-java-2.0.14-bin.jar]</path>
+    <path>[lib/squashxml/ext/servlet.jar]</path>
+    <path>[lib/squashxml/ext/xerces.jar]</path>
+  </class>
+</library>

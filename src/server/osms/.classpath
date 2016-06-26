@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="CVS/**" output=".deployables/openipmp/WEB-INF/classes" kind="src" path="srcWS"/>
+	<classpathentry excluding="CVS/**" kind="src" path="lib/squashxml/src"/>
+	<classpathentry excluding="CVS/**" kind="src" path="src"/>
+	<classpathentry excluding="CVS/**" kind="src" path="srcAuto"/>
+	<classpathentry excluding="CVS/**" kind="src" path="srcOnline"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container/openipmp"/>
+	<classpathentry kind="lib" path="lib/mysql/mysql-connector-java-3.1.10-bin.jar"/>
+	<classpathentry kind="lib" path="lib/ejbca/bouncycastle.zip"/>
+	<classpathentry kind="lib" path="lib/ejbca/ca.jar"/>
+	<classpathentry kind="lib" path="lib/ejbca/jboss-j2ee.jar"/>
+	<classpathentry kind="lib" path="lib/ejbca/jce-jdk13-112.jar"/>
+	<classpathentry kind="lib" path="lib/ejbca/servlet.jar"/>
+	<classpathentry kind="lib" path="lib/squashxml/ext/xerces.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v5.0"/>
+	<classpathentry excluding="CVS/**" kind="src" path="srcTest"/>
+	<classpathentry kind="lib" path="lib/junit/junit.jar"/>
+	<classpathentry kind="output" path=".deployables/openipmp/WEB-INF/classes"/>
+</classpath>

@@ -1,0 +1,30 @@
+<PlayerInfo>
+ <!-- OpenIPMP p12 file path-->
+ <P12FilePath>\p12\</P12FilePath>
+ <!-- OpenIPMP random number file-->
+ <RandomNumberFilePath>.\entropy.dat</RandomNumberFilePath>
+ <!-- OMA device registration database file-->
+ <RegDatabasePath>\p12\ncacheagentregdb.xml</RegDatabasePath>
+ <!-- OMA device rights database file-->
+ <RODatabasePath>\p12\agentrodb.xml</RODatabasePath>
+ <!-- OMA device certificate file-->
+ <CertPath>\p12\deviceCertSigned.der</CertPath>
+ <!-- OMA device private key file-->
+ <PrivateKeyPath>\p12\deviceKey.der</PrivateKeyPath>
+ <!-- OMA device CA certificate file-->
+ <RootCAPath>\p12\OMACACert.der</RootCAPath>
+ <!-- OMA device manufacturer-->
+ <Manufacturer>manufacturer</Manufacturer>
+ <!-- OMA device model-->
+ <Model>model</Model>
+ <!-- OMA device version-->
+ <Version>1.0</Version>
+ <!-- OMA device ROAP version-->
+ <ROAPVersion>1.0</ROAPVersion>
+ <!-- OMA device caching database indicator-->
+ <Caching>false</Caching>
+ <!-- OMA device supported algorithm-->
+ <SupportedAlgorithm>md5</SupportedAlgorithm>
+ <!-- OMA device supported algorithm-->
+ <SupportedAlgorithm>md5rsa</SupportedAlgorithm>
+</PlayerInfo>

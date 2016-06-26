@@ -1,0 +1,15 @@
+<OMADRMPlayerInfo>
+ <RegDatabasePath>\p12\cacheagentregdb.xml</RegDatabasePath>
+ <RODatabasePath>\p12\agentrodb.xml</RODatabasePath>
+ <CertPath>\p12\deviceCertSigned.der</CertPath>
+ <PrivateKeyPath>\p12\deviceKey.der</PrivateKeyPath>
+ <RootCAPath>\p12\OMACACert.der</RootCAPath>
+ <Manufacturer>manufacturer</Manufacturer>
+ <Model>model</Model>
+ <Version>1.0</Version>
+ <ROAPVersion>1.0</ROAPVersion>
+ <Caching>true</Caching>
+ <TrustedCAPath>\p12\OMACACert.der</TrustedCAPath>
+ <SupportedAlgorithm>md5</SupportedAlgorithm>
+ <SupportedAlgorithm>md5rsa</SupportedAlgorithm>
+</OMADRMPlayerInfo>

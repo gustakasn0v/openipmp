@@ -1,0 +1,22 @@
+<<INFO >> 2003-11-12 10:07:52 - TestXMLDocDOIKernel - Started
+<<ERROR>> 2003-11-12 10:08:02 - TestXMLDocDOIKernel - could not read sample xml file.
+<<DEBUG>> 2003-11-12 10:08:15 - 	BlockingSocket::write() - Sending the following 364 bytes =============================================
+<<DEBUG>> 2003-11-12 10:08:15 - POST /squashxml/servlet/ExampleServletServer HTTP/1.0
+Content-Type: text/html
+Content-Length: 211
+User-Agent: SquashXML/1.0 (Cpp;HTTPTunnelClient)
+
+00000203<?xml version="1.0"?>
+<squashxml.example.XMLMessageWhatDayOfWeek><MessageType type="int">1</MessageType><DateInQuestion type="date">1967-10-22</DateInQuestion></squashxml.example.XMLMessageWhatDayOfWeek>
+<<DEBUG>> 2003-11-12 10:08:15 - 	BlockingSocket::write() - Sent the data =============================================
+<<INFO >> 2003-12-03 09:29:25 - TestXMLDocDOIKernel - Started
+<<ERROR>> 2003-12-03 09:29:25 - TestXMLDocDOIKernel - could not read sample xml file.
+<<DEBUG>> 2003-12-03 09:29:27 - 	BlockingSocket::write() - Sending the following 364 bytes =============================================
+<<DEBUG>> 2003-12-03 09:29:27 - POST /squashxml/servlet/ExampleServletServer HTTP/1.0
+Content-Type: text/html
+Content-Length: 211
+User-Agent: SquashXML/1.0 (Cpp;HTTPTunnelClient)
+
+00000203<?xml version="1.0"?>
+<squashxml.example.XMLMessageWhatDayOfWeek><MessageType type="int">1</MessageType><DateInQuestion type="date">1967-10-22</DateInQuestion></squashxml.example.XMLMessageWhatDayOfWeek>
+<<DEBUG>> 2003-12-03 09:29:27 - 	BlockingSocket::write() - Sent the data =============================================

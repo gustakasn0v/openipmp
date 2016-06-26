@@ -1,0 +1,254 @@
+Microsoft Developer Studio Workspace File, Format Version 6.00
+# WARNING: DO NOT EDIT OR DELETE THIS WORKSPACE FILE!
+
+###############################################################################
+
+Project: "CipherFactory"=..\..\..\CipherFactory\CipherFactory.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "ContentInfoManagerFactory"=..\..\..\DRMEncoderPlugin\ContentInfoManagerFactory\ContentInfoManagerFactory.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name DRMMessenger
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OpenIPMPMessengerFactory
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "IPMPControlInfo"=..\IPMPControlInfo\IPMPControlInfo.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "IPMPData"=..\IPMPData\IPMPData.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "MPEG2IPMPXDRMEncoder"=.\MPEG2IPMPXDRMEncoder\MPEG2IPMPXDRMEncoder.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name OpenIPMPMPEG2IPMPXDRMEncryptor
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name DOIContentInfoManager
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OpenIPMPDRMEncManager
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OpenIPMPDRMEncManagerFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ContentInfoManagerFactory
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "MPEG2IPMPXEncoderTest"=.\MPEG2IPMPXEncoderTest\MPEG2IPMPXEncoderTest.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name MPEG2IPMPXDRMEncoder
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name XML
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name XMLFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ThreadSyncFactory
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "OpenIPMPDRMEncManagerFactory"=..\..\..\DRMEncoderPlugin\OpenIPMPDRMEncManagerFactory\OpenIPMPDRMEncManagerFactory.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name OpenIPMPKeyManager
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name CipherFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OpenIPMPMessengerFactory
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "OpenIPMPKeyManager"=..\..\..\OpenIPMPKeyManager\OpenIPMPKeyManager.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name DRMMessanger
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name DRMMessenger
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name XML
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "OpenIPMPMPEG2IPMPXDRMEncryptor"=.\OpenIPMPMPEG2IPMPXDRMEncryptor\OpenIPMPMPEG2IPMPXDRMEncryptor.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name IPMPControlInfo
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name IPMPData
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name XML
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "OpenIPMPMessengerFactory"=..\..\..\OpenIPMPMessengerFactory\OpenIPMPMessengerFactory.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name openipmp
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name squashxml
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ThreadSyncFactory
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "ThreadSyncFactory"=..\..\..\ThreadSyncFactory\ThreadSyncFactory.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "XMLFactory"=..\..\..\XMLFactory\XMLFactory.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "openipmp"=..\..\..\openIPMP\openipmp.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "squashxml"=..\..\..\squashxml\squashxml.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Global:
+
+Package=<5>
+{{{
+}}}
+
+Package=<3>
+{{{
+}}}
+
+###############################################################################
+

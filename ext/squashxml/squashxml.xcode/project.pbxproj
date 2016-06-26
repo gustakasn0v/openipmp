@@ -1,0 +1,893 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 39;
+	objects = {
+		014CEA520018CE5811CA2923 = {
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_TREAT_NONCONFORMANT_CODE_ERRORS_AS_WARNINGS = NO;
+				HEADER_SEARCH_PATHS = "./include ../xerces/include";
+				LIBRARY_SEARCH_PATHS = ../xerces/macosx/lib;
+				LIBRARY_STYLE = DYNAMIC;
+				ZERO_LINK = YES;
+			};
+			isa = PBXBuildStyle;
+			name = Development;
+		};
+		014CEA530018CE5811CA2923 = {
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				ZERO_LINK = NO;
+			};
+			isa = PBXBuildStyle;
+			name = Deployment;
+		};
+//010
+//011
+//012
+//013
+//014
+//080
+//081
+//082
+//083
+//084
+		08FB7793FE84155DC02AAC07 = {
+			buildSettings = {
+			};
+			buildStyles = (
+				014CEA520018CE5811CA2923,
+				014CEA530018CE5811CA2923,
+			);
+			hasScannedForEncodings = 1;
+			isa = PBXProject;
+			mainGroup = 08FB7794FE84155DC02AAC07;
+			projectDirPath = "";
+			targets = (
+				D2AAC0620554660B00DB518D,
+			);
+		};
+		08FB7794FE84155DC02AAC07 = {
+			children = (
+				C9BF5F1708A7E339008ACB43,
+				08FB7795FE84155DC02AAC07,
+				1AB674ADFE9D54B511CA2CBB,
+			);
+			isa = PBXGroup;
+			name = squashxml;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		08FB7795FE84155DC02AAC07 = {
+			children = (
+				C9013CF108A5708700F22B86,
+				C9013CF008A5706500F22B86,
+				C9013CEF08A5705500F22B86,
+			);
+			isa = PBXGroup;
+			name = Source;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+//080
+//081
+//082
+//083
+//084
+//1A0
+//1A1
+//1A2
+//1A3
+//1A4
+		1AB674ADFE9D54B511CA2CBB = {
+			children = (
+				C9C8A19E08A5C5D500361093,
+				C9C8A19C08A5C5CB00361093,
+				D2AAC0630554660B00DB518D,
+			);
+			isa = PBXGroup;
+			name = Products;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+//1A0
+//1A1
+//1A2
+//1A3
+//1A4
+//C90
+//C91
+//C92
+//C93
+//C94
+		C9013CEF08A5705500F22B86 = {
+			children = (
+				C9013D0208A5715A00F22B86,
+				C9013D0308A5715A00F22B86,
+				C9013D0408A5715A00F22B86,
+				C9013D0508A5715A00F22B86,
+				C9013D0608A5715A00F22B86,
+			);
+			isa = PBXGroup;
+			name = socket;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9013CF008A5706500F22B86 = {
+			children = (
+				C9013CF208A5711B00F22B86,
+				C9013CF308A5711B00F22B86,
+				C9013CF408A5711B00F22B86,
+				C9013CF508A5711B00F22B86,
+				C9013CF608A5711B00F22B86,
+			);
+			isa = PBXGroup;
+			name = tools;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9013CF108A5708700F22B86 = {
+			children = (
+				C9013CFC08A5713100F22B86,
+				C9013CFD08A5713100F22B86,
+				C9013CFE08A5713100F22B86,
+			);
+			isa = PBXGroup;
+			name = xml;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9013CF208A5711B00F22B86 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = FileLogger.cpp;
+			path = src/tools/FileLogger.cpp;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9013CF308A5711B00F22B86 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = FileTool.cpp;
+			path = src/tools/FileTool.cpp;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9013CF408A5711B00F22B86 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = HashMap.cpp;
+			path = src/tools/HashMap.cpp;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9013CF508A5711B00F22B86 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = Logger.cpp;
+			path = src/tools/Logger.cpp;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9013CF608A5711B00F22B86 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = RFC1521Base64.cpp;
+			path = src/tools/RFC1521Base64.cpp;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9013CF708A5711B00F22B86 = {
+			fileRef = C9013CF208A5711B00F22B86;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C9013CF808A5711B00F22B86 = {
+			fileRef = C9013CF308A5711B00F22B86;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C9013CF908A5711B00F22B86 = {
+			fileRef = C9013CF408A5711B00F22B86;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C9013CFA08A5711B00F22B86 = {
+			fileRef = C9013CF508A5711B00F22B86;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C9013CFB08A5711B00F22B86 = {
+			fileRef = C9013CF608A5711B00F22B86;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C9013CFC08A5713100F22B86 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = XMLDocument.cpp;
+			path = src/xml/XMLDocument.cpp;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9013CFD08A5713100F22B86 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = XMLMessage.cpp;
+			path = src/xml/XMLMessage.cpp;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9013CFE08A5713100F22B86 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = XMLMessageBean.cpp;
+			path = src/xml/XMLMessageBean.cpp;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9013CFF08A5713100F22B86 = {
+			fileRef = C9013CFC08A5713100F22B86;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C9013D0008A5713100F22B86 = {
+			fileRef = C9013CFD08A5713100F22B86;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C9013D0108A5713100F22B86 = {
+			fileRef = C9013CFE08A5713100F22B86;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C9013D0208A5715A00F22B86 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = BlockingClientSocket.cpp;
+			path = src/socket/BlockingClientSocket.cpp;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9013D0308A5715A00F22B86 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = BlockingSocket.cpp;
+			path = src/socket/BlockingSocket.cpp;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9013D0408A5715A00F22B86 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = HTTPTunnelClient.cpp;
+			path = src/socket/HTTPTunnelClient.cpp;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9013D0508A5715A00F22B86 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = MessageContainer.cpp;
+			path = src/socket/MessageContainer.cpp;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9013D0608A5715A00F22B86 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = SquashXMLServletClient.cpp;
+			path = src/socket/SquashXMLServletClient.cpp;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9013D0708A5715A00F22B86 = {
+			fileRef = C9013D0208A5715A00F22B86;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C9013D0808A5715A00F22B86 = {
+			fileRef = C9013D0308A5715A00F22B86;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C9013D0908A5715A00F22B86 = {
+			fileRef = C9013D0408A5715A00F22B86;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C9013D0A08A5715A00F22B86 = {
+			fileRef = C9013D0508A5715A00F22B86;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C9013D0B08A5715A00F22B86 = {
+			fileRef = C9013D0608A5715A00F22B86;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C9BF5F1708A7E339008ACB43 = {
+			children = (
+				C9BF5F3908A7E3F9008ACB43,
+				C9BF5F1D08A7E386008ACB43,
+				C9BF5F1C08A7E377008ACB43,
+			);
+			isa = PBXGroup;
+			name = Headers;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9BF5F1C08A7E377008ACB43 = {
+			children = (
+				C9BF5F1F08A7E39D008ACB43,
+				C9BF5F2008A7E39D008ACB43,
+				C9BF5F2108A7E39D008ACB43,
+				C9BF5F2208A7E39D008ACB43,
+				C9BF5F2308A7E39D008ACB43,
+			);
+			isa = PBXGroup;
+			name = socket;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9BF5F1D08A7E386008ACB43 = {
+			children = (
+				C9BF5F2908A7E3AF008ACB43,
+				C9BF5F2A08A7E3AF008ACB43,
+				C9BF5F2B08A7E3AF008ACB43,
+				C9BF5F2C08A7E3AF008ACB43,
+				C9BF5F2D08A7E3AF008ACB43,
+				C9BF5F2E08A7E3AF008ACB43,
+				C9BF5F2F08A7E3AF008ACB43,
+			);
+			isa = PBXGroup;
+			name = tools;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9BF5F1F08A7E39D008ACB43 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = BlockingClientSocket.h;
+			path = include/squashxml/socket/BlockingClientSocket.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9BF5F2008A7E39D008ACB43 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = BlockingSocket.h;
+			path = include/squashxml/socket/BlockingSocket.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9BF5F2108A7E39D008ACB43 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = HTTPTunnelClient.h;
+			path = include/squashxml/socket/HTTPTunnelClient.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9BF5F2208A7E39D008ACB43 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = MessageContainer.h;
+			path = include/squashxml/socket/MessageContainer.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9BF5F2308A7E39D008ACB43 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = SquashXMLServletClient.h;
+			path = include/squashxml/socket/SquashXMLServletClient.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9BF5F2408A7E39D008ACB43 = {
+			fileRef = C9BF5F1F08A7E39D008ACB43;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C9BF5F2508A7E39D008ACB43 = {
+			fileRef = C9BF5F2008A7E39D008ACB43;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C9BF5F2608A7E39D008ACB43 = {
+			fileRef = C9BF5F2108A7E39D008ACB43;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C9BF5F2708A7E39D008ACB43 = {
+			fileRef = C9BF5F2208A7E39D008ACB43;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C9BF5F2808A7E39D008ACB43 = {
+			fileRef = C9BF5F2308A7E39D008ACB43;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C9BF5F2908A7E3AF008ACB43 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = ByteArray.h;
+			path = include/squashxml/tools/ByteArray.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9BF5F2A08A7E3AF008ACB43 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = Date.h;
+			path = include/squashxml/tools/Date.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9BF5F2B08A7E3AF008ACB43 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = FileLogger.h;
+			path = include/squashxml/tools/FileLogger.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9BF5F2C08A7E3AF008ACB43 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = FileTool.h;
+			path = include/squashxml/tools/FileTool.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9BF5F2D08A7E3AF008ACB43 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = HashMap.h;
+			path = include/squashxml/tools/HashMap.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9BF5F2E08A7E3AF008ACB43 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = Logger.h;
+			path = include/squashxml/tools/Logger.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9BF5F2F08A7E3AF008ACB43 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = RFC1521Base64.h;
+			path = include/squashxml/tools/RFC1521Base64.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9BF5F3008A7E3AF008ACB43 = {
+			fileRef = C9BF5F2908A7E3AF008ACB43;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C9BF5F3108A7E3AF008ACB43 = {
+			fileRef = C9BF5F2A08A7E3AF008ACB43;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C9BF5F3208A7E3AF008ACB43 = {
+			fileRef = C9BF5F2B08A7E3AF008ACB43;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C9BF5F3308A7E3AF008ACB43 = {
+			fileRef = C9BF5F2C08A7E3AF008ACB43;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C9BF5F3408A7E3AF008ACB43 = {
+			fileRef = C9BF5F2D08A7E3AF008ACB43;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C9BF5F3508A7E3AF008ACB43 = {
+			fileRef = C9BF5F2E08A7E3AF008ACB43;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C9BF5F3608A7E3AF008ACB43 = {
+			fileRef = C9BF5F2F08A7E3AF008ACB43;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C9BF5F3808A7E3E9008ACB43 = {
+			children = (
+				C9BF5F3A08A7E410008ACB43,
+				C9BF5F3B08A7E410008ACB43,
+				C9BF5F3C08A7E410008ACB43,
+				C9BF5F3D08A7E410008ACB43,
+				C9BF5F3E08A7E410008ACB43,
+				C9BF5F3F08A7E410008ACB43,
+				C9BF5F4008A7E410008ACB43,
+				C9BF5F4108A7E410008ACB43,
+			);
+			isa = PBXGroup;
+			name = datatype;
+			path = "";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9BF5F3908A7E3F9008ACB43 = {
+			children = (
+				C9BF5F4A08A7E41D008ACB43,
+				C9BF5F4B08A7E41D008ACB43,
+				C9BF5F4C08A7E41D008ACB43,
+				C9BF5F3808A7E3E9008ACB43,
+			);
+			isa = PBXGroup;
+			name = xml;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9BF5F3A08A7E410008ACB43 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = DataTypeAttribute.h;
+			path = include/squashxml/xml/datatype/DataTypeAttribute.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9BF5F3B08A7E410008ACB43 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = DataTypeBinaryHex.h;
+			path = include/squashxml/xml/datatype/DataTypeBinaryHex.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9BF5F3C08A7E410008ACB43 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = DataTypeByteArray.h;
+			path = include/squashxml/xml/datatype/DataTypeByteArray.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9BF5F3D08A7E410008ACB43 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = DataTypeCharArray.h;
+			path = include/squashxml/xml/datatype/DataTypeCharArray.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9BF5F3E08A7E410008ACB43 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = DataTypeCodex.h;
+			path = include/squashxml/xml/datatype/DataTypeCodex.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9BF5F3F08A7E410008ACB43 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = DataTypeDate.h;
+			path = include/squashxml/xml/datatype/DataTypeDate.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9BF5F4008A7E410008ACB43 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = DataTypeInt.h;
+			path = include/squashxml/xml/datatype/DataTypeInt.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9BF5F4108A7E410008ACB43 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = DataTypeLong.h;
+			path = include/squashxml/xml/datatype/DataTypeLong.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9BF5F4208A7E410008ACB43 = {
+			fileRef = C9BF5F3A08A7E410008ACB43;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C9BF5F4308A7E410008ACB43 = {
+			fileRef = C9BF5F3B08A7E410008ACB43;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C9BF5F4408A7E410008ACB43 = {
+			fileRef = C9BF5F3C08A7E410008ACB43;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C9BF5F4508A7E410008ACB43 = {
+			fileRef = C9BF5F3D08A7E410008ACB43;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C9BF5F4608A7E410008ACB43 = {
+			fileRef = C9BF5F3E08A7E410008ACB43;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C9BF5F4708A7E410008ACB43 = {
+			fileRef = C9BF5F3F08A7E410008ACB43;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C9BF5F4808A7E410008ACB43 = {
+			fileRef = C9BF5F4008A7E410008ACB43;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C9BF5F4908A7E410008ACB43 = {
+			fileRef = C9BF5F4108A7E410008ACB43;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C9BF5F4A08A7E41D008ACB43 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = XMLDocument.h;
+			path = include/squashxml/xml/XMLDocument.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9BF5F4B08A7E41D008ACB43 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = XMLMessage.h;
+			path = include/squashxml/xml/XMLMessage.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9BF5F4C08A7E41D008ACB43 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = XMLMessageBean.h;
+			path = include/squashxml/xml/XMLMessageBean.h;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		C9BF5F4D08A7E41D008ACB43 = {
+			fileRef = C9BF5F4A08A7E41D008ACB43;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C9BF5F4E08A7E41D008ACB43 = {
+			fileRef = C9BF5F4B08A7E41D008ACB43;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C9BF5F4F08A7E41D008ACB43 = {
+			fileRef = C9BF5F4C08A7E41D008ACB43;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C9C8A19C08A5C5CB00361093 = {
+			isa = PBXFileReference;
+			lastKnownFileType = "compiled.mach-o.dylib";
+			name = "libxerces-c.dylib";
+			path = "../xerces/macosx/lib/libxerces-c.dylib";
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		C9C8A19D08A5C5CB00361093 = {
+			fileRef = C9C8A19C08A5C5CB00361093;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C9C8A19E08A5C5D500361093 = {
+			isa = PBXFileReference;
+			lastKnownFileType = "compiled.mach-o.dylib";
+			name = "libxerces-depdom.dylib";
+			path = "../xerces/macosx/lib/libxerces-depdom.dylib";
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		C9C8A19F08A5C5D500361093 = {
+			fileRef = C9C8A19E08A5C5D500361093;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+//C90
+//C91
+//C92
+//C93
+//C94
+//D20
+//D21
+//D22
+//D23
+//D24
+		D289988505E68E00004EDB86 = {
+			buildActionMask = 2147483647;
+			files = (
+				C9C8A19D08A5C5CB00361093,
+				C9C8A19F08A5C5D500361093,
+			);
+			isa = PBXFrameworksBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2AAC0600554660B00DB518D = {
+			buildActionMask = 2147483647;
+			files = (
+				C9BF5F2408A7E39D008ACB43,
+				C9BF5F2508A7E39D008ACB43,
+				C9BF5F2608A7E39D008ACB43,
+				C9BF5F2708A7E39D008ACB43,
+				C9BF5F2808A7E39D008ACB43,
+				C9BF5F3008A7E3AF008ACB43,
+				C9BF5F3108A7E3AF008ACB43,
+				C9BF5F3208A7E3AF008ACB43,
+				C9BF5F3308A7E3AF008ACB43,
+				C9BF5F3408A7E3AF008ACB43,
+				C9BF5F3508A7E3AF008ACB43,
+				C9BF5F3608A7E3AF008ACB43,
+				C9BF5F4208A7E410008ACB43,
+				C9BF5F4308A7E410008ACB43,
+				C9BF5F4408A7E410008ACB43,
+				C9BF5F4508A7E410008ACB43,
+				C9BF5F4608A7E410008ACB43,
+				C9BF5F4708A7E410008ACB43,
+				C9BF5F4808A7E410008ACB43,
+				C9BF5F4908A7E410008ACB43,
+				C9BF5F4D08A7E41D008ACB43,
+				C9BF5F4E08A7E41D008ACB43,
+				C9BF5F4F08A7E41D008ACB43,
+			);
+			isa = PBXHeadersBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2AAC0610554660B00DB518D = {
+			buildActionMask = 2147483647;
+			files = (
+				C9013CF708A5711B00F22B86,
+				C9013CF808A5711B00F22B86,
+				C9013CF908A5711B00F22B86,
+				C9013CFA08A5711B00F22B86,
+				C9013CFB08A5711B00F22B86,
+				C9013CFF08A5713100F22B86,
+				C9013D0008A5713100F22B86,
+				C9013D0108A5713100F22B86,
+				C9013D0708A5715A00F22B86,
+				C9013D0808A5715A00F22B86,
+				C9013D0908A5715A00F22B86,
+				C9013D0A08A5715A00F22B86,
+				C9013D0B08A5715A00F22B86,
+			);
+			isa = PBXSourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2AAC0620554660B00DB518D = {
+			buildPhases = (
+				D2AAC0600554660B00DB518D,
+				D2AAC0610554660B00DB518D,
+				D289988505E68E00004EDB86,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INSTALL_PATH = /usr/local/lib;
+				LIBRARY_SEARCH_PATHS = /Users/craigmiller/Desktop/openipmp2/ext/xerces/macosx/lib;
+				LIBRARY_STYLE = DYNAMIC;
+				PREBINDING = NO;
+				PRODUCT_NAME = squashxml;
+			};
+			dependencies = (
+			);
+			isa = PBXNativeTarget;
+			name = squashxml;
+			productName = squashxml;
+			productReference = D2AAC0630554660B00DB518D;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+		D2AAC0630554660B00DB518D = {
+			explicitFileType = "compiled.mach-o.dylib";
+			includeInIndex = 0;
+			isa = PBXFileReference;
+			path = squashxml.dylib;
+			refType = 3;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+	};
+	rootObject = 08FB7793FE84155DC02AAC07;
+}

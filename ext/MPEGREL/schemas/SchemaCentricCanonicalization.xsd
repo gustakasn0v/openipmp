@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="urn:uddi-org:schemaCentricC14N:2002-07-10" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:uddi-org:schemaCentricC14N:2002-07-10" elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <xsd:attribute name="embeddedLang" type="xsd:anyURI"/>
+    <xsd:attribute name="embeddedLangAttribute" type="xsd:QName"/>
+    <xsd:attribute name="caseMap" type="xsd:language"/>
+    <xsd:attribute name="caseMapAttribute" type="xsd:QName"/>
+    <xsd:attribute name="caseMapKind">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="upper"/>
+                <xsd:enumeration value="lower"/>
+                <xsd:enumeration value="fold"/>
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:attribute>
+</xsd:schema>

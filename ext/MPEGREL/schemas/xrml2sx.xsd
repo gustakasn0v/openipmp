@@ -1,0 +1,870 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.xrml.org/schema/2002/05/xrml2sx" xmlns:sx="http://www.xrml.org/schema/2002/05/xrml2sx" xmlns:r="http://www.xrml.org/schema/2002/05/xrml2core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:import namespace="http://www.xrml.org/schema/2002/05/xrml2core" schemaLocation="xrml2core.xsd"/>
+	<xsd:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="http://www.w3.org/TR/2002/REC-xmldsig-core-20020212/xmldsig-core-schema.xsd"/>
+	<!-- Elements -->
+	<xsd:element name="commonName" type="sx:CommonName" substitutionGroup="sx:name">
+		<xsd:annotation>
+			<xsd:documentation>A name by which an entity is colloquially known. Intended to be used as the CN name part from X400.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="bestPriceUnder" type="sx:BestPriceUnder" substitutionGroup="sx:paymentAbstract">
+		<xsd:annotation>
+			<xsd:documentation>Specifies the maximum fee that ultimately must be paid without specifying the ultimate fee exactly. The ultimate fee is determined through a later, unspecified settlement mechanism.  While Max overrides Min if Max is less than Min, Min overrides BestPriceUnder if BestPriceUnder is less than Min.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="callForPrice" type="sx:CallForPrice" substitutionGroup="sx:paymentAbstract">
+		<xsd:annotation>
+			<xsd:documentation>Identifies an entity with whom a price must be negotiated before exercising the right. Any one of the services can be contacted.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="dnsName" type="sx:DnsName" substitutionGroup="sx:name">
+		<xsd:annotation>
+			<xsd:documentation>A name in the DNS name space, with trailing period omitted. For example, "xyz.com"</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="emailName" type="sx:EmailName" substitutionGroup="sx:name">
+		<xsd:annotation>
+			<xsd:documentation>An Internet email address (per rfc822/rfc2822) associated with the entity.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="exerciseLimit" type="sx:ExerciseLimit" substitutionGroup="r:condition">
+		<xsd:annotation>
+			<xsd:documentation>Indicates a maximum number of times that the right may be exercised.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="fee" type="sx:Fee" substitutionGroup="r:condition">
+		<xsd:annotation>
+			<xsd:documentation>Indicates that a fee must be paid before a right is exercised.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="markup" type="sx:Markup" substitutionGroup="sx:paymentAbstract">
+		<xsd:annotation>
+			<xsd:documentation>Specifies a fee due each time some other fees are due.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="name" type="sx:Name" substitutionGroup="r:propertyAbstract">
+		<xsd:annotation>
+			<xsd:documentation>A property indicating a name from some name space.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="paymentAbstract" type="sx:PaymentAbstract">
+		<xsd:annotation>
+			<xsd:documentation>The head of a substitution group chain for the PaymentAbstract type.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="paymentFlat" type="sx:PaymentFlat" substitutionGroup="sx:paymentAbstract">
+		<xsd:annotation>
+			<xsd:documentation>Specifies a payment due upon exercising a right when the value in paymentRecord is False. The contained service reference should be used to determine if the fee has already been paid and to keep record of payment.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="paymentMetered" type="sx:PaymentMetered" substitutionGroup="sx:paymentAbstract">
+		<xsd:annotation>
+			<xsd:documentation>Specifies a payment due for each time interval during which the right is actually exercised.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="paymentPerInterval" type="sx:PaymentPerInterval" substitutionGroup="sx:paymentAbstract">
+		<xsd:annotation>
+			<xsd:documentation>Specifies a payment due for each time interval during which the ability to exercise the right is desired. The enclosed serviceReference indicates the time through which payment has been made. While the value stored in the contained serviceReference is greater than the global official time, no additional fee is due. Each time a payment is made, the value stored in the contained serviceReference time should be updated. If the value represents a future time, it is increased by the "per" period each time it is updated. If the value represents a past time, it is set to the sum of the global official time and the "per" period.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="paymentPerUse" type="sx:PaymentPerUse" substitutionGroup="sx:paymentAbstract">
+		<xsd:annotation>
+			<xsd:documentation>Specifies a payment due each time a right is exercised.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="propertyUri" type="sx:PropertyUri" substitutionGroup="r:propertyAbstract">
+		<xsd:annotation>
+			<xsd:documentation>Indicates a property using a URI.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="rate" type="sx:Rate" substitutionGroup="r:licensePart">
+		<xsd:annotation>
+			<xsd:documentation>A fixed amount of money in a designated currency.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="revocable" type="sx:Revocable" substitutionGroup="r:resource">
+		<xsd:annotation>
+			<xsd:documentation>Identifies a SignatureValue that can be revoked. The SignatureValue can be identified literally or by reference. In the latter case, the result of dereferencing the reference must be of type dsig:SignatureType; the SignatureValue being revoked is the one SignatureValue therein.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="rightUri" type="sx:RightUri" substitutionGroup="r:right">
+		<xsd:annotation>
+			<xsd:documentation>Indicates a right using a URI.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="seekApproval" type="sx:SeekApproval" substitutionGroup="r:condition">
+		<xsd:annotation>
+			<xsd:documentation>Indicates that the specified service must be contacted and its approval gained before exercising the associated right.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="stateReferenceValuePattern" type="sx:StateReferenceValuePattern" substitutionGroup="r:anXmlPatternAbstract">
+		<xsd:annotation>
+			<xsd:documentation>A pattern that identifies a set of service references using pattern matching by dereferencing their values.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="territory" type="sx:Territory" substitutionGroup="r:condition">
+		<xsd:annotation>
+			<xsd:documentation>Indicates a geographic or virtual space within which the associated right may be exercised.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="trackQuery" type="sx:TrackQuery" substitutionGroup="r:condition">
+		<xsd:annotation>
+			<xsd:documentation>Represents a condition on the tracking state updated by TrackReport. For example, this condition can be used to predicate the granting of one right on the successful exercise of another.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="trackReport" type="sx:TrackReport" substitutionGroup="r:condition">
+		<xsd:annotation>
+			<xsd:documentation>Indicates that exercising a right must be reported to a designated tracking service.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="transferControl" type="sx:TransferControl" substitutionGroup="r:condition">
+		<xsd:annotation>
+			<xsd:documentation>Indicates that the specified service must be contacted to confirm ownership (by the principal) of some virtual token upon which the exercisability of this grant depends.  Typically, this service may also be used to cause a transfer of ownership of the virtual token to another principal.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="uddi" type="sx:Uddi" substitutionGroup="r:serviceDescription">
+		<xsd:annotation>
+			<xsd:documentation>Specifies that the UDDI Business Registry (or possibly a private UDDI registry) be used for protocol and endpoint information. Contains the information for a UddiServiceIdentifier as defined in the UDDI specification.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="validityIntervalDurationPattern" type="sx:ValidityIntervalDurationPattern" substitutionGroup="r:conditionPatternAbstract">
+		<xsd:annotation>
+			<xsd:documentation>A pattern matching any ValidityInterval of the specified duration.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="validityIntervalFloating" type="sx:ValidityIntervalFloating" substitutionGroup="r:condition">
+		<xsd:annotation>
+			<xsd:documentation>Represents an interval of time that begins with the first exercise of a right.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="validityIntervalStartsNow" type="sx:ValidityIntervalStartsNow" substitutionGroup="r:condition">
+		<xsd:annotation>
+			<xsd:documentation>The ValidityIntervalStartsNow is satisfied at time t if the specified ValidityInterval starts within the specified tolerances of time t.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="validityTimeMetered" type="sx:ValidityTimeMetered" substitutionGroup="r:condition">
+		<xsd:annotation>
+			<xsd:documentation>Represents an accumulative period of time. A user can start and stop exercising a right, and the metering clock runs only when the right is being exercised. The right can be exercised as long as the total remaining time has not been used.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="validityTimePeriodic" type="sx:ValidityTimePeriodic" substitutionGroup="r:condition">
+		<xsd:annotation>
+			<xsd:documentation>Indicates a validity time window that recurs periodically. For example, this condition can be used to express time windows such as "every weekend" or "the second week of every month".</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="wsdlAddress" type="sx:WsdlAddress" substitutionGroup="r:serviceDescription">
+		<xsd:annotation>
+			<xsd:documentation>Uses a specified portion of the identified WSDL file to indicate the metadata and protocol information while allowing the endpoint addressing information to be specified separately.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="wsdlComplete" type="sx:WsdlComplete" substitutionGroup="r:serviceDescription">
+		<xsd:annotation>
+			<xsd:documentation>Uses a specified portion of the identified WSDL file to indicate the full protocol and endpoint information.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="x509SubjectName" type="sx:X509SubjectName" substitutionGroup="sx:name">
+		<xsd:annotation>
+			<xsd:documentation>The subject name of some X509 certificate associated with the entity. Intended to address legacy interoperability issues involving X509 certificates.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="x509SubjectNamePattern" type="sx:X509SubjectNamePattern" substitutionGroup="r:resourcePatternAbstract">
+		<xsd:annotation>
+			<xsd:documentation>A pattern that identifies a set of X509 subject names using pattern matching.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!-- Complex Types -->
+	<xsd:complexType name="AccountPayable">
+		<xsd:annotation>
+			<xsd:documentation>Identifies an entity to whom one can transfer a sum of money and the means by which that transfer is to take place. Since many transfer mechanisms have been identified, this element is extensible.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:choice>
+			<xsd:element name="paymentService">
+				<xsd:annotation>
+					<xsd:documentation>Identifies an accounts payable service. The interface to the service indicates the transfer mechanism.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="r:serviceReference"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="aba">
+				<xsd:annotation>
+					<xsd:documentation>Identifies an account within a US banking institution using conventions established by the American Banking Association.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="institution">
+							<xsd:annotation>
+								<xsd:documentation>Identifies a US banking institution by its ABA routing number.</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:integer">
+									<xsd:totalDigits value="9"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="account" type="xsd:integer">
+							<xsd:annotation>
+								<xsd:documentation>Identifies an account at a US banking institution.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:any namespace="##other" processContents="lax">
+				<xsd:annotation>
+					<xsd:documentation>Other banking mechanisms may be specified here.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:any>
+		</xsd:choice>
+	</xsd:complexType>
+	<xsd:complexType name="BestPriceUnder">
+		<xsd:annotation>
+			<xsd:documentation>Specifies the maximum fee that ultimately must be paid without specifying the ultimate fee exactly. The ultimate fee is determined through a later, unspecified settlement mechanism.  While Max overrides Min if Max is less than Min, Min overrides BestPriceUnder if BestPriceUnder is less than Min.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="sx:PaymentAbstract">
+				<xsd:sequence>
+					<xsd:element ref="sx:paymentAbstract"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="CallForPrice">
+		<xsd:annotation>
+			<xsd:documentation>Identifies an entity with whom a price must be negotiated before exercising the right.  Any one of the services can be contacted.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="sx:PaymentAbstract">
+				<xsd:sequence minOccurs="0">
+					<xsd:element ref="r:serviceReference" maxOccurs="unbounded"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="CommonName" mixed="true">
+		<xsd:annotation>
+			<xsd:documentation>A name by which an entity is colloquially known. Intended to be used as the CN name part from X400.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent mixed="true">
+			<xsd:extension base="sx:Name"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="DnsName" mixed="true">
+		<xsd:annotation>
+			<xsd:documentation>A name in the DNS name space, with trailing period omitted. For example, "xyz.com"</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent mixed="true">
+			<xsd:extension base="sx:Name"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="EmailName" mixed="true">
+		<xsd:annotation>
+			<xsd:documentation>An Internet email address (per rfc822/rfc2822) associated with the entity.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent mixed="true">
+			<xsd:extension base="sx:Name"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ExerciseLimit">
+		<xsd:annotation>
+			<xsd:documentation>Indicates a maximum number of times that the right may be exercised.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="sx:StatefulCondition"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Fee">
+		<xsd:annotation>
+			<xsd:documentation>Indicates that a fee must be paid before a right is exercised.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:Condition">
+				<xsd:sequence minOccurs="0">
+					<xsd:element ref="sx:paymentAbstract"/>
+					<xsd:element name="min" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Specifies the minimum amount due the fee recipient. If the total amount paid is less than the value of this element, a new payment in the amount of the difference is due.</xsd:documentation>
+						</xsd:annotation>
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element ref="sx:paymentAbstract"/>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="max" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Specifies the maximum amount due the fee recipient. If the total amount paid is greater than the value of this element, a new credit in the amount of the difference is due.  If the total amount paid is equal to the value of this element, all other payments resulting from this fee are void until the max increases.</xsd:documentation>
+						</xsd:annotation>
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element ref="sx:paymentAbstract"/>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="to" type="sx:AccountPayable" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Indicates the entity to whom the fee must be paid and the payment mechanism. In the rare case that this element is absent, payment information must be identified by context.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Markup">
+		<xsd:annotation>
+			<xsd:documentation>Specifies a fee due each time some other fees are due.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="sx:PaymentAbstract">
+				<xsd:sequence>
+					<xsd:element name="fraction" type="xsd:float">
+						<xsd:annotation>
+							<xsd:documentation>Indicates the fractional rate to calculate the markup. For example, a value of 0.05 indicates a fee of 5% above  the underlying fees specified within this markup element.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:choice maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation>Fees underlying the markup, which also must be paid to the respective parties.</xsd:documentation>
+						</xsd:annotation>
+						<xsd:element ref="sx:fee"/>
+						<xsd:element name="feeForResource">
+							<xsd:annotation>
+								<xsd:documentation>Identifies another resource that must be used (and paid for) in conjunction with the resource specified in the grant containing this markup. </xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element ref="r:resource"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:choice>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Name">
+		<xsd:annotation>
+			<xsd:documentation>A logically abstract type for which concrete name kinds may be defined as subtypes. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:PropertyAbstract"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="PaymentAbstract">
+		<xsd:annotation>
+			<xsd:documentation>An abstract type indicating a quantity of money, perhaps to be paid at a certain rate, etc.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:complexType>
+	<xsd:complexType name="PaymentFlat">
+		<xsd:annotation>
+			<xsd:documentation>Specifies a payment due upon exercising a right when the value in paymentRecord is False. The contained service reference should be used to determine if the fee has already been paid and to keep record of payment.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="sx:PaymentAbstract">
+				<xsd:sequence>
+					<xsd:element ref="sx:rate"/>
+					<xsd:element ref="r:serviceReference"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="PaymentMetered">
+		<xsd:annotation>
+			<xsd:documentation>Specifies a payment due for each time interval during which the right is actually exercised.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="sx:PaymentAbstract">
+				<xsd:sequence>
+					<xsd:element ref="sx:rate"/>
+					<xsd:element name="per" type="xsd:duration">
+						<xsd:annotation>
+							<xsd:documentation>The time period at which the rate is applied.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="by" type="xsd:duration">
+						<xsd:annotation>
+							<xsd:documentation>The billing time period.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="phase" type="xsd:duration">
+						<xsd:annotation>
+							<xsd:documentation>The amount of time that may elapse before the first billing occurs.  A value of 0 has the effect of rounding up.  A value equal to the "by" period has the effect of rounding down.  A value equal to half of the "by" period has the effect of rounding to the nearest "by" quantum.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="PaymentPerInterval">
+		<xsd:annotation>
+			<xsd:documentation>Specifies a payment due for each time interval during which the ability to exercise the right is desired. The enclosed serviceReference indicates the time through which payment has been made. While the value stored in the contained serviceReference is greater than the global official time, no additional fee is due. Each time a payment is made, the value stored in the contained serviceReference time should be updated. If the value represents a future time, it is increased by the "per" period each time it is updated. If the value represents a past time, it is set to the sum of the global official time and the "per" period.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="sx:PaymentAbstract">
+				<xsd:sequence>
+					<xsd:element ref="sx:rate"/>
+					<xsd:element name="per" type="xsd:duration">
+						<xsd:annotation>
+							<xsd:documentation>The time period allocated for each payment of the rate.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element ref="r:serviceReference"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="PaymentPerUse">
+		<xsd:annotation>
+			<xsd:documentation>Specifies a payment due each time a right is exercised.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="sx:PaymentAbstract">
+				<xsd:sequence>
+					<xsd:element ref="sx:rate"/>
+					<xsd:element name="allowPrePay" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Indicates whether the rate can be prepaid. If omitted, the rate must be paid each time the right is exercised. The value stored in the contained serviceReference represents the remaining number of prepaid uses of the right.  Each time a payment is made, this value should be incremented by the initialNumberOfUses.  When the right is exercised, this value should be decremented by one.</xsd:documentation>
+						</xsd:annotation>
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="initialNumberOfUses" type="xsd:integer" minOccurs="0">
+									<xsd:annotation>
+										<xsd:documentation>Specifies the number of uses allowed for each payment of the rate.  Defaults to 1.</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+								<xsd:element ref="r:serviceReference"/>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="PropertyUri">
+		<xsd:annotation>
+			<xsd:documentation>Indicates a property using a URI.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:PropertyAbstract">
+				<xsd:attribute name="definition" type="xsd:anyURI"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Rate">
+		<xsd:annotation>
+			<xsd:documentation>A fixed amount of money in a designated currency (using ISO 4217). If the currency is not specified, then the default is USD with its most recent interpretation.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:LicensePart">
+				<xsd:sequence minOccurs="0">
+					<xsd:element name="amount" type="xsd:float">
+						<xsd:annotation>
+							<xsd:documentation>Specifies an amount.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="currency" type="xsd:QName" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Identifies the currency by QName.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Revocable">
+		<xsd:annotation>
+			<xsd:documentation>Identifies a SignatureValue that can be revoked. The SignatureValue can be identified literally or by reference. In the latter case, the result of dereferencing the reference must be of type dsig:SignatureType; the SignatureValue being revoked is the one SignatureValue therein.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:Resource">
+				<xsd:choice minOccurs="0">
+					<xsd:element ref="dsig:SignatureValue"/>
+					<xsd:element ref="dsig:Reference"/>
+				</xsd:choice>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="RightUri">
+		<xsd:annotation>
+			<xsd:documentation>Indicates a right using a URI.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:Right">
+				<xsd:attribute name="definition" type="xsd:anyURI"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SeekApproval">
+		<xsd:annotation>
+			<xsd:documentation>Indicates that the specified service must be contacted and its approval gained before exercising the associated right.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="sx:StatefulCondition"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="StatefulCondition">
+		<xsd:annotation>
+			<xsd:documentation>A condition that requires that some state be referenced or manipulated to be satisfied.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:Condition">
+				<xsd:sequence minOccurs="0">
+					<xsd:element ref="r:serviceReference"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="StateReferenceValuePattern">
+		<xsd:annotation>
+			<xsd:documentation>A pattern that identifies a set of service references using pattern matching by dereferencing their values.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:AnXmlPatternAbstract">
+				<xsd:sequence>
+					<xsd:any namespace="##any" processContents="lax" maxOccurs="unbounded"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Territory">
+		<xsd:annotation>
+			<xsd:documentation>Indicates a geographic or virtual space within which the associated right may be exercised.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:Condition">
+				<xsd:choice minOccurs="0" maxOccurs="unbounded">
+					<xsd:element name="location">
+						<xsd:annotation>
+							<xsd:documentation>Specifies a physical location.</xsd:documentation>
+						</xsd:annotation>
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="country" type="xsd:QName" minOccurs="0">
+									<xsd:annotation>
+										<xsd:documentation>Identifies the country by QName.</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+								<xsd:element name="region" type="xsd:QName" minOccurs="0">
+									<xsd:annotation>
+										<xsd:documentation>Identifies the region (country subdivision) by QName.</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+								<xsd:element name="state" type="xsd:string" minOccurs="0">
+									<xsd:annotation>
+										<xsd:documentation>Identifies the state for a geographical location.</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+								<xsd:element name="city" type="xsd:string" minOccurs="0">
+									<xsd:annotation>
+										<xsd:documentation>Identifies the city for a geographical location.</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+								<xsd:element name="postalCode" type="xsd:string" minOccurs="0">
+									<xsd:annotation>
+										<xsd:documentation>Identifies the postal code for a geographical location.</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+								<xsd:element name="street" type="xsd:string" minOccurs="0">
+									<xsd:annotation>
+										<xsd:documentation>Identifies the street address for a geographical location.</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="domain">
+						<xsd:annotation>
+							<xsd:documentation>Specifies a virtual location in the digital domain.</xsd:documentation>
+						</xsd:annotation>
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="uri" type="xsd:anyURI">
+									<xsd:annotation>
+										<xsd:documentation>Specifies the URI that identifies a virtual location.</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="TrackQuery">
+		<xsd:annotation>
+			<xsd:documentation>Represents a condition on the tracking state updated by TrackReport. For example, this condition can be used to predicate the granting of one right on the successful exercise of another.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="sx:StatefulCondition">
+				<xsd:sequence minOccurs="0">
+					<xsd:element name="notLessThan" type="xsd:integer" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Specifies the minimum value that can be contained in the state reference for this condition to be satisfied. If absent, the value is assumed to be zero.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="notMoreThan" type="xsd:integer" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Specifies the maximum value that can be contained in the state reference for this condition to be satisfied. If absent, the value is assumed to be infinite.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="TrackReport">
+		<xsd:annotation>
+			<xsd:documentation>Indicates that exercising a right must be reported to a designated tracking service.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="sx:StatefulCondition">
+				<xsd:sequence minOccurs="0">
+					<xsd:element name="communicationFailurePolicy" default="required" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Specifies the policy to implement if an attempt to update the tracking information fails (for instance, if the tracking service is offline). If the value of this element is "required" (the default), the report must be completed successfully before this condition is considered satisfied. If the value of this element is "lax", communication failures may be ignored.</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:NMTOKEN">
+								<xsd:pattern value="lax"/>
+								<xsd:pattern value="required"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="TransferControl">
+		<xsd:annotation>
+			<xsd:documentation> Indicates that the specified service must be contacted to confirm ownership (by the principal) of some virtual token upon which the exercisability of this grant depends.  Typically, this service may also be used to cause a transfer of ownership of the virtual token to another principal.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="sx:StatefulCondition"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Uddi">
+		<xsd:annotation>
+			<xsd:documentation>Specifies that the UDDI Business Registry (or possibly a private UDDI registry) be used for protocol and endpoint information. Contains the information for a UddiServiceIdentifier as defined in the UDDI specification.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:ServiceDescription">
+				<xsd:sequence>
+					<xsd:element name="serviceKey" type="sx:UddiKey">
+						<xsd:annotation>
+							<xsd:documentation>Indicates the service's key  in the registry. This value should be passed to the get_serviceDetail API of the public UDDI registry to locate the service.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="registry" type="xsd:anyURI" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Identifies the UDDI registry in which the service is located. Intended for private UDDI deployments. If absent, the global UDDI Business Registry is implied.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="UddiKey">
+		<xsd:annotation>
+			<xsd:documentation>A key that identifies a business, service, or other entity inside of UDDI.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:choice>
+			<xsd:element name="uuid" type="r:Uuid">
+				<xsd:annotation>
+					<xsd:documentation>The universally unique identifier (UUID), which is used by UDDI versions 1 and 2. For more information, refer to the UDDI specification.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="uri" type="xsd:anyURI">
+				<xsd:annotation>
+					<xsd:documentation>The uniform resource identifier (URI), which is used by UDDI version 3. For more information, refer to the UDDI specification.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:choice>
+	</xsd:complexType>
+	<xsd:complexType name="ValidityIntervalDurationPattern">
+		<xsd:annotation>
+			<xsd:documentation>A pattern matching any ValidityInterval of the specified duration.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:ConditionPatternAbstract">
+				<xsd:sequence minOccurs="0">
+					<xsd:element name="duration" type="xsd:duration">
+						<xsd:annotation>
+							<xsd:documentation>The duration that matching validityIntervals must express.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ValidityIntervalFloating">
+		<xsd:annotation>
+			<xsd:documentation>Represents an interval of time that begins with the first exercise of a right.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="sx:StatefulCondition"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ValidityIntervalStartsNow">
+		<xsd:annotation>
+			<xsd:documentation>The ValidityIntervalStartsNow is satisfied at time t if the specified ValidityInterval starts within the specified tolerances of time t.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:Condition">
+				<xsd:sequence minOccurs="0">
+					<xsd:element ref="r:validityInterval"/>
+					<xsd:element name="backwardTolerance" type="xsd:duration" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>If present, indicates that the notBefore element of the specified ValidityInterval must be present and greater than or equal to the result of the current time set backwards by the value specified here.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="forwardTolerance" type="xsd:duration" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>If present, indicates that, if the notBefore element of specified ValidityInterval is present, it must be less than or equal to the result of the current time set forward by the value specified here.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ValidityTimeMetered">
+		<xsd:annotation>
+			<xsd:documentation>Represents an accumulative period of time. A user can start and stop exercising a right, and the metering clock runs only when the right is being exercised. The right can be exercised as long as the total remaining time has not been used.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="sx:StatefulCondition">
+				<xsd:sequence minOccurs="0">
+					<xsd:element name="quantum" type="xsd:duration" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Indicates the minimum amount of time consumed on the meter whenever the right is exercised. If this element is absent, minimum amount of time consumed is implementation dependent.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ValidityTimePeriodic">
+		<xsd:annotation>
+			<xsd:documentation>Indicates a validity time window that recurs periodically. For example, this condition can be used to express time windows such as "every weekend" or "the second week of every month".</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:Condition">
+				<xsd:sequence minOccurs="0">
+					<xsd:element name="start" type="xsd:dateTime">
+						<xsd:annotation>
+							<xsd:documentation>The start date and time from which the recurrences of this time interval are calculated.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="period" type="xsd:duration">
+						<xsd:annotation>
+							<xsd:documentation>The frequency at which this time window recurs. For example,  "P7D" represents a weekly recurrence.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="phase" type="xsd:duration" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>An optional latency from the beginning or end of each period before the time window opens. A positive duration is measured from the start of the period. A negative duration is measured from the end of the period. This distinction can be important for variable sized periods such as months. If the phase element is absent, the window opens at the start of the time period.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="duration" type="xsd:duration">
+						<xsd:annotation>
+							<xsd:documentation>The duration of the window once it opens.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="periodCount" type="xsd:nonNegativeInteger" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Indicates the number of periods that this interval covers.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="WsdlAddress">
+		<xsd:annotation>
+			<xsd:documentation>Uses a specified portion of the identified WSDL file to indicate the metadata and protocol information while allowing the endpoint addressing information to be specified separately.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:ServiceDescription">
+				<xsd:sequence minOccurs="0">
+					<xsd:element name="kind">
+						<xsd:annotation>
+							<xsd:documentation>Identifies the abstract type of the web service, independent of its endpoint.</xsd:documentation>
+						</xsd:annotation>
+						<xsd:complexType>
+							<xsd:annotation>
+								<xsd:documentation>Elements of this type indicate a particular type of web service without indicating where an instance of that web service is specifically available.</xsd:documentation>
+							</xsd:annotation>
+							<xsd:sequence>
+								<xsd:element name="wsdl" type="r:DigitalResource">
+									<xsd:annotation>
+										<xsd:documentation>Identifies the WSDL in which the type of the service is defined.</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+								<xsd:element name="binding" type="xsd:QName">
+									<xsd:annotation>
+										<xsd:documentation>Indicates the relevant portType and protocol binding in the WSDL file.</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="address">
+						<xsd:annotation>
+							<xsd:documentation>Indicates the actual endpoint at which the service is located.</xsd:documentation>
+						</xsd:annotation>
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:any namespace="##any" processContents="lax"/>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="WsdlComplete">
+		<xsd:annotation>
+			<xsd:documentation>Uses a specified portion of the identified WSDL file to indicate the full protocol and endpoint information.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="r:ServiceDescription">
+				<xsd:sequence minOccurs="0">
+					<xsd:element name="wsdl" type="r:DigitalResource">
+						<xsd:annotation>
+							<xsd:documentation>Identifies a particular WSDL file.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="service" type="xsd:QName">
+						<xsd:annotation>
+							<xsd:documentation>Identifies a particular service within the WSDL file. WSDL services have zero or more ports and a binding between each port and an endpoint address. All ports of the same portType are considered equivalent.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="portType" type="xsd:QName" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Identifies a specific port type if the WSDL service contains ports of more than one portType. For more information, refer to the WSDL specification.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="X509SubjectName" mixed="true">
+		<xsd:annotation>
+			<xsd:documentation>The subject name of some X509 certificate associated with the entity. Intended to address legacy interoperability issues involving X509 certificates.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent mixed="true">
+			<xsd:extension base="sx:Name"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="X509SubjectNamePattern" mixed="true">
+		<xsd:annotation>
+			<xsd:documentation>A pattern that identifies a set of X509 subject names using pattern matching.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent mixed="true">
+			<xsd:extension base="r:ResourcePatternAbstract"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!-- Groups -->
+	<!-- Simple Types -->
+</xsd:schema>

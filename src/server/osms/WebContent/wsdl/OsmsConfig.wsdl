@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://ws.mutable.com" xmlns:impl="http://ws.mutable.com" xmlns:intf="http://ws.mutable.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<!--WSDL created by Apache Axis version: 1.2.1
+Built on Jun 14, 2005 (09:15:57 EDT)-->
+
+   <wsdl:message name="getRightsHostUrlResponse">
+
+      <wsdl:part name="getRightsHostUrlReturn" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getServerPortResponse">
+
+      <wsdl:part name="getServerPortReturn" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getRightsHostUrlRequest">
+
+   </wsdl:message>
+
+   <wsdl:message name="getRightsHostPortResponse">
+
+      <wsdl:part name="getRightsHostPortReturn" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getServerPortRequest">
+
+   </wsdl:message>
+
+   <wsdl:message name="getRightsHostPortRequest">
+
+   </wsdl:message>
+
+   <wsdl:portType name="OsmsConfig">
+
+      <wsdl:operation name="getServerPort">
+
+         <wsdl:input name="getServerPortRequest" message="impl:getServerPortRequest"/>
+
+         <wsdl:output name="getServerPortResponse" message="impl:getServerPortResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getRightsHostPort">
+
+         <wsdl:input name="getRightsHostPortRequest" message="impl:getRightsHostPortRequest"/>
+
+         <wsdl:output name="getRightsHostPortResponse" message="impl:getRightsHostPortResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getRightsHostUrl">
+
+         <wsdl:input name="getRightsHostUrlRequest" message="impl:getRightsHostUrlRequest"/>
+
+         <wsdl:output name="getRightsHostUrlResponse" message="impl:getRightsHostUrlResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="OsmsConfigSoapBinding" type="impl:OsmsConfig">
+
+      <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getServerPort">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getServerPortRequest">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.mutable.com"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getServerPortResponse">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.mutable.com"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getRightsHostPort">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getRightsHostPortRequest">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.mutable.com"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getRightsHostPortResponse">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.mutable.com"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getRightsHostUrl">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getRightsHostUrlRequest">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.mutable.com"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getRightsHostUrlResponse">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.mutable.com"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="OsmsConfigService">
+
+      <wsdl:port name="OsmsConfig" binding="impl:OsmsConfigSoapBinding">
+
+         <wsdlsoap:address location="http://localhost:8080/openipmp/services/OsmsConfig"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

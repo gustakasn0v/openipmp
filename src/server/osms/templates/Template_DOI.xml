@@ -1,0 +1,48 @@
+<doi:KernelMetadata xmlns:doi="http://www.doi.org/">
+<DOI> </DOI>  
+<Identifiers>
+	<Identifier>  
+		<IdentifierType> </IdentifierType>  
+		<IdentifierValue> </IdentifierValue>  
+	</Identifier>
+</Identifiers>  
+<Titles>
+	<Title>  
+		<TitleValue> </TitleValue>  
+		<Language> </Language>  
+	</Title>
+</Titles>  
+<StructuralType> </StructuralType>  
+<Modes>  
+	<Mode> </Mode>  
+</Modes>  
+<PrimaryAgents>  
+	<Agent sequence="1">
+		<Name>  
+			<NameType> </NameType>  
+			<NameValue> </NameValue>  
+		</Name>
+		<Roles>  
+			<Role> </Role>  
+		</Roles>
+	</Agent>  
+</PrimaryAgents>  
+<Assertor>  
+	<Registrant>
+		<Name>  
+			<NameType> </NameType>  
+			<NameValue> </NameValue>  
+		</Name>
+		<Identifier>  
+			<IdentifierType> </IdentifierType>  
+			<IdentifierValue> </IdentifierValue>  
+		</Identifier>
+	</Registrant>  
+	<Authority>
+		<Name>  
+			<NameType> </NameType>  
+			<NameValue> </NameValue>  
+ 		</Name>
+	</Authority>  
+</Assertor>  
+</doi:KernelMetadata>  

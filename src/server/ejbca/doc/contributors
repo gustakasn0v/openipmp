@@ -1,0 +1,14 @@
+CONTRIBUTORS
+------------
+
+The following people have in some way or other contributed to EJBCA:
+
+Tomas Gustavsson <tomas.gustavsson@abc.se>, project founder.
+Anna Diruba Christensen <dilnet@hotmail.com>, project homepage design.
+Nathan Phelps <nphelps@solarc.com>, testing, bugfinding and suggestions.
+Leo Tai <hkleo@users.sourceforge.net>, Oracle database configuration.
+Timothy Fisher <timothyf@users.sourceforge.net>, architecture overview.
+Karl-K?nig K?nigsson <karlkoenig@users.sourceforge.net>, better deployment scripts.
+Thomas Karlsson <thomas.karlsson@planet.eu.org>, firewall script.
+Magnus Broqvist <magnus@han.pp.se>, initial P12toPEM implementation.
+Slava Sklarewski <Slava.Sklarewski@de.gi-de.com>, data flow diagram.

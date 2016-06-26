@@ -1,0 +1,1 @@
+SUBDIRS = DecoderIPMPControlInfo DecoderIPMPData IPMPControlInfoParser IPMPDataParser IPMPToolManager MessageRouter OpenIPMPTool MPEG2IPMPXDecoderTest

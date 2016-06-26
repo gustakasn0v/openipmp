@@ -1,0 +1,1 @@
+SUBDIRS = ISMAMPEG4SinfDRMEncryptor OMAMPEG4SinfDRMEncryptor OpenIPMPMPEG4SinfDRMEncryptor

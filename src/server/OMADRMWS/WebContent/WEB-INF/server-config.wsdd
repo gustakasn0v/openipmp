@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+ <globalConfiguration>
+  <parameter name="sendMultiRefs" value="false"/>
+  <parameter name="disablePrettyXML" value="true"/>
+  <parameter name="adminPassword" value="admin"/>
+  <parameter name="attachments.Directory" value="C:\eclipse\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\webapps\OMADRMWS\WEB-INF\attachments"/>
+  <parameter name="dotNetSoapEncFix" value="true"/>
+  <parameter name="enableNamespacePrefixOptimization" value="true"/>
+  <parameter name="sendXMLDeclaration" value="true"/>
+  <parameter name="sendXsiTypes" value="true"/>
+  <parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
+  <requestFlow>
+   <handler type="java:org.apache.axis.handlers.JWSHandler">
+    <parameter name="scope" value="session"/>
+   </handler>
+   <handler type="java:org.apache.axis.handlers.JWSHandler">
+    <parameter name="scope" value="request"/>
+    <parameter name="extension" value=".jwr"/>
+   </handler>
+  </requestFlow>
+ </globalConfiguration>
+ <handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
+ <handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper"/>
+ <handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
+ <service name="AdminService" provider="java:MSG">
+  <parameter name="allowedMethods" value="AdminService"/>
+  <parameter name="enableRemoteAdmin" value="true"/>
+  <parameter name="className" value="org.apache.axis.utils.Admin"/>
+  <namespace>http://xml.apache.org/axis/wsdd/</namespace>
+ </service>
+ <service name="Version" provider="java:RPC">
+  <parameter name="allowedMethods" value="getVersion"/>
+  <parameter name="className" value="org.apache.axis.Version"/>
+ </service>
+ <service name="OMADRMWebService" provider="java:RPC">
+  <parameter name="allowedMethods" value="*"/>
+  <parameter name="typeMappingVersion" value="1.2"/>
+  <parameter name="wsdlPortType" value="OMADRMWS"/>
+  <parameter name="className" value="com.mutable.omadrm.ws.OMADRMWSBindingSkeleton"/>
+  <parameter name="wsdlServicePort" value="OMADRMWebService"/>
+  <parameter name="wsdlTargetNamespace" value="http://ws.omadrm.mutable.com"/>
+  <parameter name="wsdlServiceElement" value="OMADRMWebService"/>
+  <parameter name="schemaUnqualified" value="http://roap.ws.omadrm.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns1:WSRegistrationRequest" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.omadrm.ws.roap.WSRegistrationRequest" xmlns:ns1="http://roap.ws.omadrm.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns2:WSRegistrationResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.omadrm.ws.roap.WSRegistrationResponse" xmlns:ns2="http://roap.ws.omadrm.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns3:WSAddDeviceRightsResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.omadrm.ws.roap.WSAddDeviceRightsResponse" xmlns:ns3="http://roap.ws.omadrm.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns4:WSDeviceHello" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.omadrm.ws.roap.WSDeviceHello" xmlns:ns4="http://roap.ws.omadrm.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns5:WSRIHello" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.omadrm.ws.roap.WSRIHello" xmlns:ns5="http://roap.ws.omadrm.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns6:WSAddContentKeyRequest" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.omadrm.ws.roap.WSAddContentKeyRequest" xmlns:ns6="http://roap.ws.omadrm.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns7:WSROResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.omadrm.ws.roap.WSROResponse" xmlns:ns7="http://roap.ws.omadrm.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns8:WSAddContentKeyResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.omadrm.ws.roap.WSAddContentKeyResponse" xmlns:ns8="http://roap.ws.omadrm.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns9:WSAddDeviceRightsRequest" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.omadrm.ws.roap.WSAddDeviceRightsRequest" xmlns:ns9="http://roap.ws.omadrm.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns10:WSInitialRORequest" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.omadrm.ws.roap.WSInitialRORequest" xmlns:ns10="http://roap.ws.omadrm.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns11:WSRORequest" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.omadrm.ws.roap.WSRORequest" xmlns:ns11="http://roap.ws.omadrm.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns12:WSROAcquisitionTrigger" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.omadrm.ws.roap.WSROAcquisitionTrigger" xmlns:ns12="http://roap.ws.omadrm.mutable.com"/>
+ </service>
+ <transport name="http">
+  <requestFlow>
+   <handler type="URLMapper"/>
+   <handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler"/>
+  </requestFlow>
+  <parameter name="qs:list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <parameter name="qs:wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+  <parameter name="qs.list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <parameter name="qs.method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <parameter name="qs:method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <parameter name="qs.wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+ </transport>
+ <transport name="local">
+  <responseFlow>
+   <handler type="LocalResponder"/>
+  </responseFlow>
+ </transport>
+</deployment>

@@ -1,0 +1,8 @@
+<OMADRMEncoderInfo>
+ <RightsHostURL>161.53.118.61:8080</RightsHostURL>
+ <SilentHeader>Silent:on-demand;www.silent.com</SilentHeader>
+ <PreviewHeader>Preview:instant;www.preview.com</PreviewHeader>
+ <ContentURLHeader>ContentURL:www.content.com</ContentURLHeader>
+ <ContentVersionHeader>ContentVersion:original-content-identifier:1.1</ContentVersionHeader>
+ <ContentLocationHeader>Content-Location:www.content.com</ContentLocationHeader>
+</OMADRMEncoderInfo>

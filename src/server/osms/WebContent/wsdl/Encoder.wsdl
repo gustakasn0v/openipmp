@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://ws.mutable.com" xmlns:impl="http://ws.mutable.com" xmlns:intf="http://ws.mutable.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<!--WSDL created by Apache Axis version: 1.2.1
+Built on Jun 14, 2005 (09:15:57 EDT)-->
+
+   <wsdl:message name="encodeRequest">
+
+      <wsdl:part name="username" type="xsd:string"/>
+
+      <wsdl:part name="password" type="xsd:string"/>
+
+      <wsdl:part name="inFile" type="xsd:string"/>
+
+      <wsdl:part name="outFile" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="encodeResponse">
+
+      <wsdl:part name="encodeReturn" type="xsd:int"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="Encoder">
+
+      <wsdl:operation name="encode" parameterOrder="username password inFile outFile">
+
+         <wsdl:input name="encodeRequest" message="impl:encodeRequest"/>
+
+         <wsdl:output name="encodeResponse" message="impl:encodeResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="EncoderSoapBinding" type="impl:Encoder">
+
+      <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="encode">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="encodeRequest">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.mutable.com"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="encodeResponse">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.mutable.com"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="EncoderService">
+
+      <wsdl:port name="Encoder" binding="impl:EncoderSoapBinding">
+
+         <wsdlsoap:address location="http://localhost:8080/openipmp/services/Encoder"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="7.10"
+	Name="OMADRMTest"
+	SccProjectName=""
+	SccLocalPath="">
+	<Platforms>
+		<Platform
+			Name="Win32"/>
+	</Platforms>
+	<Configurations>
+		<Configuration
+			Name="Debug|Win32"
+			OutputDirectory=".\Build\Win32\VC7\Debug"
+			IntermediateDirectory=".\Build\Win32\VC7\Debug"
+			ConfigurationType="1"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions="/Zm200 "
+				Optimization="0"
+				AdditionalIncludeDirectories="../../../ThreadSyncFactory,../../../CipherFactory,../../../PublicCryptoFactory,../../../DRMDecoderPlugin/OMADRMDecManagerFactory,../../../DRMEncoderPlugin/OMADRMEncManagerFactory,../../OMADRMCommon,../../../Base64Factory,../../../XMLFactory,../../ROAPParser,../../OMADRMCrypto,../../ROAP,../../../include,../../include,../../../DRMDecoderPlugin/include,../../../DRMEncoderPlugin/include,../../../../../ext/openssl/include,../../../../../ext/xerces/include"
+				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				PrecompiledHeaderFile=".\Build\Win32\VC7\Debug/OMADRMTest.pch"
+				AssemblerListingLocation=".\Build\Win32\VC7\Debug/"
+				ObjectFile=".\Build\Win32\VC7\Debug/"
+				ProgramDataBaseFileName=".\Build\Win32\VC7\Debug/"
+				WarningLevel="3"
+				SuppressStartupBanner="TRUE"
+				DebugInformationFormat="4"
+				CompileAs="0"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="..\..\..\..\..\ext\srtp\lib\win32\VC7\debug\SRTPCrypto.lib ..\..\..\..\..\ext\Crypto++\lib\win32\VC7\debug\cryptlib.lib ../../../../../ext/xerces/win32/lib/VC7/xerces-depdom_2D.lib ../../../../../ext/xerces/win32/lib/VC7/xerces-c_2D.lib ../../../../../ext/openssl/lib/win32/debug/VC7/libeay32.lib ../../../../../ext/openssl/lib/win32/debug/VC7/ssleay32.lib odbc32.lib odbccp32.lib ws2_32.lib"
+				OutputFile=".\Build\Win32\VC7\Debug/OMADRMTest.exe"
+				LinkIncremental="1"
+				SuppressStartupBanner="TRUE"
+				GenerateDebugInformation="TRUE"
+				ProgramDatabaseFile=".\Build\Win32\VC7\Debug/OMADRMTest.pdb"
+				SubSystem="1"
+				TargetMachine="1"/>
+			<Tool
+				Name="VCMIDLTool"
+				TypeLibraryName=".\Build\Win32\VC7\Debug/OMADRMTest.tlb"
+				HeaderFileName=""/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				Description="Copying DLLs..."
+				CommandLine="copy ..\..\..\DRMEncoderPlugin\OMADRMEncManagerFactory\Build\Win32\VC7\Debug\OMADRMEncManagerFactory.dll .\Build\Win32\VC7\Debug
+ copy ..\..\..\DRMDecoderPlugin\OMADRMDecManagerFactory\Build\Win32\VC7\Debug\OMADRMDecManagerFactory.dll .\Build\Win32\VC7\Debug 
+copy ..\..\..\..\..\ext\openssl\lib\win32\debug\VC7\libeay32.dll .\Build\Win32\VC7\Debug
+ copy ..\..\..\..\..\ext\openssl\lib\win32\debug\VC7\ssleay32.dll .\Build\Win32\VC7\Debug
+ copy ..\..\..\..\..\ext\xerces\win32\lib\VC7\xerces-c_2_6D.dll .\Build\Win32\VC7\Debug
+ copy ..\..\..\..\..\ext\xerces\win32\lib\VC7\xerces-depdom_2_6D.dll .\Build\Win32\VC7\Debug
+ copy ..\..\..\PublicCryptoFactory\Build\Win32\VC7\Debug\PublicCryptoFactory.dll .\Build\Win32\VC7\Debug
+ copy ..\..\..\XMLFactory\Build\Win32\VC7\Debug\XMLFactory.dll .\Build\Win32\VC7\Debug
+ copy ..\..\..\DRMEncoderPlugin\OMADRMEncCommHandlerFactory\Build\Win32\VC7\Debug\OMADRMEncCommHandlerFactory.dll .\Build\Win32\VC7\Debug
+ copy ..\..\..\DRMDecoderPlugin\OMADRMDecCommHandlerFactory\Build\Win32\VC7\Debug\OMADRMDecCommHandlerFactory.dll .\Build\Win32\VC7\Debug
+ copy ..\..\..\ThreadSyncFactory\Build\Win32\VC7\Debug\ThreadSyncFactory.dll .\Build\Win32\VC7\Debug
+ copy   ..\..\..\OpenIPMPMessengerFactory\Build\Win32\VC7\Debug\OpenIPMPMessengerFactory.dll .\Build\Win32\VC7\Debug
+ copy ..\..\..\..\..\ext\axis-c\lib\win32\VC7\AxisClient_D.dll .\Build\Win32\VC7\Debug
+ copy ..\..\..\..\..\ext\axis-c\lib\win32\VC7\AxisXMLParser_D.dll .\Build\Win32\VC7\Debug
+ copy ..\..\..\..\..\ext\axis-c\lib\win32\VC7\HTTPChannel_D.dll .\Build\Win32\VC7\Debug
+ copy  ..\..\..\..\..\ext\axis-c\lib\win32\VC7\HTTPTransport_D.dll .\Build\Win32\VC7\Debug
+"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="_DEBUG"
+				Culture="1050"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCWebDeploymentTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory=".\Build\Win32\VC7\Release"
+			IntermediateDirectory=".\Build\Win32\VC7\Release"
+			ConfigurationType="1"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions="/Zm200 "
+				Optimization="2"
+				InlineFunctionExpansion="1"
+				AdditionalIncludeDirectories="../../../ThreadSyncFactory,../../../CipherFactory,../../../PublicCryptoFactory,../../../DRMDecoderPlugin/OMADRMDecManagerFactory,../../../DRMEncoderPlugin/OMADRMEncManagerFactory,../../OMADRMCommon,../../../Base64Factory,../../../XMLFactory,../../ROAPParser,../../OMADRMCrypto,../../ROAP,../../../include,../../include,../../../DRMDecoderPlugin/include,../../../DRMEncoderPlugin/include,../../../../../ext/openssl/include,../../../../../ext/xerces/include"
+				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
+				StringPooling="TRUE"
+				RuntimeLibrary="2"
+				EnableFunctionLevelLinking="TRUE"
+				PrecompiledHeaderFile=".\Build\Win32\VC7\Release/OMADRMTest.pch"
+				AssemblerListingLocation=".\Build\Win32\VC7\Release/"
+				ObjectFile=".\Build\Win32\VC7\Release/"
+				ProgramDataBaseFileName=".\Build\Win32\VC7\Release/"
+				WarningLevel="3"
+				SuppressStartupBanner="TRUE"
+				CompileAs="0"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="..\..\..\..\..\ext\srtp\lib\win32\VC7\release\SRTPCrypto.lib ..\..\..\..\..\ext\Crypto++\lib\win32\VC7\release\cryptlib.lib ../../../../../ext/xerces/win32/lib/VC7/xerces-depdom_2.lib ../../../../../ext/xerces/win32/lib/VC7/xerces-c_2.lib ../../../../../ext/openssl/lib/win32/release/VC7/libeay32.lib ../../../../../ext/openssl/lib/win32/release/VC7/ssleay32.lib odbc32.lib odbccp32.lib ws2_32.lib"
+				OutputFile=".\Build\Win32\VC7\Release/OMADRMTest.exe"
+				LinkIncremental="1"
+				SuppressStartupBanner="TRUE"
+				ProgramDatabaseFile=".\Build\Win32\VC7\Release/OMADRMTest.pdb"
+				SubSystem="1"
+				TargetMachine="1"/>
+			<Tool
+				Name="VCMIDLTool"
+				TypeLibraryName=".\Build\Win32\VC7\Release/OMADRMTest.tlb"
+				HeaderFileName=""/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				Description="Copying DLLs..."
+				CommandLine="copy ..\..\..\DRMEncoderPlugin\OMADRMEncManagerFactory\Build\Win32\VC7\Release\OMADRMEncManagerFactory.dll .\Build\Win32\VC7\Release
+ copy ..\..\..\DRMDecoderPlugin\OMADRMDecManagerFactory\Build\Win32\VC7\Release\OMADRMDecManagerFactory.dll .\Build\Win32\VC7\Release
+ copy ..\..\..\..\..\ext\openssl\lib\win32\release\VC7\libeay32.dll .\Build\Win32\VC7\Release
+ copy ..\..\..\..\..\ext\openssl\lib\win32\release\VC7\ssleay32.dll .\Build\Win32\VC7\Release
+ copy ..\..\..\..\..\ext\xerces\win32\lib\VC7\xerces-c_2_6.dll .\Build\Win32\VC7\Release
+ copy ..\..\..\..\..\ext\xerces\win32\lib\VC7\xerces-depdom_2_6.dll .\Build\Win32\VC7\Release
+ copy ..\..\..\PublicCryptoFactory\Build\Win32\VC7\Release\PublicCryptoFactory.dll .\Build\Win32\VC7\Release
+ copy ..\..\..\XMLFactory\Build\Win32\VC7\Release\XMLFactory.dll .\Build\Win32\VC7\Release
+ copy ..\..\..\DRMEncoderPlugin\OMADRMEncCommHandlerFactory\Build\Win32\VC7\Release\OMADRMEncCommHandlerFactory.dll .\Build\Win32\VC7\Release
+ copy ..\..\..\DRMDecoderPlugin\OMADRMDecCommHandlerFactory\Build\Win32\VC7\Release\OMADRMDecCommHandlerFactory.dll .\Build\Win32\VC7\Release 
+copy  ..\..\..\ThreadSyncFactory\Build\Win32\VC7\Release\ThreadSyncFactory.dll  .\Build\Win32\VC7\Release
+ copy ..\..\..\OpenIPMPMessengerFactory\Build\Win32\VC7\Release\OpenIPMPMessengerFactory.dll .\Build\Win32\VC7\Release
+ copy ..\..\..\..\..\ext\axis-c\lib\win32\VC7\AxisClient.dll .\Build\Win32\VC7\Release
+ copy ..\..\..\..\..\ext\axis-c\lib\win32\VC7\AxisXMLParser.dll .\Build\Win32\VC7\Release
+ copy  ..\..\..\..\..\ext\axis-c\lib\win32\VC7\HTTPChannel.dll .\Build\Win32\VC7\Release
+ copy ..\..\..\..\..\ext\axis-c\lib\win32\VC7\HTTPTransport.dll .\Build\Win32\VC7\Release
+"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="NDEBUG"
+				Culture="1050"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCWebDeploymentTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+	</Configurations>
+	<References>
+	</References>
+	<Files>
+		<Filter
+			Name="Source Files"
+			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat">
+			<File
+				RelativePath="Test.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="0"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						BasicRuntimeChecks="3"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="2"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""/>
+				</FileConfiguration>
+			</File>
+		</Filter>
+		<Filter
+			Name="Header Files"
+			Filter="h;hpp;hxx;hm;inl">
+		</Filter>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>

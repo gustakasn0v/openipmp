@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<EncoderInfo>
+ <ContentTitle></ContentTitle>
+ <UserInfo></UserInfo>
+ <OpenIPMPHostInfo>localhost:8080</OpenIPMPHostInfo>
+ <RightsHostInfo>localhost:8080</RightsHostInfo>
+ <LicenseGrant></LicenseGrant>
+ <doi:KernelMetadata xmlns:doi="http://www.doi.org/">
+  <DOI>TBD</DOI>
+  <Identifiers>
+   <Identifier>
+    <IdentifierType>ISWC</IdentifierType>
+    <IdentifierValue>T-034.524.680</IdentifierValue>
+   </Identifier>
+  </Identifiers>
+  <Titles>
+   <Title>
+    <TitleValue>title</TitleValue>
+    <Language>en</Language>
+   </Title>
+  </Titles>
+  <StructuralType>visual</StructuralType>
+  <Modes>
+   <Mode>visual</Mode>
+  </Modes>
+  <PrimaryAgents>
+   <Agent sequence="1">
+    <Name>
+     <NameType>Person</NameType>
+     <NameValue>Matt Witte</NameValue>
+    </Name>
+    <Roles>
+     <Role>Artist</Role>
+    </Roles>
+   </Agent>
+   <Agent sequence="2">
+    <Name>
+     <NameType>Person</NameType>
+     <NameValue>Freddy</NameValue>
+    </Name>
+    <Roles>
+     <Role>Directory</Role>
+    </Roles>
+   </Agent>
+  </PrimaryAgents>
+  <Assertor>
+   <Registrant>
+    <Name>
+     <NameType></NameType>
+     <NameValue></NameValue>
+    </Name>
+    <Identifier>
+     <IdentifierType>PublisherCode</IdentifierType>
+     <IdentifierValue>9901</IdentifierValue>
+    </Identifier>
+   </Registrant>
+   <Authority>
+    <Name>
+     <NameType>Organization</NameType>
+     <NameValue>Mutable</NameValue>
+    </Name>
+   </Authority>
+  </Assertor>
+ </doi:KernelMetadata>
+</EncoderInfo>

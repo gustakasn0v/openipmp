@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from EncoderService WSDL service -->
+
+  <service name="Encoder" provider="java:RPC" style="rpc" use="encoded">
+      <parameter name="wsdlTargetNamespace" value="http://ws.mutable.com"/>
+      <parameter name="wsdlServiceElement" value="EncoderService"/>
+      <parameter name="wsdlServicePort" value="Encoder"/>
+      <parameter name="className" value="com.mutable.ws.Encoder"/>
+      <parameter name="wsdlPortType" value="Encoder"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://ws.mutable.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="encode" qname="operNS:encode" returnQName="encodeReturn" returnType="rtns:int" soapAction="">
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="username" type="tns:string"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="password" type="tns:string"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="inFile" type="tns:string"/>
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="outFile" type="tns:string"/>
+      </operation>
+      <parameter name="allowedMethods" value="encode"/>
+
+  </service>
+</deployment>

@@ -1,0 +1,20 @@
+<ds:Signature>
+	<ds:SignedInfo>
+		<ds:CanonicalizationMethod ds:Algorithm="http://www.w3.org/TR/2001/REC-xml-c14-20010315"></ds:CanonicalizationMethod>
+		<ds:SignatureMethod ds:Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"></ds:SignatureMethod>
+		<ds:Reference ds:URI="#MyRightsData">
+			<ds:Transforms>
+				<ds:Transform ds:Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"></ds:Transform>
+				<ds:Transform ds:Algortithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"></ds:Transform>
+			</ds:Transforms>
+			<ds:DigestMethod ds:Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
+			<ds:DigestValue>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</ds:DigestValue>
+		</ds:Reference>
+	</ds:SignedInfo>
+	<ds:KeyInfo>
+		<ds:X509Data>
+			<ds:X509Certificate>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</ds:X509Certificate>
+		</ds:X509Data>
+	</ds:KeyInfo>
+	<ds:SignatureValue>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</ds:SignatureValue>
+</ds:Signature>

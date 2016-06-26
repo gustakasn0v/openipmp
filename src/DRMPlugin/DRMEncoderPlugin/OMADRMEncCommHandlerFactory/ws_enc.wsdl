@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2003-2004 The Apache Software Foundation.                      -->
+<!--                                                                          -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");          -->
+<!-- you may not use this file except in compliance with the License.         -->
+<!-- You may obtain a copy of the License at                                  -->
+<!--                                                                          -->
+<!--        http://www.apache.org/licenses/LICENSE-2.0                        -->
+<!--                                                                          -->
+<!-- Unless required by applicable law or agreed to in writing, software      -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,        -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. -->
+<!-- See the License for the specific language governing permissions and      -->
+<!-- limitations under the License.                                           -->
+
+<wsdl:definitions targetNamespace="http://ws.omadrm.mutable.com" 
+xmlns="http://schemas.xmlsoap.org/wsdl/" 
+xmlns:apachesoap="http://xml.apache.org/xml-soap"
+xmlns:impl="http://ws.omadrm.mutable.com"
+xmlns:intf="http://ws.omadrm.mutable.com"
+xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+xmlns:roap="http://roap.ws.omadrm.mutable.com"
+>
+
+  <wsdl:types>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://roap.ws.omadrm.mutable.com">
+      <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+      <complexType name="WSAddContentKeyRequest">
+        <sequence>
+          <element name="msg" type="xsd:string"/>
+        </sequence>
+      </complexType>
+      <complexType name="WSAddContentKeyResponse">
+        <sequence>
+          <element name="msg" type="xsd:string"/>
+        </sequence>
+      </complexType>
+      <complexType name="WSAddDeviceRightsRequest">
+        <sequence>
+          <element name="msg" type="xsd:string"/>
+        </sequence>
+      </complexType>
+      <complexType name="WSAddDeviceRightsResponse">
+        <sequence>
+          <element name="msg" type="xsd:string"/>
+        </sequence>
+      </complexType>
+    </schema>
+  </wsdl:types>
+
+  <wsdl:message name="addContentKeyRequest">
+    <wsdl:part name="add_key_request" type="roap:WSAddContentKeyRequest"/>
+  </wsdl:message>
+
+  <wsdl:message name="addContentKeyResponse">
+    <wsdl:part name="add_key_response" type="roap:WSAddContentKeyResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="addDeviceRightsRequest">
+    <wsdl:part name="add_rights_request" type="roap:WSAddDeviceRightsRequest"/>
+  </wsdl:message>
+
+  <wsdl:message name="addDeviceRightsResponse">
+    <wsdl:part name="add_rights_response" type="roap:WSAddDeviceRightsResponse"/>
+  </wsdl:message>
+
+  <wsdl:portType name="OMADRMWS">
+    <wsdl:operation name="addContentKey">
+      <wsdl:input name="addContentKeyRequest" message="intf:addContentKeyRequest"/>
+      <wsdl:output name="addContentKeyResponse" message="intf:addContentKeyResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="addDeviceRights">
+      <wsdl:input name="addDeviceRightsRequest" message="intf:addDeviceRightsRequest"/>
+      <wsdl:output name="addDeviceRightsResponse" message="intf:addDeviceRightsResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+
+  <wsdl:binding type="intf:OMADRMWS" name="OMADRMWSBinding">
+  <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="addContentKey">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="addContentKeyRequest">
+        <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output name="addContentKeyResponse">
+        <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addDeviceRights">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="addDeviceRightsRequest">
+        <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output name="addDeviceRightsResponse">
+        <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+
+  <wsdl:service name="OMADRMWebService">
+    <wsdl:port binding="intf:OMADRMWSBinding" name="OMADRMWebService">
+      <wsdlsoap:address location="http://localhost:8080/OMADRMWS/services/OMADRMWebService"/>
+    </wsdl:port>
+  </wsdl:service>
+
+</wsdl:definitions>

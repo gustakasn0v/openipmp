@@ -1,0 +1,165 @@
+<project name="openIPMP" default="dist" basedir=".">
+    <description>
+        This is buildfile is used to build the openIPMP project
+    </description>
+
+  <!-- ======================================================= -->
+  <!-- Set Global Properties for build.                        -->
+  <!-- ======================================================= -->
+  <property name="src" location="src"/>
+  <property name="srcAuto" location="srcAuto"/>
+  <property name="srcOnline" location="srcOnline"/>
+  <property name="srcSquash" location="lib/squashxml/src"/>
+  <property name="srcWS" location="srcWS"/>
+  <property name="jsp" location="WebContent/jsp"/>
+  <property name="wsdl" location="WebContent/wsdl"/>
+  <property name="lib" location="lib"/>
+  <property name="WEB-INF" location="WebContent/WEB-INF"/>
+  <property name="build.classes" location="build/WEB-INF/classes"/>
+  <property name="build" location="build"/>
+  <property name="build.docdir" location="build/docs/api"/>
+  <property name="build.WEB-INF" location="build/WEB-INF"/>
+  <property name="dist"  location="dist"/>
+  <property name="dist.docdir" location="dist/docs/api"/>
+
+  <property environment="env"></property>
+	
+  <!-- ======================================================= -->
+  <!-- Set Project Class Path.                                 -->
+  <!-- ======================================================= -->
+  <path id="project.class.path">
+    <pathelement location="lib/"/>
+    <pathelement path="${java.class.path}/"/>
+    <pathelement path=".\lib\ejbca\bouncycastle.zip"/>
+    <pathelement path=".\lib\ejbca\ca.jar"/>
+    <pathelement path=".\lib\ejbca\jboss-j2ee.jar"/>
+    <pathelement path=".\lib\ejbca\jce-jdk13-112.jar"/>
+    <pathelement path=".\lib\ejbca\servlet.jar"/>
+    <pathelement path=".\lib\squashxml\ext\xerces.jar"/>
+    <pathelement path=".\lib\mysql\mysql-connector-java-3.1.10-bin.jar"/>
+  	
+  	<pathelement location="./WebContent/WEB-INF/lib/saaj.jar"/>
+  	<pathelement location="./WebContent/WEB-INF/lib/axis.jar"/>
+  	<pathelement location="./WebContent/WEB-INF/lib/commons-logging.jar"/>
+  	<pathelement location="./WebContent/WEB-INF/lib/axis-ant.jar"/>
+  	<pathelement location="./WebContent/WEB-INF/lib/jaxrpc.jar"/>
+  	<pathelement location="./WebContent/WEB-INF/lib/log4j-1.2.8.jar"/>
+  	<pathelement location="./WebContent/WEB-INF/lib/wsdl4j-1.5.1.jar"/>
+  	<pathelement location="./WebContent/WEB-INF/lib/commons-discovery-0.2.jar"/>
+  </path>
+
+  <!-- ======================================================= -->
+  <!-- Cleanup.                                                -->
+  <!-- ======================================================= -->
+  <target name="clean"
+        description="clean up" >
+    <!-- Delete the ${build} and ${dist} directory trees -->
+    <delete dir="${build}"/>
+    <delete dir="${dist}"/>
+  </target>
+
+  <!-- ======================================================= -->
+  <!-- Create Start Timestamp.                                 -->
+  <!-- ======================================================= -->
+  <target name="init" depends="clean">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${build}"/>
+  </target>
+
+  <!-- ======================================================= -->
+  <!-- Compile Source Code.                                    -->
+  <!-- ======================================================= -->
+  <target name="compile" depends="init" description="compile the source" >
+
+    <mkdir dir="${build.classes}"/>
+
+    <!-- Compile the java code from ${src}:${srcAuto}:${srcOnline}:${srcSquash} into ${WEB-INF.classes} -->
+    <javac srcdir="${src}:${srcAuto}:${srcOnline}:${srcSquash}:${srcWS}" destdir="${build.classes}">
+       <classpath refid="project.class.path"/>
+    </javac>
+  </target>
+
+  <!-- ======================================================= -->
+  <!-- Prepare JSP.                                            -->
+  <!-- ======================================================= -->
+  <target name="jsp" depends="compile" description="prepares openipmp jsp for distribution" >
+    <!-- Create the build jsp directory and copy jsp code for distribution-->
+    <mkdir dir="${build}/jsp"/>
+    <copy todir="${build}/jsp">
+      <fileset dir="${jsp}/"/>
+    </copy>
+  </target>
+
+  <!-- ======================================================= -->
+  <!-- Prepare WSDL                                            -->
+  <!-- ======================================================= -->
+  <target name="wsdl" depends="jsp" description="prepares openipmp WSDL for distribution" >
+    <!-- Create the build wsdl directory and copy wsdl files for distribution-->
+    <mkdir dir="${build}/wsdl"/>
+    <copy todir="${build}/wsdl">
+      <fileset dir="${wsdl}/"/>
+    </copy>
+  </target>
+
+  <!-- ======================================================= -->
+  <!-- Prepare WEB-INF.                                        -->
+  <!-- ======================================================= -->
+  <target name="web" depends="wsdl" description="prepares openipmp WEB-INF for distribution" >
+    <!-- Create the build WEB-INF directory and copy WEB-INF files for distribution-->
+    <mkdir dir="${build.WEB-INF}"/>
+    <copy todir="${build.WEB-INF}">
+      <fileset dir="${WEB-INF}/"/>
+    </copy>
+  </target>
+
+  <!-- ======================================================= -->
+  <!-- Generate Distribution.                                  -->
+  <!-- ======================================================= -->
+  <target name="prep" depends="web" description="generate the application war file for distribution" >
+    <!-- Create the distribution lib directory -->
+    <mkdir dir="${dist}/lib"/>
+
+    <!-- Put everything in ${build} into the openipmp.war file -->
+    <jar jarfile="${dist}/lib/openipmp.war" basedir="${build}"/>
+
+  </target>
+
+  <!-- ======================================================= -->
+  <!-- Create Javadoc.                                         -->
+  <!-- ======================================================= -->
+  <target name="javadoc" depends="prep" description="build javadoc">
+    <!-- Build javadoc -->
+    <delete dir="${build.docdir}"/>
+    <mkdir dir="${build.docdir}"/>
+    <javadoc packagenames="com.mutable.*"
+             sourcepath="${src}:${srcAuto}:${srcOnline}:${srcSquash}"
+             destdir="${build.docdir}"
+             author="true"
+             version="true"
+		 use="true"
+             windowtitle="openIPMP API from Mutable"
+             doctitle="openIPMP Javadoc"
+		 additionalparam="-breakiterator"
+             bottom="Copyright 2002-2006 Mutable, Inc.  All Rights Reserved.">
+        <classpath refid="project.class.path"/>
+    </javadoc>
+
+    <!-- Put javadoc into ${dist.docdir} -->
+    <delete dir="${dist.docdir}"/>
+    <mkdir dir="${dist.docdir}"/>
+    <copy todir="${dist.docdir}">
+      <fileset dir="${build.docdir}/"/>
+    </copy>
+  </target>
+
+  <!-- ======================================================= -->
+  <!-- Create End Timestamp.                                   -->
+  <!-- ======================================================= -->
+  <target name="dist" depends="javadoc">
+    <!-- Create the time stamp -->
+    <tstamp/>
+  </target>
+
+</project>

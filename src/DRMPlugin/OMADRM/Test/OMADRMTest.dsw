@@ -1,0 +1,452 @@
+Microsoft Developer Studio Workspace File, Format Version 6.00
+# WARNING: DO NOT EDIT OR DELETE THIS WORKSPACE FILE!
+
+###############################################################################
+
+Project: "Base64Factory"=..\..\Base64Factory\Base64Factory.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "CipherFactory"=..\..\CipherFactory\CipherFactory.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "OMADRMCommon"=..\OMADRMCommon\OMADRMCommon.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "OMADRMCrypto"=..\OMADRMCrypto\OMADRMCrypto.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "OMADRMDecCommHandlerFactory"=..\..\DRMDecoderPlugin\OMADRMDecCommHandlerFactory\OMADRMDecCommHandlerFactory.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name ROAPParser
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ROAP
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name XMLFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OMADRMMQDecCommHandler
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ThreadSyncFactory
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "OMADRMDecManagerFactory"=..\..\DRMDECODERPLUGIN\OMADRMDecManagerFactory\OMADRMDecManagerFactory.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name OMADRMDecCommHandlerFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name Base64Factory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name CipherFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OMADRMCommon
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OMADRMCrypto
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name PublicCryptoFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ROAP
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ROAPParser
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name XMLFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ThreadSyncFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OpenIPMPKeyManager
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OpenIPMPMessengerFactory
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "OMADRMDeviceIDCalc"=..\OMADRMDeviceIDCalc\OMADRMDeviceIDCalc.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name Base64Factory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name PublicCryptoFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OMADRMCrypto
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ROAP
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "OMADRMEncCommHandlerFactory"=..\..\DRMEncoderPlugin\OMADRMEncCommHandlerFactory\OMADRMEncCommHandlerFactory.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name ROAPParser
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name XMLFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ROAP
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OMADRMMQEncCommHandler
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ThreadSyncFactory
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "OMADRMEncManagerFactory"=..\..\DRMENCODERPLUGIN\OMADRMEncManagerFactory\OMADRMEncManagerFactory.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name Base64Factory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name CipherFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OMADRMCommon
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OMADRMCrypto
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ROAP
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OMADRMEncCommHandlerFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ThreadSyncFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OpenIPMPKeyManager
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OpenIPMPMessengerFactory
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "OMADRMMQDecCommHandler"=.\OMADRMMQDecCommHandler\OMADRMMQDecCommHandler.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name OMADRMServer
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name PublicCryptoFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OMADRMCrypto
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name Base64Factory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OMADRMCommon
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "OMADRMMQEncCommHandler"=.\OMADRMMQEncCommHandler\OMADRMMQEncCommHandler.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name OMADRMServer
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name Base64Factory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OMADRMCommon
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OMADRMCrypto
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name PublicCryptoFactory
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "OMADRMServer"=.\OMADRMServer\OMADRMServer.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "OMADRMTest"=.\OMADRMTest\OMADRMTest.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name Base64Factory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name CipherFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name XMLFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name PublicCryptoFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OMADRMCrypto
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ROAP
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OMADRMDecManagerFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name OMADRMEncManagerFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name ThreadSyncFactory
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "OpenIPMPKeyManager"=..\..\OpenIPMPKeyManager\OpenIPMPKeyManager.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "OpenIPMPMessengerFactory"=..\..\OpenIPMPMessengerFactory\OpenIPMPMessengerFactory.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name ThreadSyncFactory
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name openipmp
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name squashxml
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "PublicCryptoFactory"=..\..\PublicCryptoFactory\PublicCryptoFactory.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "ROAP"=..\ROAP\ROAP.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "ROAPParser"=..\ROAPParser\ROAPParser.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "ThreadSyncFactory"=..\..\ThreadSyncFactory\ThreadSyncFactory.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "XMLFactory"=..\..\XMLFactory\XMLFactory.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "openipmp"=..\..\openIPMP\openipmp.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "squashxml"=..\..\squashxml\squashxml.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Global:
+
+Package=<5>
+{{{
+}}}
+
+Package=<3>
+{{{
+}}}
+
+###############################################################################
+

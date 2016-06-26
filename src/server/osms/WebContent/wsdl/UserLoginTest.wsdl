@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://ws.mutable.com" xmlns:impl="http://ws.mutable.com" xmlns:intf="http://ws.mutable.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<!--WSDL created by Apache Axis version: 1.2.1
+Built on Jun 14, 2005 (09:15:57 EDT)-->
+
+   <wsdl:message name="loginRequest">
+
+      <wsdl:part name="userName" type="xsd:string"/>
+
+      <wsdl:part name="password" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="loginResponse">
+
+      <wsdl:part name="loginReturn" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="UserLoginTest">
+
+      <wsdl:operation name="login" parameterOrder="userName password">
+
+         <wsdl:input name="loginRequest" message="impl:loginRequest"/>
+
+         <wsdl:output name="loginResponse" message="impl:loginResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="UserLoginTestSoapBinding" type="impl:UserLoginTest">
+
+      <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="login">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="loginRequest">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.mutable.com"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="loginResponse">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.mutable.com"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="UserLoginTestService">
+
+      <wsdl:port name="UserLoginTest" binding="impl:UserLoginTestSoapBinding">
+
+         <wsdlsoap:address location="http://localhost:8080/openipmp/services/UserLoginTest"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

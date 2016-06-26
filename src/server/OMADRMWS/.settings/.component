@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId">
+<wb-module deploy-name="OMADRMWS">
+<wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+<wb-resource deploy-path="/" source-path="/WebContent"/>
+<wb-resource deploy-path="/WEB-INF" source-path="WebContent/WEB-INF"/>
+<wb-resource deploy-path="/WEB-INF/web.xml" source-path="WebContent/WEB-INF/web.xml"/>
+<wb-resource deploy-path="/WEB-INF/lib" source-path="WebContent/WEB-INF/lib"/>
+<wb-resource deploy-path="/wsdl/OMADRMWebService.wsdl" source-path="WebContent/wsdl/OMADRMWebService.wsdl"/>
+<wb-resource deploy-path="/WEB-INF/lib/axis.jar" source-path="WebContent/WEB-INF/lib/axis.jar"/>
+<wb-resource deploy-path="/WEB-INF/lib/commons-discovery-0.2.jar" source-path="WebContent/WEB-INF/lib/commons-discovery-0.2.jar"/>
+<wb-resource deploy-path="/WEB-INF/lib/commons-logging-1.0.4.jar" source-path="WebContent/WEB-INF/lib/commons-logging-1.0.4.jar"/>
+<wb-resource deploy-path="/WEB-INF/lib/jaxrpc.jar" source-path="WebContent/WEB-INF/lib/jaxrpc.jar"/>
+<wb-resource deploy-path="/WEB-INF/lib/saaj.jar" source-path="WebContent/WEB-INF/lib/saaj.jar"/>
+<wb-resource deploy-path="/WEB-INF/lib/wsdl4j-1.5.1.jar" source-path="WebContent/WEB-INF/lib/wsdl4j-1.5.1.jar"/>
+<property name="context-root" value="OMADRMWS"/>
+<property name="java-output-path" value="/build/classes/"/>
+</wb-module>
+</project-modules>

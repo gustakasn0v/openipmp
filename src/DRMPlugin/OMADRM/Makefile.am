@@ -1,0 +1,1 @@
+SUBDIRS = OMADRMCommon OMADRMCrypto ROAP ROAPParser OMADRMDeviceIDCalc Test

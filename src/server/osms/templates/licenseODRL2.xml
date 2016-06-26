@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<o-ex:rights o-ex:id="MyRightsData" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:enc="http://www.w3.org/2001/04/xmlenc#" xmlns:o-dd="http://odrl.net/1.1/ODRL-DD" xmlns:o-ex="http://odrl.net/1.1/ODRL-EX" xmlns:o-doi="http://www.doi.org/">
+<o-ex:agreement>
+	<o-ex:context>
+		<o-dd:uid>XXXI SEE YOU XXXXXXXXXXXXX</o-dd:uid>
+		<o-dd:remark>OpenIPMP License Identifier</o-dd:remark>
+	</o-ex:context>
+	<o-ex:asset>
+		<o-ex:context>
+			<o-dd:uid>
+				<o-doi:DOI>XXXXXXXXXXXXXXXXXXXXX</o-doi:DOI>
+			</o-dd:uid>
+		</o-ex:context>
+
+		<ds:KeyInfo>
+			<enc:EncryptedKey>
+				<enc:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-1_5/"></enc:EncryptionMethod>
+				<ds:KeyInfo>
+					<ds:X509Data>
+						<ds:X509Certificate>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</ds:X509Certificate>
+					</ds:X509Data>
+					<enc:CipherData>
+						<enc:CipherValue>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx</enc:CipherValue>
+					</enc:CipherData>
+				</ds:KeyInfo>
+			</enc:EncryptedKey>
+		</ds:KeyInfo>
+	</o-ex:asset>
+	<o-ex:permission>
+		<o-dd:play>
+			<o-ex:constraint>
+				<o-dd:datetime>
+					<o-dd:start>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX1999-11-24T18:20:00XXXXXXXXXXXXXXXXXXXXXXXXXXX</o-dd:start>
+					<o-dd:end>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX2003-11-25T18:20:00XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx</o-dd:end>
+				</o-dd:datetime>
+			</o-ex:constraint>
+		</o-dd:play>
+	</o-ex:permission>
+	<o-ex:party>
+		<o-ex:context>
+			<o-dd:uid>Unique ID of the user?  Should be the user's public key here?</o-dd:uid>
+		</o-ex:context>
+	</o-ex:party>
+</o-ex:agreement>
+
+<ds:Signature>
+	<ds:SignedInfo>
+		<ds:CanonicalizationMethod ds:Algorithm="http://www.w3.org/TR/2001/REC-xml-c14-20010315"></ds:CanonicalizationMethod>
+		<ds:SignatureMethod ds:Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"></ds:SignatureMethod>
+		<ds:Reference ds:URI="#MyRightsData">
+			<ds:Transforms>
+				<ds:Transform ds:Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"></ds:Transform>
+				<ds:Transform ds:Algortithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"></ds:Transform>
+			</ds:Transforms>
+			<ds:DigestMethod ds:Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
+			<ds:DigestValue>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</ds:DigestValue>
+		</ds:Reference>
+	</ds:SignedInfo>
+	<ds:KeyInfo>
+		<ds:X509Data>
+			<ds:X509Certificate>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</ds:X509Certificate>
+		</ds:X509Data>
+	</ds:KeyInfo>
+	<ds:SignatureValue>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</ds:SignatureValue>
+</ds:Signature>
+
+</o-ex:rights>

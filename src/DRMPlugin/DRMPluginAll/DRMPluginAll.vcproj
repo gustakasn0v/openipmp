@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="7.10"
+	Name="DRMPluginAll"
+	SccProjectName=""
+	SccLocalPath=""
+	Keyword="MakeFileProj">
+	<Platforms>
+		<Platform
+			Name="Win32"/>
+	</Platforms>
+	<Configurations>
+		<Configuration
+			Name="Debug|Win32"
+			OutputDirectory="."
+			IntermediateDirectory="."
+			ConfigurationType="10"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE">
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCMIDLTool"
+				TypeLibraryName="./DRMPluginAll.tlb"
+				HeaderFileName=""/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				CommandLine="@ECHO Creating directories...
+
+@IF NOT EXIST .\DRMPlugin (
+	@mkdir .\DRMPlugin
+)
+@IF NOT EXIST .\DRMPlugin\include (
+	@mkdir .\DRMPlugin\include
+)
+@IF NOT EXIST .\DRMPlugin\lib (
+	@mkdir .\DRMPlugin\lib
+)
+@IF NOT EXIST .\DRMPlugin\lib\win32 (
+	@mkdir .\DRMPlugin\lib\win32
+)
+@IF NOT EXIST .\DRMPlugin\lib\win32\VC7 (
+	@mkdir .\DRMPlugin\lib\win32\VC7
+)
+@IF NOT EXIST .\DRMPlugin\lib\win32\VC7\debug (
+	@mkdir .\DRMPlugin\lib\win32\VC7\debug
+)
+
+@del /Q .\DRMPlugin\*.*
+@del /Q .\DRMPlugin\include\*.*
+@del /Q .\DRMPlugin\lib\*.*
+@del /Q .\DRMPlugin\lib\win32\*.*
+@del /Q .\DRMPlugin\lib\win32\VC7\*.*
+@del /Q .\DRMPlugin\lib\win32\VC7\debug\*.*
+
+@ECHO Done...
+
+
+@ECHO Copying include files...
+
+@copy ..\include\Value.h .\DRMPlugin\include
+@copy ..\include\UTCTime.h .\DRMPlugin\include
+@copy ..\include\BasicTypes.h .\DRMPlugin\include
+@copy ..\DRMEncoderPlugin\include\ContentInfoManager.h .\DRMPlugin\include
+@copy ..\DRMEncoderPlugin\ContentInfoManagerFactory\ContentInfoManagerFactory.h .\DRMPlugin\include
+@copy ..\include\DRMLogger.h .\DRMPlugin\include
+@copy ..\include\ICipher.h .\DRMPlugin\include
+@copy ..\DRMDecoderPlugin\include\IDRMDecryptor.h .\DRMPlugin\include
+@copy ..\DRMEncoderPlugin\include\IDRMEncManager.h .\DRMPlugin\include
+@copy ..\DRMEncoderPlugin\include\IISMADRMEncManager.h .\DRMPlugin\include
+@copy ..\MPEG4DRMPlugin\MPEG4SinfDRMPlugin\MPEG4SinfDRMDecoderPlugin\DecryptorHolder\DecryptorHolder.h .\DRMPlugin\include
+@copy ..\MPEG4DRMPlugin\MPEG4SinfDRMPlugin\MPEG4SinfDRMEncoderPlugin\include\IISMAMPEG4SinfDRMEncryptor.h .\DRMPlugin\include
+@copy ..\MPEG4DRMPlugin\MPEG4SinfDRMPlugin\include\IMPEG4DRMAtom.h .\DRMPlugin\include
+@copy ..\MPEG4DRMPlugin\MPEG4SinfDRMPlugin\MPEG4SinfDRMEncoderPlugin\include\IMPEG4SinfDRMEncryptor.h .\DRMPlugin\include
+@copy ..\DRMEncoderPlugin\include\IOMADRMEncManager.h .\DRMPlugin\include
+@copy ..\MPEG4DRMPlugin\MPEG4SinfDRMPlugin\MPEG4SinfDRMEncoderPlugin\include\IOMAMPEG4SinfDRMEncryptor.h .\DRMPlugin\include
+@copy ..\DRMEncoderPlugin\include\IOpenIPMPDRMEncManager.h .\DRMPlugin\include
+@copy ..\MPEG4DRMPlugin\MPEG4SinfDRMPlugin\MPEG4SinfDRMEncoderPlugin\include\IOpenIPMPMPEG4SinfDRMEncryptor.h .\DRMPlugin\include
+@copy ..\include\IPublicCrypto.h .\DRMPlugin\include
+@copy ..\DRMEncoderPlugin\ISMADRMEncManagerFactory\ISMADRMEncManagerFactory.h .\DRMPlugin\include
+@copy ..\MPEG4DRMPlugin\MPEG4SinfDRMPlugin\MPEG4SinfDRMEncoderPlugin\ISMAMPEG4SinfDRMEncryptor\ISMAMPEG4SinfDRMEncryptor.h .\DRMPlugin\include
+@copy ..\include\IThreadSync.h .\DRMPlugin\include
+@copy ..\include\IXMLDocument.h .\DRMPlugin\include
+@copy ..\MPEG4DRMPlugin\include\MPEG4DRMPluginException.h .\DRMPlugin\include
+@copy ..\DRMEncoderPlugin\OMADRMEncManagerFactory\OMADRMEncManagerFactory.h .\DRMPlugin\include
+@copy ..\MPEG4DRMPlugin\MPEG4SinfDRMPlugin\MPEG4SinfDRMEncoderPlugin\OMAMPEG4SinfDRMEncryptor\OMAMPEG4SinfDRMEncryptor.h .\DRMPlugin\include
+@copy ..\DRMEncoderPlugin\OpenIPMPDRMEncManagerFactory\OpenIPMPDRMEncManagerFactory.h .\DRMPlugin\include
+@copy ..\MPEG4DRMPlugin\MPEG4SinfDRMPlugin\MPEG4SinfDRMEncoderPlugin\OpenIPMPMPEG4SinfDRMEncryptor\OpenIPMPMPEG4SinfDRMEncryptor.h .\DRMPlugin\include
+@copy ..\PublicCryptoFactory\PublicCryptoFactory.h .\DRMPlugin\include
+@copy ..\ThreadSyncFactory\ThreadSyncFactory.h .\DRMPlugin\include
+@copy ..\XMLFactory\XMLFactory.h .\DRMPlugin\include
+
+
+@copy ..\DRMDecoderPlugin\include\DRMInfoException.h .\DRMPlugin\include
+@copy ..\DRMDecoderPlugin\include\IISMADRMDecManager.h .\DRMPlugin\include
+@copy ..\DRMDecoderPlugin\include\IISMADRMDecryptor.h .\DRMPlugin\include
+@copy ..\DRMDecoderPlugin\include\IOMADRMDecManager.h .\DRMPlugin\include
+@copy ..\DRMDecoderPlugin\include\IOMADRMDecryptor.h .\DRMPlugin\include
+@copy ..\DRMDecoderPlugin\include\IOpenIPMPDRMDecManager.h .\DRMPlugin\include
+@copy ..\DRMDecoderPlugin\include\IOpenIPMPDRMDecryptor.h .\DRMPlugin\include
+@copy ..\DRMDecoderPlugin\include\ISMADRMInfo.h .\DRMPlugin\include
+@copy ..\DRMDecoderPlugin\include\OMADRMInfo.h .\DRMPlugin\include
+@copy ..\DRMDecoderPlugin\include\OpenIPMPDRMInfo.h .\DRMPlugin\include
+@copy ..\DRMDecoderPlugin\ISMADRMDecManagerFactory\ISMADRMDecManagerFactory.h .\DRMPlugin\include
+@copy ..\DRMDecoderPlugin\OMADRMDecManagerFactory\OMADRMDecManagerFactory.h .\DRMPlugin\include
+@copy ..\DRMDecoderPlugin\OpenIPMPDRMDecManagerFactory\OpenIPMPDRMDecManagerFactory.h .\DRMPlugin\include
+@copy ..\openIPMP\OpenIPMP.h .\DRMPlugin\include
+
+
+
+@ECHO Done...
+
+
+@ECHO Copying libraries...
+
+@ECHO Copying externals...
+
+@copy ..\..\..\ext\axis-c\lib\win32\VC7\AxisClient_D.dll .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\..\..\ext\axis-c\lib\win32\VC7\AxisXMLParser_D.dll .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\..\..\ext\axis-c\lib\win32\VC7\HTTPChannel_D.dll .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\..\..\ext\axis-c\lib\win32\VC7\HTTPTransport_D.dll .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\..\..\ext\xerces\win32\lib\VC7\xerces-c_2_6D.dll .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\..\..\ext\xerces\win32\lib\VC7\xerces-depdom_2_6D.dll .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\..\..\ext\openssl\lib\win32\debug\VC7\ssleay32.dll .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\..\..\ext\openssl\lib\win32\debug\VC7\libeay32.dll .\DRMPlugin\lib\win32\VC7\debug
+
+@ECHO Copying DRM plugins...
+
+@copy ..\OMADRM\OMADRMDeviceIDCalc\Build\Win32\VC7\Debug\OMADRMDeviceIDCalc.exe .\DRMPlugin\lib\win32\VC7\debug
+
+@copy ..\DRMEncoderPlugin\ContentInfoManagerFactory\Build\Win32\VC7\Debug\ContentInfoManagerFactory.dll .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\DRMEncoderPlugin\ISMADRMEncManagerFactory\Build\Win32\VC7\Debug\ISMADRMEncManagerFactory.dll .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\DRMEncoderPlugin\OMADRMEncManagerFactory\Build\Win32\VC7\Debug\OMADRMEncManagerFactory.dll .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\DRMEncoderPlugin\OpenIPMPDRMEncManagerFactory\Build\Win32\VC7\Debug\OpenIPMPDRMEncManagerFactory.dll .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\DRMEncoderPlugin\OMADRMEncCommHandlerFactory\Build\Win32\VC7\Debug\OMADRMEncCommHandlerFactory.dll .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\XMLFactory\Build\Win32\VC7\Debug\XMLFactory.dll .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\PublicCryptoFactory\Build\Win32\VC7\Debug\PublicCryptoFactory.dll .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\ThreadSyncFactory\Build\Win32\VC7\Debug\ThreadSyncFactory.dll .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\OpenIPMPMessengerFactory\Build\Win32\VC7\Debug\OpenIPMPMessengerFactory.dll .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\DRMDecoderPlugin\ISMADRMDecManagerFactory\Build\Win32\VC7\Debug\ISMADRMDecManagerFactory.dll .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\DRMDecoderPlugin\OMADRMDecManagerFactory\Build\Win32\VC7\Debug\OMADRMDecManagerFactory.dll .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\DRMDecoderPlugin\OpenIPMPDRMDecManagerFactory\Build\Win32\VC7\Debug\OpenIPMPDRMDecManagerFactory.dll .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\DRMDecoderPlugin\OMADRMDecCommHandlerFactory\Build\Win32\VC7\Debug\OMADRMDecCommHandlerFactory.dll .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\DRMEncoderPlugin\ContentInfoManagerFactory\Build\Win32\VC7\Debug\ContentInfoManagerFactory.lib .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\DRMEncoderPlugin\ISMADRMEncManagerFactory\Build\Win32\VC7\Debug\ISMADRMEncManagerFactory.lib .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\DRMEncoderPlugin\OMADRMEncManagerFactory\Build\Win32\VC7\Debug\OMADRMEncManagerFactory.lib .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\DRMEncoderPlugin\OpenIPMPDRMEncManagerFactory\Build\Win32\VC7\Debug\OpenIPMPDRMEncManagerFactory.lib .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\XMLFactory\Build\Win32\VC7\Debug\XMLFactory.lib .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\PublicCryptoFactory\Build\Win32\VC7\Debug\PublicCryptoFactory.lib .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\ThreadSyncFactory\Build\Win32\VC7\Debug\ThreadSyncFactory.lib .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\DRMDecoderPlugin\ISMADRMDecManagerFactory\Build\Win32\VC7\Debug\ISMADRMDecManagerFactory.lib .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\DRMDecoderPlugin\OMADRMDecManagerFactory\Build\Win32\VC7\Debug\OMADRMDecManagerFactory.lib .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\DRMDecoderPlugin\OpenIPMPDRMDecManagerFactory\Build\Win32\VC7\Debug\OpenIPMPDRMDecManagerFactory.lib .\DRMPlugin\lib\win32\VC7\debug
+
+@ECHO Copying MPEG4 DRM plugins...
+
+@copy ..\MPEG4DRMPlugin\MPEG4SinfDRMPlugin\MPEG4SinfDRMEncoderPlugin\ISMAMPEG4SinfDRMEncryptor\Build\Win32\VC7\Debug\ISMAMPEG4SinfDRMEncryptor.dll .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\MPEG4DRMPlugin\MPEG4SinfDRMPlugin\MPEG4SinfDRMEncoderPlugin\OMAMPEG4SinfDRMEncryptor\Build\Win32\VC7\Debug\OMAMPEG4SinfDRMEncryptor.dll .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\MPEG4DRMPlugin\MPEG4SinfDRMPlugin\MPEG4SinfDRMEncoderPlugin\OpenIPMPMPEG4SinfDRMEncryptor\Build\Win32\VC7\Debug\OpenIPMPMPEG4SinfDRMEncryptor.dll .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\MPEG4DRMPlugin\MPEG4SinfDRMPlugin\MPEG4SinfDRMEncoderPlugin\ISMAMPEG4SinfDRMEncryptor\Build\Win32\VC7\Debug\ISMAMPEG4SinfDRMEncryptor.lib .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\MPEG4DRMPlugin\MPEG4SinfDRMPlugin\MPEG4SinfDRMEncoderPlugin\OMAMPEG4SinfDRMEncryptor\Build\Win32\VC7\Debug\OMAMPEG4SinfDRMEncryptor.lib .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\MPEG4DRMPlugin\MPEG4SinfDRMPlugin\MPEG4SinfDRMEncoderPlugin\OpenIPMPMPEG4SinfDRMEncryptor\Build\Win32\VC7\Debug\OpenIPMPMPEG4SinfDRMEncryptor.lib .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\MPEG4DRMPlugin\MPEG4SinfDRMPlugin\MPEG4SinfDRMDecoderPlugin\DecryptorHolder\Build\Win32\VC7\Debug\DecryptorHolder.lib .\DRMPlugin\lib\win32\VC7\debug
+
+@ECHO Done...
+
+
+@ECHO Copying MPEG2 DRM plugins...
+
+@copy ..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\MPEG2IPMPXDRMEncoderPlugin\MPEG2IPMPXDRMEncoder\Build\Win32\VC7\Debug\MPEG2IPMPXDRMEncoder.dll .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\MPEG2IPMPXDRMEncoderPlugin\OpenIPMPMPEG2IPMPXDRMEncryptor\Build\Win32\VC7\Debug\OpenIPMPMPEG2IPMPXDRMEncryptor.dll .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\MPEG2IPMPXDRMDecoderPlugin\MessageRouter\Build\Win32\VC7\Debug\MessageRouter.dll .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\MPEG2IPMPXDRMDecoderPlugin\OpenIPMPTool\Build\Win32\VC7\Debug\OpenIPMPTool.dll .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\MPEG2IPMPXDRMEncoderPlugin\MPEG2IPMPXDRMEncoder\Build\Win32\VC7\Debug\MPEG2IPMPXDRMEncoder.lib .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\MPEG2IPMPXDRMDecoderPlugin\MessageRouter\Build\Win32\VC7\Debug\MessageRouter.lib .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\MPEG2IPMPXDRMDecoderPlugin\OpenIPMPTool\Build\Win32\VC7\Debug\OpenIPMPTool.lib .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\IPMPControlInfo\Build\Win32\VC7\Debug\IPMPControlInfo.lib .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\IPMPCrypto\Build\Win32\VC7\Debug\IPMPCrypto.lib .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\IPMPData\Build\Win32\VC7\Debug\IPMPData.lib .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\MPEG2IPMPXDRMDecoderPlugin\DecoderIPMPControlInfo\Build\Win32\VC7\Debug\DecoderIPMPControlInfo.lib .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\MPEG2IPMPXDRMDecoderPlugin\DecoderIPMPData\Build\Win32\VC7\Debug\DecoderIPMPData.lib .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\MPEG2IPMPXDRMDecoderPlugin\IPMPControlInfoParser\Build\Win32\VC7\Debug\IPMPControlInfoParser.lib .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\MPEG2IPMPXDRMDecoderPlugin\IPMPDataParser\Build\Win32\VC7\Debug\IPMPDataParser.lib .\DRMPlugin\lib\win32\VC7\debug
+@copy ..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\MPEG2IPMPXDRMDecoderPlugin\IPMPToolManager\Build\Win32\VC7\Debug\IPMPToolManager.lib .\DRMPlugin\lib\win32\VC7\debug
+
+@ECHO Done...
+"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory="."
+			IntermediateDirectory="."
+			ConfigurationType="10"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE">
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCMIDLTool"
+				TypeLibraryName="./DRMPluginAll.tlb"
+				HeaderFileName=""/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				CommandLine="@ECHO Creating directories...
+
+@IF NOT EXIST .\DRMPlugin (
+	@mkdir .\DRMPlugin
+)
+@IF NOT EXIST .\DRMPlugin\include (
+	@mkdir .\DRMPlugin\include
+)
+@IF NOT EXIST .\DRMPlugin\lib (
+	@mkdir .\DRMPlugin\lib
+)
+@IF NOT EXIST .\DRMPlugin\lib\win32 (
+	@mkdir .\DRMPlugin\lib\win32
+)
+@IF NOT EXIST .\DRMPlugin\lib\win32\VC7 (
+	@mkdir .\DRMPlugin\lib\win32\VC7
+)
+@IF NOT EXIST .\DRMPlugin\lib\win32\VC7\release (
+	@mkdir .\DRMPlugin\lib\win32\VC7\release
+)
+
+@del /Q .\DRMPlugin\*.*
+@del /Q .\DRMPlugin\include\*.*
+@del /Q .\DRMPlugin\lib\*.*
+@del /Q .\DRMPlugin\lib\win32\*.*
+@del /Q .\DRMPlugin\lib\win32\VC7\*.*
+@del /Q .\DRMPlugin\lib\win32\VC7\release\*.*
+
+@ECHO Done...
+
+
+@ECHO Copying include files...
+
+@copy ..\include\Value.h .\DRMPlugin\include
+@copy ..\include\UTCTime.h .\DRMPlugin\include
+@copy ..\include\BasicTypes.h .\DRMPlugin\include
+@copy ..\DRMEncoderPlugin\include\ContentInfoManager.h .\DRMPlugin\include
+@copy ..\DRMEncoderPlugin\ContentInfoManagerFactory\ContentInfoManagerFactory.h .\DRMPlugin\include
+@copy ..\include\DRMLogger.h .\DRMPlugin\include
+@copy ..\include\ICipher.h .\DRMPlugin\include
+@copy ..\DRMDecoderPlugin\include\IDRMDecryptor.h .\DRMPlugin\include
+@copy ..\DRMEncoderPlugin\include\IDRMEncManager.h .\DRMPlugin\include
+@copy ..\DRMEncoderPlugin\include\IISMADRMEncManager.h .\DRMPlugin\include
+@copy ..\MPEG4DRMPlugin\MPEG4SinfDRMPlugin\MPEG4SinfDRMDecoderPlugin\DecryptorHolder\DecryptorHolder.h .\DRMPlugin\include
+@copy ..\MPEG4DRMPlugin\MPEG4SinfDRMPlugin\MPEG4SinfDRMEncoderPlugin\include\IISMAMPEG4SinfDRMEncryptor.h .\DRMPlugin\include
+@copy ..\MPEG4DRMPlugin\MPEG4SinfDRMPlugin\include\IMPEG4DRMAtom.h .\DRMPlugin\include
+@copy ..\MPEG4DRMPlugin\MPEG4SinfDRMPlugin\MPEG4SinfDRMEncoderPlugin\include\IMPEG4SinfDRMEncryptor.h .\DRMPlugin\include
+@copy ..\DRMEncoderPlugin\include\IOMADRMEncManager.h .\DRMPlugin\include
+@copy ..\MPEG4DRMPlugin\MPEG4SinfDRMPlugin\MPEG4SinfDRMEncoderPlugin\include\IOMAMPEG4SinfDRMEncryptor.h .\DRMPlugin\include
+@copy ..\DRMEncoderPlugin\include\IOpenIPMPDRMEncManager.h .\DRMPlugin\include
+@copy ..\MPEG4DRMPlugin\MPEG4SinfDRMPlugin\MPEG4SinfDRMEncoderPlugin\include\IOpenIPMPMPEG4SinfDRMEncryptor.h .\DRMPlugin\include
+@copy ..\include\IPublicCrypto.h .\DRMPlugin\include
+@copy ..\DRMEncoderPlugin\ISMADRMEncManagerFactory\ISMADRMEncManagerFactory.h .\DRMPlugin\include
+@copy ..\MPEG4DRMPlugin\MPEG4SinfDRMPlugin\MPEG4SinfDRMEncoderPlugin\ISMAMPEG4SinfDRMEncryptor\ISMAMPEG4SinfDRMEncryptor.h .\DRMPlugin\include
+@copy ..\include\IThreadSync.h .\DRMPlugin\include
+@copy ..\include\IXMLDocument.h .\DRMPlugin\include
+@copy ..\MPEG4DRMPlugin\include\MPEG4DRMPluginException.h .\DRMPlugin\include
+@copy ..\DRMEncoderPlugin\OMADRMEncManagerFactory\OMADRMEncManagerFactory.h .\DRMPlugin\include
+@copy ..\MPEG4DRMPlugin\MPEG4SinfDRMPlugin\MPEG4SinfDRMEncoderPlugin\OMAMPEG4SinfDRMEncryptor\OMAMPEG4SinfDRMEncryptor.h .\DRMPlugin\include
+@copy ..\DRMEncoderPlugin\OpenIPMPDRMEncManagerFactory\OpenIPMPDRMEncManagerFactory.h .\DRMPlugin\include
+@copy ..\MPEG4DRMPlugin\MPEG4SinfDRMPlugin\MPEG4SinfDRMEncoderPlugin\OpenIPMPMPEG4SinfDRMEncryptor\OpenIPMPMPEG4SinfDRMEncryptor.h .\DRMPlugin\include
+@copy ..\PublicCryptoFactory\PublicCryptoFactory.h .\DRMPlugin\include
+@copy ..\ThreadSyncFactory\ThreadSyncFactory.h .\DRMPlugin\include
+@copy ..\XMLFactory\XMLFactory.h .\DRMPlugin\include
+
+
+@copy ..\DRMDecoderPlugin\include\DRMInfoException.h .\DRMPlugin\include
+@copy ..\DRMDecoderPlugin\include\IISMADRMDecManager.h .\DRMPlugin\include
+@copy ..\DRMDecoderPlugin\include\IISMADRMDecryptor.h .\DRMPlugin\include
+@copy ..\DRMDecoderPlugin\include\IOMADRMDecManager.h .\DRMPlugin\include
+@copy ..\DRMDecoderPlugin\include\IOMADRMDecryptor.h .\DRMPlugin\include
+@copy ..\DRMDecoderPlugin\include\IOpenIPMPDRMDecManager.h .\DRMPlugin\include
+@copy ..\DRMDecoderPlugin\include\IOpenIPMPDRMDecryptor.h .\DRMPlugin\include
+@copy ..\DRMDecoderPlugin\include\ISMADRMInfo.h .\DRMPlugin\include
+@copy ..\DRMDecoderPlugin\include\OMADRMInfo.h .\DRMPlugin\include
+@copy ..\DRMDecoderPlugin\include\OpenIPMPDRMInfo.h .\DRMPlugin\include
+@copy ..\DRMDecoderPlugin\ISMADRMDecManagerFactory\ISMADRMDecManagerFactory.h .\DRMPlugin\include
+@copy ..\DRMDecoderPlugin\OMADRMDecManagerFactory\OMADRMDecManagerFactory.h .\DRMPlugin\include
+@copy ..\DRMDecoderPlugin\OpenIPMPDRMDecManagerFactory\OpenIPMPDRMDecManagerFactory.h .\DRMPlugin\include
+@copy ..\openIPMP\OpenIPMP.h .\DRMPlugin\include
+
+
+@ECHO Done...
+
+
+@ECHO Copying libraries...
+
+@ECHO Copying externals...
+
+@copy ..\..\..\ext\axis-c\lib\win32\VC7\AxisClient.dll .\DRMPlugin\lib\win32\VC7\release
+@copy ..\..\..\ext\axis-c\lib\win32\VC7\AxisXMLParser.dll .\DRMPlugin\lib\win32\VC7\release
+@copy ..\..\..\ext\axis-c\lib\win32\VC7\HTTPChannel.dll .\DRMPlugin\lib\win32\VC7\release
+@copy ..\..\..\ext\axis-c\lib\win32\VC7\HTTPTransport.dll .\DRMPlugin\lib\win32\VC7\release
+@copy ..\..\..\ext\xerces\win32\lib\VC7\xerces-c_2_6.dll .\DRMPlugin\lib\win32\VC7\release
+@copy ..\..\..\ext\xerces\win32\lib\VC7\xerces-depdom_2_6.dll .\DRMPlugin\lib\win32\VC7\release
+@copy ..\..\..\ext\openssl\lib\win32\release\VC7\ssleay32.dll .\DRMPlugin\lib\win32\VC7\release
+@copy ..\..\..\ext\openssl\lib\win32\release\VC7\libeay32.dll .\DRMPlugin\lib\win32\VC7\release
+
+@ECHO Copying DRM plugins...
+
+@copy ..\OMADRM\OMADRMDeviceIDCalc\Build\Win32\VC7\Release\OMADRMDeviceIDCalc.exe .\DRMPlugin\lib\win32\VC7\release
+
+@copy ..\DRMEncoderPlugin\ContentInfoManagerFactory\Build\Win32\VC7\Release\ContentInfoManagerFactory.dll .\DRMPlugin\lib\win32\VC7\release
+@copy ..\DRMEncoderPlugin\ISMADRMEncManagerFactory\Build\Win32\VC7\Release\ISMADRMEncManagerFactory.dll .\DRMPlugin\lib\win32\VC7\release
+@copy ..\DRMEncoderPlugin\OMADRMEncManagerFactory\Build\Win32\VC7\Release\OMADRMEncManagerFactory.dll .\DRMPlugin\lib\win32\VC7\release
+@copy ..\DRMEncoderPlugin\OpenIPMPDRMEncManagerFactory\Build\Win32\VC7\Release\OpenIPMPDRMEncManagerFactory.dll .\DRMPlugin\lib\win32\VC7\release
+@copy ..\DRMEncoderPlugin\OMADRMEncCommHandlerFactory\Build\Win32\VC7\Release\OMADRMEncCommHandlerFactory.dll .\DRMPlugin\lib\win32\VC7\release
+@copy ..\XMLFactory\Build\Win32\VC7\Release\XMLFactory.dll .\DRMPlugin\lib\win32\VC7\release
+@copy ..\PublicCryptoFactory\Build\Win32\VC7\Release\PublicCryptoFactory.dll .\DRMPlugin\lib\win32\VC7\release
+@copy ..\ThreadSyncFactory\Build\Win32\VC7\Release\ThreadSyncFactory.dll .\DRMPlugin\lib\win32\VC7\release
+@copy ..\OpenIPMPMessengerFactory\Build\Win32\VC7\Release\OpenIPMPMessengerFactory.dll .\DRMPlugin\lib\win32\VC7\release
+@copy ..\DRMDecoderPlugin\ISMADRMDecManagerFactory\Build\Win32\VC7\Release\ISMADRMDecManagerFactory.dll .\DRMPlugin\lib\win32\VC7\release
+@copy ..\DRMDecoderPlugin\OMADRMDecManagerFactory\Build\Win32\VC7\Release\OMADRMDecManagerFactory.dll .\DRMPlugin\lib\win32\VC7\release
+@copy ..\DRMDecoderPlugin\OpenIPMPDRMDecManagerFactory\Build\Win32\VC7\Release\OpenIPMPDRMDecManagerFactory.dll .\DRMPlugin\lib\win32\VC7\release
+@copy ..\DRMDecoderPlugin\OMADRMDecCommHandlerFactory\Build\Win32\VC7\Release\OMADRMDecCommHandlerFactory.dll .\DRMPlugin\lib\win32\VC7\release
+@copy ..\DRMEncoderPlugin\ContentInfoManagerFactory\Build\Win32\VC7\Release\ContentInfoManagerFactory.lib .\DRMPlugin\lib\win32\VC7\release
+@copy ..\DRMEncoderPlugin\ISMADRMEncManagerFactory\Build\Win32\VC7\Release\ISMADRMEncManagerFactory.lib .\DRMPlugin\lib\win32\VC7\release
+@copy ..\DRMEncoderPlugin\OMADRMEncManagerFactory\Build\Win32\VC7\Release\OMADRMEncManagerFactory.lib .\DRMPlugin\lib\win32\VC7\release
+@copy ..\DRMEncoderPlugin\OpenIPMPDRMEncManagerFactory\Build\Win32\VC7\Release\OpenIPMPDRMEncManagerFactory.lib .\DRMPlugin\lib\win32\VC7\release
+@copy ..\XMLFactory\Build\Win32\VC7\Release\XMLFactory.lib .\DRMPlugin\lib\win32\VC7\release
+@copy ..\PublicCryptoFactory\Build\Win32\VC7\Release\PublicCryptoFactory.lib .\DRMPlugin\lib\win32\VC7\release
+@copy ..\ThreadSyncFactory\Build\Win32\VC7\Release\ThreadSyncFactory.lib .\DRMPlugin\lib\win32\VC7\release
+@copy ..\DRMDecoderPlugin\ISMADRMDecManagerFactory\Build\Win32\VC7\Release\ISMADRMDecManagerFactory.lib .\DRMPlugin\lib\win32\VC7\release
+@copy ..\DRMDecoderPlugin\OMADRMDecManagerFactory\Build\Win32\VC7\Release\OMADRMDecManagerFactory.lib .\DRMPlugin\lib\win32\VC7\release
+@copy ..\DRMDecoderPlugin\OpenIPMPDRMDecManagerFactory\Build\Win32\VC7\Release\OpenIPMPDRMDecManagerFactory.lib .\DRMPlugin\lib\win32\VC7\release
+
+@ECHO Copying MPEG4 DRM plugins...
+
+@copy ..\MPEG4DRMPlugin\MPEG4SinfDRMPlugin\MPEG4SinfDRMEncoderPlugin\ISMAMPEG4SinfDRMEncryptor\Build\Win32\VC7\Release\ISMAMPEG4SinfDRMEncryptor.dll .\DRMPlugin\lib\win32\VC7\release
+@copy ..\MPEG4DRMPlugin\MPEG4SinfDRMPlugin\MPEG4SinfDRMEncoderPlugin\OMAMPEG4SinfDRMEncryptor\Build\Win32\VC7\Release\OMAMPEG4SinfDRMEncryptor.dll .\DRMPlugin\lib\win32\VC7\release
+@copy ..\MPEG4DRMPlugin\MPEG4SinfDRMPlugin\MPEG4SinfDRMEncoderPlugin\OpenIPMPMPEG4SinfDRMEncryptor\Build\Win32\VC7\Release\OpenIPMPMPEG4SinfDRMEncryptor.dll .\DRMPlugin\lib\win32\VC7\release
+@copy ..\MPEG4DRMPlugin\MPEG4SinfDRMPlugin\MPEG4SinfDRMEncoderPlugin\ISMAMPEG4SinfDRMEncryptor\Build\Win32\VC7\Release\ISMAMPEG4SinfDRMEncryptor.lib .\DRMPlugin\lib\win32\VC7\release
+@copy ..\MPEG4DRMPlugin\MPEG4SinfDRMPlugin\MPEG4SinfDRMEncoderPlugin\OMAMPEG4SinfDRMEncryptor\Build\Win32\VC7\Release\OMAMPEG4SinfDRMEncryptor.lib .\DRMPlugin\lib\win32\VC7\release
+@copy ..\MPEG4DRMPlugin\MPEG4SinfDRMPlugin\MPEG4SinfDRMEncoderPlugin\OpenIPMPMPEG4SinfDRMEncryptor\Build\Win32\VC7\Release\OpenIPMPMPEG4SinfDRMEncryptor.lib .\DRMPlugin\lib\win32\VC7\release
+@copy ..\MPEG4DRMPlugin\MPEG4SinfDRMPlugin\MPEG4SinfDRMDecoderPlugin\DecryptorHolder\Build\Win32\VC7\Release\DecryptorHolder.lib .\DRMPlugin\lib\win32\VC7\release
+
+@ECHO Done...
+
+
+@ECHO Copying MPEG2 DRM plugins...
+
+@copy ..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\MPEG2IPMPXDRMEncoderPlugin\MPEG2IPMPXDRMEncoder\Build\Win32\VC7\Release\MPEG2IPMPXDRMEncoder.dll .\DRMPlugin\lib\win32\VC7\release
+@copy ..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\MPEG2IPMPXDRMEncoderPlugin\OpenIPMPMPEG2IPMPXDRMEncryptor\Build\Win32\VC7\Release\OpenIPMPMPEG2IPMPXDRMEncryptor.dll .\DRMPlugin\lib\win32\VC7\release
+@copy ..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\MPEG2IPMPXDRMDecoderPlugin\MessageRouter\Build\Win32\VC7\Release\MessageRouter.dll .\DRMPlugin\lib\win32\VC7\release
+@copy ..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\MPEG2IPMPXDRMDecoderPlugin\OpenIPMPTool\Build\Win32\VC7\Release\OpenIPMPTool.dll .\DRMPlugin\lib\win32\VC7\release
+@copy ..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\MPEG2IPMPXDRMEncoderPlugin\MPEG2IPMPXDRMEncoder\Build\Win32\VC7\Release\MPEG2IPMPXDRMEncoder.lib .\DRMPlugin\lib\win32\VC7\release
+@copy ..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\MPEG2IPMPXDRMDecoderPlugin\MessageRouter\Build\Win32\VC7\Release\MessageRouter.lib .\DRMPlugin\lib\win32\VC7\release
+@copy ..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\MPEG2IPMPXDRMDecoderPlugin\OpenIPMPTool\Build\Win32\VC7\Release\OpenIPMPTool.lib .\DRMPlugin\lib\win32\VC7\release
+@copy ..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\IPMPControlInfo\Build\Win32\VC7\Release\IPMPControlInfo.lib .\DRMPlugin\lib\win32\VC7\release
+@copy ..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\IPMPCrypto\Build\Win32\VC7\Release\IPMPCrypto.lib .\DRMPlugin\lib\win32\VC7\release
+@copy ..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\IPMPData\Build\Win32\VC7\Release\IPMPData.lib .\DRMPlugin\lib\win32\VC7\release
+@copy ..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\MPEG2IPMPXDRMDecoderPlugin\DecoderIPMPControlInfo\Build\Win32\VC7\Release\DecoderIPMPControlInfo.lib .\DRMPlugin\lib\win32\VC7\release
+@copy ..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\MPEG2IPMPXDRMDecoderPlugin\DecoderIPMPData\Build\Win32\VC7\Release\DecoderIPMPData.lib .\DRMPlugin\lib\win32\VC7\release
+@copy ..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\MPEG2IPMPXDRMDecoderPlugin\IPMPControlInfoParser\Build\Win32\VC7\Release\IPMPControlInfoParser.lib .\DRMPlugin\lib\win32\VC7\release
+@copy ..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\MPEG2IPMPXDRMDecoderPlugin\IPMPDataParser\Build\Win32\VC7\Release\IPMPDataParser.lib .\DRMPlugin\lib\win32\VC7\release
+@copy ..\MPEG2DRMPlugin\MPEG2IPMPXDRMPlugin\MPEG2IPMPXDRMDecoderPlugin\IPMPToolManager\Build\Win32\VC7\Release\IPMPToolManager.lib .\DRMPlugin\lib\win32\VC7\release
+
+@ECHO Done...
+"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+		</Configuration>
+	</Configurations>
+	<References>
+	</References>
+	<Files>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>

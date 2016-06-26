@@ -1,0 +1,20 @@
+<KeyXml xmlns:enc="http://www.w3.org/2000/10/xmlenc" xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+	<ds:KeyInfo> 
+		<enc:EncryptedKey>
+			<enc:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-1_5/"/>
+			<ds:KeyInfo>
+				<ds:X509Data>
+					<ds:X509Certificate> 
+					</ds:X509Certificate>
+				</ds:X509Data>
+				<enc:CipherData>
+					<enc:CipherValue> 
+					</enc:CipherValue>
+				</enc:CipherData>
+			</ds:KeyInfo>
+		</enc:EncryptedKey>
+	</ds:KeyInfo>
+	<KeyAuxData> 
+		<enc:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#blowfish128/"/>
+	</KeyAuxData> 
+</KeyXml>

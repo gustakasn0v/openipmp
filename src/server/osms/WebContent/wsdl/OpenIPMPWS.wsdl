@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://service.app.server.osms.mutable.com" xmlns:impl="http://service.app.server.osms.mutable.com" xmlns:intf="http://service.app.server.osms.mutable.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<!--WSDL created by Apache Axis version: 1.2.1
+Built on Jun 14, 2005 (09:15:57 EDT)-->
+ <wsdl:types>
+  <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://service.app.server.osms.mutable.com">
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="ArrayOf_xsd_string">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="xsd:string[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="packageSecureContentWithMPEG_RELRequest">
+
+      <wsdl:part name="agentUserName" type="xsd:string"/>
+
+      <wsdl:part name="agentPassword" type="xsd:string"/>
+
+      <wsdl:part name="contentOwnerAppId" type="xsd:string"/>
+
+      <wsdl:part name="contentOwnerUserId" type="xsd:string"/>
+
+      <wsdl:part name="transactionID" type="xsd:string"/>
+
+      <wsdl:part name="mpegREL" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="pingResponse">
+
+   </wsdl:message>
+
+   <wsdl:message name="packageSecureContentWithParamsResponse">
+
+      <wsdl:part name="packageSecureContentWithParamsReturn" type="xsd:int"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="packageSecureContentWithMPEG_RELResponse">
+
+      <wsdl:part name="packageSecureContentWithMPEG_RELReturn" type="xsd:int"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="pingRequest">
+
+   </wsdl:message>
+
+   <wsdl:message name="packageSecureContentWithParamsForSingleUserRequest">
+
+      <wsdl:part name="agentUserName" type="xsd:string"/>
+
+      <wsdl:part name="agentPassword" type="xsd:string"/>
+
+      <wsdl:part name="sourceFileURL" type="xsd:string"/>
+
+      <wsdl:part name="destinationFileURL" type="xsd:string"/>
+
+      <wsdl:part name="contentOwnerAppId" type="xsd:string"/>
+
+      <wsdl:part name="contentOwnerUserId" type="xsd:string"/>
+
+      <wsdl:part name="transactionID" type="xsd:string"/>
+
+      <wsdl:part name="validityStartDate" type="xsd:string"/>
+
+      <wsdl:part name="validityEndDate" type="xsd:string"/>
+
+      <wsdl:part name="validityDays" type="xsd:int"/>
+
+      <wsdl:part name="validityPlaycount" type="xsd:int"/>
+
+      <wsdl:part name="grantUser" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="loginResponse">
+
+      <wsdl:part name="loginReturn" type="xsd:int"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="loginRequest">
+
+      <wsdl:part name="userName" type="xsd:string"/>
+
+      <wsdl:part name="passwd" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="packageSecureContentWithParamsForSingleUserResponse">
+
+      <wsdl:part name="packageSecureContentWithParamsForSingleUserReturn" type="xsd:int"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="packageSecureContentWithParamsRequest">
+
+      <wsdl:part name="agentUserName" type="xsd:string"/>
+
+      <wsdl:part name="agentPassword" type="xsd:string"/>
+
+      <wsdl:part name="sourceFileURL" type="xsd:string"/>
+
+      <wsdl:part name="destinationFileURL" type="xsd:string"/>
+
+      <wsdl:part name="contentOwnerAppId" type="xsd:string"/>
+
+      <wsdl:part name="contentOwnerUserId" type="xsd:string"/>
+
+      <wsdl:part name="transactionID" type="xsd:string"/>
+
+      <wsdl:part name="validityStartDate" type="xsd:string"/>
+
+      <wsdl:part name="validityEndDate" type="xsd:string"/>
+
+      <wsdl:part name="validityDays" type="xsd:int"/>
+
+      <wsdl:part name="validityPlaycount" type="xsd:int"/>
+
+      <wsdl:part name="grantUsers" type="impl:ArrayOf_xsd_string"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="OpenIPMPWS">
+
+      <wsdl:operation name="ping">
+
+         <wsdl:input name="pingRequest" message="impl:pingRequest"/>
+
+         <wsdl:output name="pingResponse" message="impl:pingResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="login" parameterOrder="userName passwd">
+
+         <wsdl:input name="loginRequest" message="impl:loginRequest"/>
+
+         <wsdl:output name="loginResponse" message="impl:loginResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="packageSecureContentWithParams" parameterOrder="agentUserName agentPassword sourceFileURL destinationFileURL contentOwnerAppId contentOwnerUserId transactionID validityStartDate validityEndDate validityDays validityPlaycount grantUsers">
+
+         <wsdl:input name="packageSecureContentWithParamsRequest" message="impl:packageSecureContentWithParamsRequest"/>
+
+         <wsdl:output name="packageSecureContentWithParamsResponse" message="impl:packageSecureContentWithParamsResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="packageSecureContentWithParamsForSingleUser" parameterOrder="agentUserName agentPassword sourceFileURL destinationFileURL contentOwnerAppId contentOwnerUserId transactionID validityStartDate validityEndDate validityDays validityPlaycount grantUser">
+
+         <wsdl:input name="packageSecureContentWithParamsForSingleUserRequest" message="impl:packageSecureContentWithParamsForSingleUserRequest"/>
+
+         <wsdl:output name="packageSecureContentWithParamsForSingleUserResponse" message="impl:packageSecureContentWithParamsForSingleUserResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="packageSecureContentWithMPEG_REL" parameterOrder="agentUserName agentPassword contentOwnerAppId contentOwnerUserId transactionID mpegREL">
+
+         <wsdl:input name="packageSecureContentWithMPEG_RELRequest" message="impl:packageSecureContentWithMPEG_RELRequest"/>
+
+         <wsdl:output name="packageSecureContentWithMPEG_RELResponse" message="impl:packageSecureContentWithMPEG_RELResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="OpenIPMPWSSoapBinding" type="impl:OpenIPMPWS">
+
+      <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="ping">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="pingRequest">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://service.app.server.osms.mutable.com"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="pingResponse">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://service.app.server.osms.mutable.com"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="login">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="loginRequest">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://service.app.server.osms.mutable.com"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="loginResponse">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://service.app.server.osms.mutable.com"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="packageSecureContentWithParams">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="packageSecureContentWithParamsRequest">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://service.app.server.osms.mutable.com"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="packageSecureContentWithParamsResponse">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://service.app.server.osms.mutable.com"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="packageSecureContentWithParamsForSingleUser">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="packageSecureContentWithParamsForSingleUserRequest">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://service.app.server.osms.mutable.com"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="packageSecureContentWithParamsForSingleUserResponse">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://service.app.server.osms.mutable.com"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="packageSecureContentWithMPEG_REL">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="packageSecureContentWithMPEG_RELRequest">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://service.app.server.osms.mutable.com"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="packageSecureContentWithMPEG_RELResponse">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://service.app.server.osms.mutable.com"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="OpenIPMPWSService">
+
+      <wsdl:port name="OpenIPMPWS" binding="impl:OpenIPMPWSSoapBinding">
+
+         <wsdlsoap:address location="http://localhost:8080/openipmp/services/OpenIPMPWS"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

@@ -1,0 +1,884 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://ws.server.osms.mutable.com" xmlns:impl="http://ws.server.osms.mutable.com" xmlns:intf="http://ws.server.osms.mutable.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns1="http://message.ws.server.osms.mutable.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<!--WSDL created by Apache Axis version: 1.2.1
+Built on Jun 14, 2005 (09:15:57 EDT)-->
+ <wsdl:types>
+  <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://message.ws.server.osms.mutable.com">
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="OsmsQueryRequest">
+    <sequence>
+     <element name="type" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="OsmsQueryResponse">
+    <sequence>
+     <element name="heading" nillable="true" type="xsd:string"/>
+     <element name="length" type="xsd:int"/>
+     <element name="results" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="OsmsUserLoginFault">
+    <sequence>
+     <element name="errorCode" nillable="true" type="xsd:int"/>
+     <element name="responseString" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="OsmsQueryFault">
+    <sequence>
+     <element name="errorCode" nillable="true" type="xsd:int"/>
+     <element name="responseString" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="OsmsLicenseRequest">
+    <sequence>
+     <element name="contentId" nillable="true" type="xsd:string"/>
+     <element name="rightsInfo" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="OsmsLicenseResponse">
+    <sequence>
+     <element name="license" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="OsmsLicenseFault">
+    <sequence>
+     <element name="errorCode" nillable="true" type="xsd:int"/>
+     <element name="responseString" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="OsmsUserLoginRequest">
+    <sequence>
+     <element name="password" nillable="true" type="xsd:string"/>
+     <element name="userName" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="OsmsUserLoginResponse">
+    <sequence>
+     <element name="responseString" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="OsmsUserLogoutRequest">
+    <sequence/>
+   </complexType>
+   <complexType name="OsmsUserLogoutResponse">
+    <sequence>
+     <element name="responseString" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="OsmsUserLogoutFault">
+    <sequence>
+     <element name="errorCode" nillable="true" type="xsd:int"/>
+     <element name="responseString" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="OsmsCreateUserRequest">
+    <sequence>
+     <element name="addressLine1" nillable="true" type="xsd:string"/>
+     <element name="addressLine2" nillable="true" type="xsd:string"/>
+     <element name="addressLine3" nillable="true" type="xsd:string"/>
+     <element name="altPhoneNumber" nillable="true" type="xsd:string"/>
+     <element name="city" nillable="true" type="xsd:string"/>
+     <element name="country" nillable="true" type="xsd:string"/>
+     <element name="emailAddress" nillable="true" type="xsd:string"/>
+     <element name="faxPhoneNumber" nillable="true" type="xsd:string"/>
+     <element name="firstName" nillable="true" type="xsd:string"/>
+     <element name="lastName" nillable="true" type="xsd:string"/>
+     <element name="mainPhoneNumber" nillable="true" type="xsd:string"/>
+     <element name="organizationName" nillable="true" type="xsd:string"/>
+     <element name="organizationUnit" nillable="true" type="xsd:string"/>
+     <element name="password" nillable="true" type="xsd:string"/>
+     <element name="salutation" nillable="true" type="xsd:string"/>
+     <element name="secretAnswer" nillable="true" type="xsd:string"/>
+     <element name="secretQuestion" nillable="true" type="xsd:string"/>
+     <element name="state" nillable="true" type="xsd:string"/>
+     <element name="suffix" nillable="true" type="xsd:string"/>
+     <element name="userName" nillable="true" type="xsd:string"/>
+     <element name="zipCode" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="OsmsCreateUserResponse">
+    <sequence>
+     <element name="responseString" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="OsmsCreateUserFault">
+    <sequence>
+     <element name="errorCode" nillable="true" type="xsd:int"/>
+     <element name="responseString" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="OsmsGetContentKeyRequest">
+    <sequence>
+     <element name="digitalItemInstanceId" nillable="true" type="xsd:string"/>
+     <element name="metadataType" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="OsmsGetContentKeyResponse">
+    <sequence>
+     <element name="auxDataXml" nillable="true" type="xsd:string"/>
+     <element name="keyXml" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="OsmsGetContentKeyFault">
+    <sequence>
+     <element name="errorCode" nillable="true" type="xsd:int"/>
+     <element name="responseString" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="OsmsRegisterContentAssignIdentifierRequest">
+    <sequence>
+     <element name="metadataType" nillable="true" type="xsd:string"/>
+     <element name="metadataXml" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="OsmsRegisterContentAssignIdentifierResponse">
+    <sequence>
+     <element name="metadataType" nillable="true" type="xsd:string"/>
+     <element name="metadataXml" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="OsmsRegisterContentAssignIdentifierFault">
+    <sequence>
+     <element name="errorCode" nillable="true" type="xsd:int"/>
+     <element name="responseString" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="OsmsRegisterContentExistingIdentifierRequest">
+    <sequence>
+     <element name="metadataType" nillable="true" type="xsd:string"/>
+     <element name="metadataXml" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="OsmsRegisterContentExistingIdentifierResponse">
+    <sequence>
+     <element name="responseString" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="OsmsRegisterContentExistingIdentifierFault">
+    <sequence>
+     <element name="errorCode" nillable="true" type="xsd:int"/>
+     <element name="responseString" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="OsmsRegisterDigitalItemInstanceRequest">
+    <sequence>
+     <element name="auxDataXml" nillable="true" type="xsd:string"/>
+     <element name="keyXml" nillable="true" type="xsd:string"/>
+     <element name="metadataType" nillable="true" type="xsd:string"/>
+     <element name="metadataXml" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="OsmsRegisterDigitalItemInstanceResponse">
+    <sequence>
+     <element name="auxDataXml" nillable="true" type="xsd:string"/>
+     <element name="metadataType" nillable="true" type="xsd:string"/>
+     <element name="metadataXml" nillable="true" type="xsd:string"/>
+     <element name="signatureXml" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="OsmsRegisterDigitalItemInstanceFault">
+    <sequence>
+     <element name="errorCode" nillable="true" type="xsd:int"/>
+     <element name="responseString" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="OsmsRegisterUserRequest">
+    <sequence>
+     <element name="emailAddress" nillable="true" type="xsd:string"/>
+     <element name="password" nillable="true" type="xsd:string"/>
+     <element name="passwordConfirm" nillable="true" type="xsd:string"/>
+     <element name="userName" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="OsmsRegisterUserResponse">
+    <sequence>
+     <element name="userName" nillable="true" type="xsd:string"/>
+     <element name="userSecurityStore" nillable="true" type="xsd:base64Binary"/>
+    </sequence>
+   </complexType>
+   <complexType name="OsmsRegisterUserFault">
+    <sequence>
+     <element name="errorCode" nillable="true" type="xsd:int"/>
+     <element name="responseString" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="OsmsRightsAuthorizationRequest">
+    <sequence>
+     <element name="contentId" nillable="true" type="xsd:string"/>
+     <element name="endDate" nillable="true" type="xsd:dateTime"/>
+     <element name="licenseType" nillable="true" type="xsd:string"/>
+     <element name="startDate" nillable="true" type="xsd:dateTime"/>
+     <element name="userName" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="OsmsRightsAuthorizationResponse">
+    <sequence>
+     <element name="transactionId" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="OsmsRightsAuthorizationFault">
+    <sequence>
+     <element name="errorCode" nillable="true" type="xsd:int"/>
+     <element name="responseString" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="userLoginResponse">
+
+      <wsdl:part name="userLoginReturn" type="tns1:OsmsUserLoginResponse"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="OsmsRegisterContentExistingIdentifierFault">
+
+      <wsdl:part name="fault" type="tns1:OsmsRegisterContentExistingIdentifierFault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="OsmsGetContentKeyFault">
+
+      <wsdl:part name="fault" type="tns1:OsmsGetContentKeyFault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="rightsAuthorizationResponse">
+
+      <wsdl:part name="rightsAuthorizationReturn" type="tns1:OsmsRightsAuthorizationResponse"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="registerUserRequest">
+
+      <wsdl:part name="msg" type="tns1:OsmsRegisterUserRequest"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getContentKeyRequest">
+
+      <wsdl:part name="msg" type="tns1:OsmsGetContentKeyRequest"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getContentKeyResponse">
+
+      <wsdl:part name="getContentKeyReturn" type="tns1:OsmsGetContentKeyResponse"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="OsmsLicenseFault">
+
+      <wsdl:part name="fault" type="tns1:OsmsLicenseFault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="OsmsRegisterUserFault">
+
+      <wsdl:part name="fault" type="tns1:OsmsRegisterUserFault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="OsmsUserLogoutFault">
+
+      <wsdl:part name="fault" type="tns1:OsmsUserLogoutFault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="OsmsQueryFault">
+
+      <wsdl:part name="fault" type="tns1:OsmsQueryFault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="OsmsUserLoginFault">
+
+      <wsdl:part name="fault" type="tns1:OsmsUserLoginFault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="userLogoutRequest">
+
+      <wsdl:part name="msg" type="tns1:OsmsUserLogoutRequest"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="OsmsRegisterDigitalItemInstanceFault">
+
+      <wsdl:part name="fault" type="tns1:OsmsRegisterDigitalItemInstanceFault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="createUserRequest">
+
+      <wsdl:part name="msg" type="tns1:OsmsCreateUserRequest"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="queryRequest">
+
+      <wsdl:part name="msg" type="tns1:OsmsQueryRequest"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="createUserResponse">
+
+      <wsdl:part name="createUserReturn" type="tns1:OsmsCreateUserResponse"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="registerDigitalItemInstanceResponse">
+
+      <wsdl:part name="registerDigitalItemInstanceReturn" type="tns1:OsmsRegisterDigitalItemInstanceResponse"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="OsmsRegisterContentAssignIdentifierFault">
+
+      <wsdl:part name="fault" type="tns1:OsmsRegisterContentAssignIdentifierFault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="userLogoutResponse">
+
+      <wsdl:part name="userLogoutReturn" type="tns1:OsmsUserLogoutResponse"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="licenseRequest">
+
+      <wsdl:part name="msg" type="tns1:OsmsLicenseRequest"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="registerContentAssignIdentifierRequest">
+
+      <wsdl:part name="msg" type="tns1:OsmsRegisterContentAssignIdentifierRequest"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="registerDigitalItemInstanceRequest">
+
+      <wsdl:part name="msg" type="tns1:OsmsRegisterDigitalItemInstanceRequest"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="registerContentExistingIdentifierResponse">
+
+      <wsdl:part name="registerContentExistingIdentifierReturn" type="tns1:OsmsRegisterContentExistingIdentifierResponse"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="userLoginRequest">
+
+      <wsdl:part name="msg" type="tns1:OsmsUserLoginRequest"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="queryResponse">
+
+      <wsdl:part name="queryReturn" type="tns1:OsmsQueryResponse"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="registerContentAssignIdentifierResponse">
+
+      <wsdl:part name="registerContentAssignIdentifierReturn" type="tns1:OsmsRegisterContentAssignIdentifierResponse"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="registerContentExistingIdentifierRequest">
+
+      <wsdl:part name="msg" type="tns1:OsmsRegisterContentExistingIdentifierRequest"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="rightsAuthorizationRequest">
+
+      <wsdl:part name="msg" type="tns1:OsmsRightsAuthorizationRequest"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="registerUserResponse">
+
+      <wsdl:part name="registerUserReturn" type="tns1:OsmsRegisterUserResponse"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="OsmsCreateUserFault">
+
+      <wsdl:part name="fault" type="tns1:OsmsCreateUserFault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="OsmsRightsAuthorizationFault">
+
+      <wsdl:part name="fault" type="tns1:OsmsRightsAuthorizationFault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="licenseResponse">
+
+      <wsdl:part name="licenseReturn" type="tns1:OsmsLicenseResponse"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="OsmsWebService">
+
+      <wsdl:operation name="query" parameterOrder="msg">
+
+         <wsdl:input name="queryRequest" message="impl:queryRequest"/>
+
+         <wsdl:output name="queryResponse" message="impl:queryResponse"/>
+
+         <wsdl:fault name="OsmsUserLoginFault" message="impl:OsmsUserLoginFault"/>
+
+         <wsdl:fault name="OsmsQueryFault" message="impl:OsmsQueryFault"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="license" parameterOrder="msg">
+
+         <wsdl:input name="licenseRequest" message="impl:licenseRequest"/>
+
+         <wsdl:output name="licenseResponse" message="impl:licenseResponse"/>
+
+         <wsdl:fault name="OsmsLicenseFault" message="impl:OsmsLicenseFault"/>
+
+         <wsdl:fault name="OsmsUserLoginFault" message="impl:OsmsUserLoginFault"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="userLogin" parameterOrder="msg">
+
+         <wsdl:input name="userLoginRequest" message="impl:userLoginRequest"/>
+
+         <wsdl:output name="userLoginResponse" message="impl:userLoginResponse"/>
+
+         <wsdl:fault name="OsmsUserLoginFault" message="impl:OsmsUserLoginFault"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="userLogout" parameterOrder="msg">
+
+         <wsdl:input name="userLogoutRequest" message="impl:userLogoutRequest"/>
+
+         <wsdl:output name="userLogoutResponse" message="impl:userLogoutResponse"/>
+
+         <wsdl:fault name="OsmsUserLoginFault" message="impl:OsmsUserLoginFault"/>
+
+         <wsdl:fault name="OsmsUserLogoutFault" message="impl:OsmsUserLogoutFault"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createUser" parameterOrder="msg">
+
+         <wsdl:input name="createUserRequest" message="impl:createUserRequest"/>
+
+         <wsdl:output name="createUserResponse" message="impl:createUserResponse"/>
+
+         <wsdl:fault name="OsmsCreateUserFault" message="impl:OsmsCreateUserFault"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getContentKey" parameterOrder="msg">
+
+         <wsdl:input name="getContentKeyRequest" message="impl:getContentKeyRequest"/>
+
+         <wsdl:output name="getContentKeyResponse" message="impl:getContentKeyResponse"/>
+
+         <wsdl:fault name="OsmsGetContentKeyFault" message="impl:OsmsGetContentKeyFault"/>
+
+         <wsdl:fault name="OsmsUserLoginFault" message="impl:OsmsUserLoginFault"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="registerContentAssignIdentifier" parameterOrder="msg">
+
+         <wsdl:input name="registerContentAssignIdentifierRequest" message="impl:registerContentAssignIdentifierRequest"/>
+
+         <wsdl:output name="registerContentAssignIdentifierResponse" message="impl:registerContentAssignIdentifierResponse"/>
+
+         <wsdl:fault name="OsmsRegisterContentAssignIdentifierFault" message="impl:OsmsRegisterContentAssignIdentifierFault"/>
+
+         <wsdl:fault name="OsmsUserLoginFault" message="impl:OsmsUserLoginFault"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="registerContentExistingIdentifier" parameterOrder="msg">
+
+         <wsdl:input name="registerContentExistingIdentifierRequest" message="impl:registerContentExistingIdentifierRequest"/>
+
+         <wsdl:output name="registerContentExistingIdentifierResponse" message="impl:registerContentExistingIdentifierResponse"/>
+
+         <wsdl:fault name="OsmsRegisterContentExistingIdentifierFault" message="impl:OsmsRegisterContentExistingIdentifierFault"/>
+
+         <wsdl:fault name="OsmsUserLoginFault" message="impl:OsmsUserLoginFault"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="registerDigitalItemInstance" parameterOrder="msg">
+
+         <wsdl:input name="registerDigitalItemInstanceRequest" message="impl:registerDigitalItemInstanceRequest"/>
+
+         <wsdl:output name="registerDigitalItemInstanceResponse" message="impl:registerDigitalItemInstanceResponse"/>
+
+         <wsdl:fault name="OsmsUserLoginFault" message="impl:OsmsUserLoginFault"/>
+
+         <wsdl:fault name="OsmsRegisterDigitalItemInstanceFault" message="impl:OsmsRegisterDigitalItemInstanceFault"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="registerUser" parameterOrder="msg">
+
+         <wsdl:input name="registerUserRequest" message="impl:registerUserRequest"/>
+
+         <wsdl:output name="registerUserResponse" message="impl:registerUserResponse"/>
+
+         <wsdl:fault name="OsmsRegisterUserFault" message="impl:OsmsRegisterUserFault"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="rightsAuthorization" parameterOrder="msg">
+
+         <wsdl:input name="rightsAuthorizationRequest" message="impl:rightsAuthorizationRequest"/>
+
+         <wsdl:output name="rightsAuthorizationResponse" message="impl:rightsAuthorizationResponse"/>
+
+         <wsdl:fault name="OsmsUserLoginFault" message="impl:OsmsUserLoginFault"/>
+
+         <wsdl:fault name="OsmsRightsAuthorizationFault" message="impl:OsmsRightsAuthorizationFault"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="OsmsWebServiceSoapBinding" type="impl:OsmsWebService">
+
+      <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="query">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="queryRequest">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="queryResponse">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="OsmsUserLoginFault">
+
+            <wsdlsoap:fault name="OsmsUserLoginFault" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="OsmsQueryFault">
+
+            <wsdlsoap:fault name="OsmsQueryFault" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="license">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="licenseRequest">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="licenseResponse">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="OsmsLicenseFault">
+
+            <wsdlsoap:fault name="OsmsLicenseFault" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="OsmsUserLoginFault">
+
+            <wsdlsoap:fault name="OsmsUserLoginFault" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="userLogin">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="userLoginRequest">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="userLoginResponse">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="OsmsUserLoginFault">
+
+            <wsdlsoap:fault name="OsmsUserLoginFault" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="userLogout">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="userLogoutRequest">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="userLogoutResponse">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="OsmsUserLoginFault">
+
+            <wsdlsoap:fault name="OsmsUserLoginFault" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="OsmsUserLogoutFault">
+
+            <wsdlsoap:fault name="OsmsUserLogoutFault" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createUser">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createUserRequest">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createUserResponse">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="OsmsCreateUserFault">
+
+            <wsdlsoap:fault name="OsmsCreateUserFault" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getContentKey">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getContentKeyRequest">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getContentKeyResponse">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="OsmsGetContentKeyFault">
+
+            <wsdlsoap:fault name="OsmsGetContentKeyFault" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="OsmsUserLoginFault">
+
+            <wsdlsoap:fault name="OsmsUserLoginFault" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="registerContentAssignIdentifier">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="registerContentAssignIdentifierRequest">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="registerContentAssignIdentifierResponse">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="OsmsRegisterContentAssignIdentifierFault">
+
+            <wsdlsoap:fault name="OsmsRegisterContentAssignIdentifierFault" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="OsmsUserLoginFault">
+
+            <wsdlsoap:fault name="OsmsUserLoginFault" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="registerContentExistingIdentifier">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="registerContentExistingIdentifierRequest">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="registerContentExistingIdentifierResponse">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="OsmsRegisterContentExistingIdentifierFault">
+
+            <wsdlsoap:fault name="OsmsRegisterContentExistingIdentifierFault" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="OsmsUserLoginFault">
+
+            <wsdlsoap:fault name="OsmsUserLoginFault" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="registerDigitalItemInstance">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="registerDigitalItemInstanceRequest">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="registerDigitalItemInstanceResponse">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="OsmsUserLoginFault">
+
+            <wsdlsoap:fault name="OsmsUserLoginFault" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="OsmsRegisterDigitalItemInstanceFault">
+
+            <wsdlsoap:fault name="OsmsRegisterDigitalItemInstanceFault" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="registerUser">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="registerUserRequest">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="registerUserResponse">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="OsmsRegisterUserFault">
+
+            <wsdlsoap:fault name="OsmsRegisterUserFault" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="rightsAuthorization">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="rightsAuthorizationRequest">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="rightsAuthorizationResponse">
+
+            <wsdlsoap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="OsmsUserLoginFault">
+
+            <wsdlsoap:fault name="OsmsUserLoginFault" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="OsmsRightsAuthorizationFault">
+
+            <wsdlsoap:fault name="OsmsRightsAuthorizationFault" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.server.osms.mutable.com"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="OsmsWebServiceService">
+
+      <wsdl:port name="OsmsWebService" binding="impl:OsmsWebServiceSoapBinding">
+
+         <wsdlsoap:address location="http://localhost:8080/openipmp/services/OsmsWebService"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

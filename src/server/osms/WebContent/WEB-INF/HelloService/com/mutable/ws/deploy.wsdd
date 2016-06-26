@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+
+
+  <!-- Services from HelloService WSDL service -->
+
+
+
+  <service name="Hello" provider="java:RPC" style="rpc" use="encoded">
+
+      <parameter name="wsdlTargetNamespace" value="http://ws.mutable.com"/>
+
+      <parameter name="wsdlServiceElement" value="HelloService"/>
+
+      <parameter name="wsdlServicePort" value="Hello"/>
+
+      <parameter name="className" value="com.mutable.ws.Hello"/>
+
+      <parameter name="wsdlPortType" value="Hello"/>
+
+      <parameter name="typeMappingVersion" value="1.2"/>
+
+      <operation xmlns:operNS="http://ws.mutable.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="hello" qname="operNS:hello" returnQName="helloReturn" returnType="rtns:string" soapAction="">
+
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"/>
+
+      </operation>
+
+      <parameter name="allowedMethods" value="hello"/>
+
+
+
+  </service>
+
+</deployment>

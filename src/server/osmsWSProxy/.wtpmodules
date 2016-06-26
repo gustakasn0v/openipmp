@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId">
+    <wb-module deploy-name="osmsWSProxy">
+        <module-type module-type-id="jst.web">
+            <version>2.4</version>
+            <property name="context-root" value="osmsWSProxy"/>
+            <property name="java-output-path" value="/bin/"/>
+        </module-type>
+        <wb-resource source-path="/JavaSource" deploy-path="/WEB-INF/classes"/>
+        <wb-resource source-path="/WebContent" deploy-path="/"/>
+    </wb-module>
+</project-modules>
+

@@ -1,0 +1,19 @@
+<databases>
+	<mySqlDriver>com.mysql.jdbc.Driver</mySqlDriver>
+	<mySqlPath>jdbc:mysql://localhost/OMADRM</mySqlPath>
+	<mySqlUser>omadrm</mySqlUser>
+	<mySqlPass>omadrm</mySqlPass>
+	<ri>
+		<context>RI_PRIVATE</context>
+		<riChain>RI_CERT_CHAIN</riChain>
+		<deviceCa>DEVICE_CA</deviceCa>
+		<url>localhost:8080</url>
+	</ri>
+	<registrationDatabase>
+		<deviceContexts>DEVICE_CONTEXT</deviceContexts>
+	</registrationDatabase>
+	<rightsDatabase>
+		<encKeys>CONTENTID2KEY</encKeys>
+		<rights>DEVICEID2CONTENTID2ROIDRIGHTS</rights>
+	</rightsDatabase>
+</databases>

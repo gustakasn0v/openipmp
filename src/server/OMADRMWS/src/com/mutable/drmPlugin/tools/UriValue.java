@@ -1,0 +1,60 @@
+/*
+ * LICENSE AND COPYRIGHT INFORMATION:
+ *
+ * The contents of this file are subject to the Mozilla Public
+ * License Version 1.1 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of
+ * the License at http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS
+ * IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+ * implied. See the License for the specific language governing
+ * rights and limitations under the License.
+ *
+ * The Initial Developer of the Original Code is Mutable, Inc.
+ * Portions created by Mutable, Inc. are
+ * Copyright (C) Mutable, Inc. 2002-2006.  All Rights Reserved.
+ * 
+ *
+ */
+package com.mutable.drmPlugin.tools;
+
+/**
+ * A StringValue holding a valid url.
+ * 
+ * 
+ *
+ */
+
+public class UriValue extends StringValue {
+
+	
+
+
+
+
+	/**
+	 * some validation might be in order here, but the validation provided by 
+	 * java.net.URI
+	 * seems to be too stringent for some strings popping up in OMADRM.
+	 * 
+	 */
+	public UriValue(String s) {
+		super(s);
+/*		TODO: provide reasonable validation
+ 		try {
+			URI uri = new URI(s);
+		} catch (Exception e) {
+			throw new IllegalArgumentException("illegal string for URI");
+		}
+*/
+	}
+	
+	public boolean equals(Object o) {
+		if (!UriValue.class.isInstance(o)) return false;
+		return toString().equals(((UriValue)o).toString());
+	}
+	
+	
+	
+}

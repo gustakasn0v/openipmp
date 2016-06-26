@@ -1,0 +1,19 @@
+<osmsTestConfig>
+	<testUser>
+		<username>testuser</username>
+	<password>openipmp</password>
+	<badUsername>badusername</badUsername>
+	</testUser>
+	<pkcsStorage>
+		<path>C:\localsecurity</path>
+	</pkcsStorage>
+	<ioFiles>
+		<inFile>C:\tmp\test30.mp4</inFile>
+		<outFile>C:\tmp\enc-test30.mp4</outFile>
+	<badInFile>C:\tmp\test30-238273428382232.mp4</badInFile>
+	<badOutFile>C:\tmp</badOutFile>
+	</ioFiles>
+	<openipmp>
+		<path>C:\jboss-4.0.2\openIPMP</path>
+	</openipmp>
+</osmsTestConfig>

@@ -1,0 +1,93 @@
+Microsoft Developer Studio Workspace File, Format Version 6.00
+# WARNING: DO NOT EDIT OR DELETE THIS WORKSPACE FILE!
+
+###############################################################################
+
+Project: "RELExLimitService"="..\RELExLimitService\RELExLimitService.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/XrML Reference Implementations/OpenIPMP/Client/RELExLimitService", GGJHAAAA
+    ..\relexlimitservice
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "RELLicAuthz"="..\RELLicAuthz\RELLicAuthz.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/XrML Reference Implementations/OpenIPMP/Client/RELLicAuthz", HGJHAAAA
+    ..\RELLicAuthz
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "RELLicAuthzDriver"="..\RELLicAuthzDriver\RELLicAuthzDriver.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/XrML Reference Implementations/OpenIPMP/Client/RELLicAuthzDriver", KGJHAAAA
+    ..\RELLicAuthzDriver
+    end source code control
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name RELLicAuthz
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "RELLicAuthzWinGUI"="..\RELLicAuthzWinGUI\RELLicAuthzWinGUI.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/XrML Reference Implementations/OpenIPMP/Client/RELLicAuthzWinGUI", LGJHAAAA
+    ..\RELLicAuthzWinGUI
+    end source code control
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name RELLicAuthz
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name RELLicAuthzDriver
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name RELExLimitService
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Global:
+
+Package=<5>
+{{{
+}}}
+
+Package=<3>
+{{{
+}}}
+
+###############################################################################
+

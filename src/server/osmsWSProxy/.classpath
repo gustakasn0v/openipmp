@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="CVS/**" output=".deployables/osmsWSProxy/WEB-INF/classes" kind="src" path="JavaSource"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container/osmsWSProxy"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v5.0"/>
+	<classpathentry sourcepath="ECLIPSE_HOME/plugins/org.eclipse.jdt.source_3.1.0/src/org.junit_3.8.1/junitsrc.zip" kind="var" path="JUNIT_HOME/junit.jar"/>
+	<classpathentry excluding="CVS/**" kind="src" path="TestSource"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

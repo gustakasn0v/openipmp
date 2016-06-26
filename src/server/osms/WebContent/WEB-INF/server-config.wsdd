@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+ <globalConfiguration>
+  <parameter name="sendMultiRefs" value="false"/>
+  <parameter name="disablePrettyXML" value="true"/>
+  <parameter name="adminPassword" value="admin"/>
+  <parameter name="attachments.Directory" value="D:\tools\openipmp2\src\server\osms\.deployables\openipmp\WEB-INF\attachments"/>
+  <parameter name="dotNetSoapEncFix" value="true"/>
+  <parameter name="enableNamespacePrefixOptimization" value="true"/>
+  <parameter name="sendXMLDeclaration" value="true"/>
+  <parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
+  <parameter name="sendXsiTypes" value="true"/>
+  <requestFlow>
+   <handler type="java:org.apache.axis.handlers.JWSHandler">
+    <parameter name="scope" value="session"/>
+   </handler>
+   <handler type="java:org.apache.axis.handlers.JWSHandler">
+    <parameter name="scope" value="request"/>
+    <parameter name="extension" value=".jwr"/>
+   </handler>
+  </requestFlow>
+ </globalConfiguration>
+ <handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
+ <handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper"/>
+ <handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
+ <service name="Encoder" provider="java:RPC">
+  <operation name="encode" qname="ns1:encode" returnQName="encodeReturn" returnType="xsd:int" soapAction="" xmlns:ns1="http://ws.mutable.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <parameter name="username" type="xsd:string"/>
+   <parameter name="password" type="xsd:string"/>
+   <parameter name="inFile" type="xsd:string"/>
+   <parameter name="outFile" type="xsd:string"/>
+  </operation>
+  <parameter name="allowedMethods" value="encode"/>
+  <parameter name="wsdlPortType" value="Encoder"/>
+  <parameter name="typeMappingVersion" value="1.2"/>
+  <parameter name="wsdlServicePort" value="Encoder"/>
+  <parameter name="className" value="com.mutable.ws.Encoder"/>
+  <parameter name="wsdlTargetNamespace" value="http://ws.mutable.com"/>
+  <parameter name="wsdlServiceElement" value="EncoderService"/>
+ </service>
+ <service name="AdminService" provider="java:MSG">
+  <parameter name="allowedMethods" value="AdminService"/>
+  <parameter name="enableRemoteAdmin" value="true"/>
+  <parameter name="className" value="org.apache.axis.utils.Admin"/>
+  <namespace>http://xml.apache.org/axis/wsdd/</namespace>
+ </service>
+ <service name="ExecCommand" provider="java:RPC">
+  <operation name="exec" qname="ns2:exec" returnQName="execReturn" returnType="xsd:string" soapAction="" xmlns:ns2="http://ws.mutable.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <parameter name="cmd" type="xsd:string"/>
+  </operation>
+  <parameter name="allowedMethods" value="exec"/>
+  <parameter name="typeMappingVersion" value="1.2"/>
+  <parameter name="wsdlPortType" value="ExecCommand"/>
+  <parameter name="className" value="com.mutable.ws.ExecCommand"/>
+  <parameter name="wsdlServicePort" value="ExecCommand"/>
+  <parameter name="wsdlTargetNamespace" value="http://ws.mutable.com"/>
+  <parameter name="wsdlServiceElement" value="ExecCommandService"/>
+ </service>
+ <service name="UserLoginTest" provider="java:RPC">
+  <operation name="login" qname="ns3:login" returnQName="loginReturn" returnType="xsd:string" soapAction="" xmlns:ns3="http://ws.mutable.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <parameter name="userName" type="xsd:string"/>
+   <parameter name="password" type="xsd:string"/>
+  </operation>
+  <parameter name="allowedMethods" value="login"/>
+  <parameter name="typeMappingVersion" value="1.2"/>
+  <parameter name="wsdlPortType" value="UserLoginTest"/>
+  <parameter name="className" value="com.mutable.ws.UserLoginTest"/>
+  <parameter name="wsdlServicePort" value="UserLoginTest"/>
+  <parameter name="wsdlTargetNamespace" value="http://ws.mutable.com"/>
+  <parameter name="wsdlServiceElement" value="UserLoginTestService"/>
+ </service>
+ <service name="Version" provider="java:RPC">
+  <parameter name="allowedMethods" value="getVersion"/>
+  <parameter name="className" value="org.apache.axis.Version"/>
+ </service>
+ <service name="Hello" provider="java:RPC">
+  <operation name="hello" qname="ns4:hello" returnQName="helloReturn" returnType="xsd:string" soapAction="" xmlns:ns4="http://ws.mutable.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <parameter name="name" type="xsd:string"/>
+  </operation>
+  <parameter name="allowedMethods" value="hello"/>
+  <parameter name="wsdlPortType" value="Hello"/>
+  <parameter name="typeMappingVersion" value="1.2"/>
+  <parameter name="wsdlServicePort" value="Hello"/>
+  <parameter name="className" value="com.mutable.ws.Hello"/>
+  <parameter name="wsdlTargetNamespace" value="http://ws.mutable.com"/>
+  <parameter name="wsdlServiceElement" value="HelloService"/>
+ </service>
+ <service name="OsmsWebService" provider="java:RPC">
+  <operation name="query" qname="ns6:query" returnQName="queryReturn" returnType="ns5:OsmsQueryResponse" soapAction="" xmlns:ns5="http://message.ws.server.osms.mutable.com" xmlns:ns6="http://ws.server.osms.mutable.com">
+   <parameter name="msg" type="ns5:OsmsQueryRequest"/>
+   <fault class="com.mutable.osms.server.ws.message.OsmsUserLoginFault" qname="ns6:fault" type="ns5:OsmsUserLoginFault"/>
+   <fault class="com.mutable.osms.server.ws.message.OsmsQueryFault" qname="ns6:fault" type="ns5:OsmsQueryFault"/>
+  </operation>
+  <operation name="license" qname="ns8:license" returnQName="licenseReturn" returnType="ns7:OsmsLicenseResponse" soapAction="" xmlns:ns7="http://message.ws.server.osms.mutable.com" xmlns:ns8="http://ws.server.osms.mutable.com">
+   <parameter name="msg" type="ns7:OsmsLicenseRequest"/>
+   <fault class="com.mutable.osms.server.ws.message.OsmsLicenseFault" qname="ns8:fault" type="ns7:OsmsLicenseFault"/>
+   <fault class="com.mutable.osms.server.ws.message.OsmsUserLoginFault" qname="ns8:fault" type="ns7:OsmsUserLoginFault"/>
+  </operation>
+  <operation name="userLogin" qname="ns10:userLogin" returnQName="userLoginReturn" returnType="ns9:OsmsUserLoginResponse" soapAction="" xmlns:ns10="http://ws.server.osms.mutable.com" xmlns:ns9="http://message.ws.server.osms.mutable.com">
+   <parameter name="msg" type="ns9:OsmsUserLoginRequest"/>
+   <fault class="com.mutable.osms.server.ws.message.OsmsUserLoginFault" qname="ns10:fault" type="ns9:OsmsUserLoginFault"/>
+  </operation>
+  <operation name="userLogout" qname="ns12:userLogout" returnQName="userLogoutReturn" returnType="ns11:OsmsUserLogoutResponse" soapAction="" xmlns:ns11="http://message.ws.server.osms.mutable.com" xmlns:ns12="http://ws.server.osms.mutable.com">
+   <parameter name="msg" type="ns11:OsmsUserLogoutRequest"/>
+   <fault class="com.mutable.osms.server.ws.message.OsmsUserLoginFault" qname="ns12:fault" type="ns11:OsmsUserLoginFault"/>
+   <fault class="com.mutable.osms.server.ws.message.OsmsUserLogoutFault" qname="ns12:fault" type="ns11:OsmsUserLogoutFault"/>
+  </operation>
+  <operation name="createUser" qname="ns14:createUser" returnQName="createUserReturn" returnType="ns13:OsmsCreateUserResponse" soapAction="" xmlns:ns13="http://message.ws.server.osms.mutable.com" xmlns:ns14="http://ws.server.osms.mutable.com">
+   <parameter name="msg" type="ns13:OsmsCreateUserRequest"/>
+   <fault class="com.mutable.osms.server.ws.message.OsmsCreateUserFault" qname="ns14:fault" type="ns13:OsmsCreateUserFault"/>
+  </operation>
+  <operation name="getContentKey" qname="ns16:getContentKey" returnQName="getContentKeyReturn" returnType="ns15:OsmsGetContentKeyResponse" soapAction="" xmlns:ns15="http://message.ws.server.osms.mutable.com" xmlns:ns16="http://ws.server.osms.mutable.com">
+   <parameter name="msg" type="ns15:OsmsGetContentKeyRequest"/>
+   <fault class="com.mutable.osms.server.ws.message.OsmsGetContentKeyFault" qname="ns16:fault" type="ns15:OsmsGetContentKeyFault"/>
+   <fault class="com.mutable.osms.server.ws.message.OsmsUserLoginFault" qname="ns16:fault" type="ns15:OsmsUserLoginFault"/>
+  </operation>
+  <operation name="registerContentAssignIdentifier" qname="ns18:registerContentAssignIdentifier" returnQName="registerContentAssignIdentifierReturn" returnType="ns17:OsmsRegisterContentAssignIdentifierResponse" soapAction="" xmlns:ns17="http://message.ws.server.osms.mutable.com" xmlns:ns18="http://ws.server.osms.mutable.com">
+   <parameter name="msg" type="ns17:OsmsRegisterContentAssignIdentifierRequest"/>
+   <fault class="com.mutable.osms.server.ws.message.OsmsRegisterContentAssignIdentifierFault" qname="ns18:fault" type="ns17:OsmsRegisterContentAssignIdentifierFault"/>
+   <fault class="com.mutable.osms.server.ws.message.OsmsUserLoginFault" qname="ns18:fault" type="ns17:OsmsUserLoginFault"/>
+  </operation>
+  <operation name="registerContentExistingIdentifier" qname="ns20:registerContentExistingIdentifier" returnQName="registerContentExistingIdentifierReturn" returnType="ns19:OsmsRegisterContentExistingIdentifierResponse" soapAction="" xmlns:ns19="http://message.ws.server.osms.mutable.com" xmlns:ns20="http://ws.server.osms.mutable.com">
+   <parameter name="msg" type="ns19:OsmsRegisterContentExistingIdentifierRequest"/>
+   <fault class="com.mutable.osms.server.ws.message.OsmsUserLoginFault" qname="ns20:fault" type="ns19:OsmsUserLoginFault"/>
+   <fault class="com.mutable.osms.server.ws.message.OsmsRegisterContentExistingIdentifierFault" qname="ns20:fault" type="ns19:OsmsRegisterContentExistingIdentifierFault"/>
+  </operation>
+  <operation name="registerDigitalItemInstance" qname="ns22:registerDigitalItemInstance" returnQName="registerDigitalItemInstanceReturn" returnType="ns21:OsmsRegisterDigitalItemInstanceResponse" soapAction="" xmlns:ns21="http://message.ws.server.osms.mutable.com" xmlns:ns22="http://ws.server.osms.mutable.com">
+   <parameter name="msg" type="ns21:OsmsRegisterDigitalItemInstanceRequest"/>
+   <fault class="com.mutable.osms.server.ws.message.OsmsUserLoginFault" qname="ns22:fault" type="ns21:OsmsUserLoginFault"/>
+   <fault class="com.mutable.osms.server.ws.message.OsmsRegisterDigitalItemInstanceFault" qname="ns22:fault" type="ns21:OsmsRegisterDigitalItemInstanceFault"/>
+  </operation>
+  <operation name="registerUser" qname="ns24:registerUser" returnQName="registerUserReturn" returnType="ns23:OsmsRegisterUserResponse" soapAction="" xmlns:ns23="http://message.ws.server.osms.mutable.com" xmlns:ns24="http://ws.server.osms.mutable.com">
+   <parameter name="msg" type="ns23:OsmsRegisterUserRequest"/>
+   <fault class="com.mutable.osms.server.ws.message.OsmsRegisterUserFault" qname="ns24:fault" type="ns23:OsmsRegisterUserFault"/>
+  </operation>
+  <operation name="rightsAuthorization" qname="ns26:rightsAuthorization" returnQName="rightsAuthorizationReturn" returnType="ns25:OsmsRightsAuthorizationResponse" soapAction="" xmlns:ns25="http://message.ws.server.osms.mutable.com" xmlns:ns26="http://ws.server.osms.mutable.com">
+   <parameter name="msg" type="ns25:OsmsRightsAuthorizationRequest"/>
+   <fault class="com.mutable.osms.server.ws.message.OsmsUserLoginFault" qname="ns26:fault" type="ns25:OsmsUserLoginFault"/>
+   <fault class="com.mutable.osms.server.ws.message.OsmsRightsAuthorizationFault" qname="ns26:fault" type="ns25:OsmsRightsAuthorizationFault"/>
+  </operation>
+  <parameter name="allowedMethods" value="license registerContentAssignIdentifier query registerContentExistingIdentifier userLogin getContentKey rightsAuthorization userLogout registerUser createUser registerDigitalItemInstance"/>
+  <parameter name="typeMappingVersion" value="1.2"/>
+  <parameter name="wsdlPortType" value="OsmsWebService"/>
+  <parameter name="className" value="com.mutable.osms.server.ws.OsmsWebService"/>
+  <parameter name="wsdlServicePort" value="OsmsWebService"/>
+  <parameter name="wsdlTargetNamespace" value="http://ws.server.osms.mutable.com"/>
+  <parameter name="wsdlServiceElement" value="OsmsWebServiceService"/>
+  <parameter name="schemaUnqualified" value="http://message.ws.server.osms.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns27:OsmsUserLogoutFault" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.osms.server.ws.message.OsmsUserLogoutFault" xmlns:ns27="http://message.ws.server.osms.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns28:OsmsUserLoginFault" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.osms.server.ws.message.OsmsUserLoginFault" xmlns:ns28="http://message.ws.server.osms.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns29:OsmsCreateUserRequest" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.osms.server.ws.message.OsmsCreateUserRequest" xmlns:ns29="http://message.ws.server.osms.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns30:OsmsGetContentKeyResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.osms.server.ws.message.OsmsGetContentKeyResponse" xmlns:ns30="http://message.ws.server.osms.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns31:OsmsUserLogoutRequest" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.osms.server.ws.message.OsmsUserLogoutRequest" xmlns:ns31="http://message.ws.server.osms.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns32:OsmsRegisterUserRequest" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.osms.server.ws.message.OsmsRegisterUserRequest" xmlns:ns32="http://message.ws.server.osms.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns33:OsmsLicenseFault" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.osms.server.ws.message.OsmsLicenseFault" xmlns:ns33="http://message.ws.server.osms.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns34:OsmsRegisterContentExistingIdentifierResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.osms.server.ws.message.OsmsRegisterContentExistingIdentifierResponse" xmlns:ns34="http://message.ws.server.osms.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns35:OsmsCreateUserFault" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.osms.server.ws.message.OsmsCreateUserFault" xmlns:ns35="http://message.ws.server.osms.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns36:OsmsRightsAuthorizationFault" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.osms.server.ws.message.OsmsRightsAuthorizationFault" xmlns:ns36="http://message.ws.server.osms.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns37:OsmsRegisterDigitalItemInstanceFault" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.osms.server.ws.message.OsmsRegisterDigitalItemInstanceFault" xmlns:ns37="http://message.ws.server.osms.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns38:OsmsUserLoginRequest" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.osms.server.ws.message.OsmsUserLoginRequest" xmlns:ns38="http://message.ws.server.osms.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns39:OsmsRegisterContentAssignIdentifierResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.osms.server.ws.message.OsmsRegisterContentAssignIdentifierResponse" xmlns:ns39="http://message.ws.server.osms.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns40:OsmsRightsAuthorizationRequest" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.osms.server.ws.message.OsmsRightsAuthorizationRequest" xmlns:ns40="http://message.ws.server.osms.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns41:OsmsLicenseResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.osms.server.ws.message.OsmsLicenseResponse" xmlns:ns41="http://message.ws.server.osms.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns42:OsmsLicenseRequest" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.osms.server.ws.message.OsmsLicenseRequest" xmlns:ns42="http://message.ws.server.osms.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns43:OsmsRegisterContentAssignIdentifierFault" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.osms.server.ws.message.OsmsRegisterContentAssignIdentifierFault" xmlns:ns43="http://message.ws.server.osms.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns44:OsmsRegisterContentExistingIdentifierFault" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.osms.server.ws.message.OsmsRegisterContentExistingIdentifierFault" xmlns:ns44="http://message.ws.server.osms.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns45:OsmsUserLogoutResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.osms.server.ws.message.OsmsUserLogoutResponse" xmlns:ns45="http://message.ws.server.osms.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns46:OsmsRegisterContentExistingIdentifierRequest" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.osms.server.ws.message.OsmsRegisterContentExistingIdentifierRequest" xmlns:ns46="http://message.ws.server.osms.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns47:OsmsUserLoginResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.osms.server.ws.message.OsmsUserLoginResponse" xmlns:ns47="http://message.ws.server.osms.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns48:OsmsQueryFault" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.osms.server.ws.message.OsmsQueryFault" xmlns:ns48="http://message.ws.server.osms.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns49:OsmsRegisterUserFault" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.osms.server.ws.message.OsmsRegisterUserFault" xmlns:ns49="http://message.ws.server.osms.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns50:OsmsQueryRequest" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.osms.server.ws.message.OsmsQueryRequest" xmlns:ns50="http://message.ws.server.osms.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns51:OsmsRegisterUserResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.osms.server.ws.message.OsmsRegisterUserResponse" xmlns:ns51="http://message.ws.server.osms.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns52:OsmsCreateUserResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.osms.server.ws.message.OsmsCreateUserResponse" xmlns:ns52="http://message.ws.server.osms.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns53:OsmsRightsAuthorizationResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.osms.server.ws.message.OsmsRightsAuthorizationResponse" xmlns:ns53="http://message.ws.server.osms.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns54:OsmsQueryResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.osms.server.ws.message.OsmsQueryResponse" xmlns:ns54="http://message.ws.server.osms.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns55:OsmsRegisterDigitalItemInstanceResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.osms.server.ws.message.OsmsRegisterDigitalItemInstanceResponse" xmlns:ns55="http://message.ws.server.osms.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns56:OsmsRegisterContentAssignIdentifierRequest" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.osms.server.ws.message.OsmsRegisterContentAssignIdentifierRequest" xmlns:ns56="http://message.ws.server.osms.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns57:OsmsRegisterDigitalItemInstanceRequest" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.osms.server.ws.message.OsmsRegisterDigitalItemInstanceRequest" xmlns:ns57="http://message.ws.server.osms.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns58:OsmsGetContentKeyRequest" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.osms.server.ws.message.OsmsGetContentKeyRequest" xmlns:ns58="http://message.ws.server.osms.mutable.com"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns59:OsmsGetContentKeyFault" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.mutable.osms.server.ws.message.OsmsGetContentKeyFault" xmlns:ns59="http://message.ws.server.osms.mutable.com"/>
+ </service>
+ <service name="OpenIPMPWS" provider="java:RPC">
+  <operation name="ping" qname="ns60:ping" soapAction="" xmlns:ns60="http://service.app.server.osms.mutable.com"/>
+  <operation name="login" qname="ns61:login" returnQName="loginReturn" returnType="xsd:int" soapAction="" xmlns:ns61="http://service.app.server.osms.mutable.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <parameter name="userName" type="xsd:string"/>
+   <parameter name="passwd" type="xsd:string"/>
+  </operation>
+  <operation name="packageSecureContentWithParams" qname="ns62:packageSecureContentWithParams" returnQName="packageSecureContentWithParamsReturn" returnType="xsd:int" soapAction="" xmlns:ns62="http://service.app.server.osms.mutable.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <parameter name="agentUserName" type="xsd:string"/>
+   <parameter name="agentPassword" type="xsd:string"/>
+   <parameter name="sourceFileURL" type="xsd:string"/>
+   <parameter name="destinationFileURL" type="xsd:string"/>
+   <parameter name="contentOwnerAppId" type="xsd:string"/>
+   <parameter name="contentOwnerUserId" type="xsd:string"/>
+   <parameter name="transactionID" type="xsd:string"/>
+   <parameter name="validityStartDate" type="xsd:string"/>
+   <parameter name="validityEndDate" type="xsd:string"/>
+   <parameter name="validityDays" type="xsd:int"/>
+   <parameter name="validityPlaycount" type="xsd:int"/>
+   <parameter name="grantUsers" type="ns62:ArrayOf_xsd_string"/>
+  </operation>
+  <operation name="packageSecureContentWithParamsForSingleUser" qname="ns63:packageSecureContentWithParamsForSingleUser" returnQName="packageSecureContentWithParamsForSingleUserReturn" returnType="xsd:int" soapAction="" xmlns:ns63="http://service.app.server.osms.mutable.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <parameter name="agentUserName" type="xsd:string"/>
+   <parameter name="agentPassword" type="xsd:string"/>
+   <parameter name="sourceFileURL" type="xsd:string"/>
+   <parameter name="destinationFileURL" type="xsd:string"/>
+   <parameter name="contentOwnerAppId" type="xsd:string"/>
+   <parameter name="contentOwnerUserId" type="xsd:string"/>
+   <parameter name="transactionID" type="xsd:string"/>
+   <parameter name="validityStartDate" type="xsd:string"/>
+   <parameter name="validityEndDate" type="xsd:string"/>
+   <parameter name="validityDays" type="xsd:int"/>
+   <parameter name="validityPlaycount" type="xsd:int"/>
+   <parameter name="grantUser" type="xsd:string"/>
+  </operation>
+  <operation name="packageSecureContentWithMPEG_REL" qname="ns64:packageSecureContentWithMPEG_REL" returnQName="packageSecureContentWithMPEG_RELReturn" returnType="xsd:int" soapAction="" xmlns:ns64="http://service.app.server.osms.mutable.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <parameter name="agentUserName" type="xsd:string"/>
+   <parameter name="agentPassword" type="xsd:string"/>
+   <parameter name="contentOwnerAppId" type="xsd:string"/>
+   <parameter name="contentOwnerUserId" type="xsd:string"/>
+   <parameter name="transactionID" type="xsd:string"/>
+   <parameter name="mpegREL" type="xsd:string"/>
+  </operation>
+  <parameter name="allowedMethods" value="packageSecureContentWithParams login packageSecureContentWithMPEG_REL packageSecureContentWithParamsForSingleUser ping"/>
+  <parameter name="typeMappingVersion" value="1.2"/>
+  <parameter name="wsdlPortType" value="OpenIPMPWS"/>
+  <parameter name="className" value="com.mutable.osms.server.app.service.OpenIPMPWS"/>
+  <parameter name="wsdlServicePort" value="OpenIPMPWS"/>
+  <parameter name="wsdlTargetNamespace" value="http://service.app.server.osms.mutable.com"/>
+  <parameter name="wsdlServiceElement" value="OpenIPMPWSService"/>
+  <parameter name="schemaUnqualified" value="http://service.app.server.osms.mutable.com"/>
+  <arrayMapping innerType="xsd:string" languageSpecificType="java:java.lang.String[]" qname="ns65:ArrayOf_xsd_string" xmlns:ns65="http://service.app.server.osms.mutable.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+ </service>
+ <service name="OsmsConfig" provider="java:RPC">
+  <operation name="getServerPort" qname="ns66:getServerPort" returnQName="getServerPortReturn" returnType="xsd:string" soapAction="" xmlns:ns66="http://ws.mutable.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <operation name="getRightsHostPort" qname="ns67:getRightsHostPort" returnQName="getRightsHostPortReturn" returnType="xsd:string" soapAction="" xmlns:ns67="http://ws.mutable.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <operation name="getRightsHostUrl" qname="ns68:getRightsHostUrl" returnQName="getRightsHostUrlReturn" returnType="xsd:string" soapAction="" xmlns:ns68="http://ws.mutable.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <parameter name="allowedMethods" value="getServerPort getRightsHostPort getRightsHostUrl"/>
+  <parameter name="wsdlPortType" value="OsmsConfig"/>
+  <parameter name="typeMappingVersion" value="1.2"/>
+  <parameter name="wsdlServicePort" value="OsmsConfig"/>
+  <parameter name="className" value="com.mutable.ws.OsmsConfig"/>
+  <parameter name="wsdlTargetNamespace" value="http://ws.mutable.com"/>
+  <parameter name="wsdlServiceElement" value="OsmsConfigService"/>
+ </service>
+ <transport name="http">
+  <requestFlow>
+   <handler type="URLMapper"/>
+   <handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler"/>
+  </requestFlow>
+  <parameter name="qs:list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <parameter name="qs:wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+  <parameter name="qs.list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <parameter name="qs.method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <parameter name="qs:method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <parameter name="qs.wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+ </transport>
+ <transport name="local">
+  <responseFlow>
+   <handler type="LocalResponder"/>
+  </responseFlow>
+ </transport>
+</deployment>
