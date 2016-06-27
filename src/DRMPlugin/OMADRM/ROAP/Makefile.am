@@ -6,4 +6,4 @@ libROAP_a_SOURCES = ROAPMessages.h ROAPMessages.cpp ROAPImport.h ROAPImport.cpp 
 
 INCLUDES = -I../../include
 
-AM_CXXFLAGS = -DLINUX
+AM_CXXFLAGS = -DLINUX -fPIC

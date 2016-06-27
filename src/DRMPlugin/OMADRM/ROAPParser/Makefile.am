@@ -6,4 +6,4 @@ libROAPParser_a_SOURCES = ROAPParser.h ROAPParser.cpp
 
 INCLUDES = -I../../include -I../ROAP
 
-AM_CXXFLAGS = -DLINUX
+AM_CXXFLAGS = -DLINUX -fPIC
