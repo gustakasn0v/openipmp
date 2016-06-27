@@ -37,7 +37,7 @@ public:
 		if (data == NULL)
 			return "";
 		static char iStr[64];
-		sprintf(iStr, "%d", (int)data);
+		sprintf(iStr, "%p", (intptr_t)data);
 		return iStr;
 	}
 

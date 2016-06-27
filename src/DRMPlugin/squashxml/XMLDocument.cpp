@@ -342,7 +342,10 @@ int XMLDocument::getInteger(char* path, DataTypeAttribute** dtAttributes)
 {
 	static DataTypeInt dtInt;
   char* tmp = getValue(mRootNode, path, dtAttributes);
-	int ret = (int)dtInt.decode(tmp);
+	// BE CAREFUL WITH THIS! 
+	// THIS CAN BREAK 64-bit compatibility!
+	void* ptr = dtInt.decode(tmp);
+	int ret = *((int*)&ptr);
   delete[] tmp;
   return ret;
 }
