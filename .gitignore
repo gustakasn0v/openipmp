@@ -1,0 +1,11 @@
+# Java binary files
+*.class
+
+# Ant build dirs
+**/build
+
+# Temporary build directories
+**/tmp
+
+# Reference documentation files
+**/dist
