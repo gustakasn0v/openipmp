@@ -1,14 +1,17 @@
+// twofish.h - written and placed in the public domain by Wei Dai
+
+//! \file twofish.h
+//! \brief Classes for the Twofish block cipher
+
 #ifndef CRYPTOPP_TWOFISH_H
 #define CRYPTOPP_TWOFISH_H
-
-/** \file
-*/
 
 #include "seckey.h"
 #include "secblock.h"
 
 NAMESPACE_BEGIN(CryptoPP)
 
+//! _
 struct Twofish_Info : public FixedBlockSize<16>, public VariableKeyLength<16, 0, 32>, FixedRounds<16>
 {
 	static const char *StaticAlgorithmName() {return "Twofish";}
@@ -20,7 +23,7 @@ class Twofish : public Twofish_Info, public BlockCipherDocumentation
 	class CRYPTOPP_NO_VTABLE Base : public BlockCipherImpl<Twofish_Info>
 	{
 	public:
-		void UncheckedSetKey(CipherDir direction, const byte *userKey, unsigned int length);
+		void UncheckedSetKey(const byte *userKey, unsigned int length, const NameValuePairs &params);
 
 	protected:
 		static word32 h0(word32 x, const word32 *key, unsigned int kLen);
@@ -30,7 +33,7 @@ class Twofish : public Twofish_Info, public BlockCipherDocumentation
 		static const word32 mds[4][256];
 
 		FixedSizeSecBlock<word32, 40> m_k;
-		FixedSizeSecBlock<word32[256], 4> m_s;
+		FixedSizeSecBlock<word32, 4*256> m_s;
 	};
 
 	class CRYPTOPP_NO_VTABLE Enc : public Base

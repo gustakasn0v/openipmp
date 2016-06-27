@@ -2,13 +2,18 @@
 #define CRYPTOPP_VALIDATE_H
 
 #include "cryptlib.h"
-#include "randpool.h"
 
 bool ValidateAll(bool thorough);
 bool TestSettings();
 bool TestOS_RNG();
-bool ValidateBaseCode();
+bool TestAutoSeeded();
 
+#if (CRYPTOPP_BOOL_X86 || CRYPTOPP_BOOL_X32 || CRYPTOPP_BOOL_X64)
+bool TestRDRAND();
+bool TestRDSEED();
+#endif
+
+bool ValidateBaseCode();
 bool ValidateCRC32();
 bool ValidateAdler32();
 bool ValidateMD2();
@@ -16,19 +21,17 @@ bool ValidateMD4();
 bool ValidateMD5();
 bool ValidateSHA();
 bool ValidateSHA2();
-bool ValidateHAVAL();
 bool ValidateTiger();
 bool ValidateRIPEMD();
 bool ValidatePanama();
 bool ValidateWhirlpool();
 
-bool ValidateMD5MAC();
 bool ValidateHMAC();
-bool ValidateXMACC();
 bool ValidateTTMAC();
 
 bool ValidateCipherModes();
 bool ValidatePBKDF();
+bool ValidateHKDF();
 
 bool ValidateDES();
 bool ValidateIDEA();
@@ -52,6 +55,12 @@ bool ValidateTwofish();
 bool ValidateSerpent();
 bool ValidateSHACAL2();
 bool ValidateCamellia();
+bool ValidateSalsa();
+bool ValidateSosemanuk();
+bool ValidateVMAC();
+bool ValidateCCM();
+bool ValidateGCM();
+bool ValidateCMAC();
 
 bool ValidateBBS();
 bool ValidateDH();
@@ -73,6 +82,19 @@ bool ValidateEC2N();
 bool ValidateECDSA();
 bool ValidateESIGN();
 
-CryptoPP::RandomPool & GlobalRNG();
+#if !defined(NDEBUG)
+bool TestPolynomialMod2();
+#endif
+
+// Coverity findings
+template <class T, bool NON_NEGATIVE>
+T StringToValue(const std::string& str);
+template<>
+int StringToValue<int, true>(const std::string& str);
+
+// Functions that need a RNG; uses AES inf CFB mode with Seed.
+CryptoPP::RandomNumberGenerator & GlobalRNG();
+
+bool RunTestDataFile(const char *filename, const CryptoPP::NameValuePairs &overrideParameters=CryptoPP::g_nullNameValuePairs, bool thorough=true);
 
 #endif

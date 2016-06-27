@@ -1,18 +1,21 @@
+// rw.h - written and placed in the public domain by Wei Dai
+
+//! \file rw.h
+//! \brief Classes for Rabin-Williams signature schemes
+//! \details Rabin-Williams signature schemes as defined in IEEE P1363.
+
 #ifndef CRYPTOPP_RW_H
 #define CRYPTOPP_RW_H
 
-/** \file
-	This file contains classes that implement the
-	Rabin-Williams signature schemes as defined in IEEE P1363.
-*/
 
+#include "cryptlib.h"
+#include "pubkey.h"
 #include "integer.h"
-#include "pssr.h"
 
 NAMESPACE_BEGIN(CryptoPP)
 
-//! .
-class RWFunction : virtual public TrapdoorFunction, public PublicKey
+//! _
+class CRYPTOPP_DLL RWFunction : public TrapdoorFunction, public PublicKey
 {
 	typedef RWFunction ThisClass;
 
@@ -22,6 +25,11 @@ public:
 
 	void BERDecode(BufferedTransformation &bt);
 	void DEREncode(BufferedTransformation &bt) const;
+
+	void Save(BufferedTransformation &bt) const
+		{DEREncode(bt);}
+	void Load(BufferedTransformation &bt)
+		{BERDecode(bt);}
 
 	Integer ApplyFunction(const Integer &x) const;
 	Integer PreimageBound() const {return ++(m_n>>1);}
@@ -38,8 +46,8 @@ protected:
 	Integer m_n;
 };
 
-//! .
-class InvertibleRWFunction : public RWFunction, public TrapdoorFunctionInverse, public PrivateKey
+//! _
+class CRYPTOPP_DLL InvertibleRWFunction : public RWFunction, public TrapdoorFunctionInverse, public PrivateKey
 {
 	typedef InvertibleRWFunction ThisClass;
 
@@ -52,6 +60,11 @@ public:
 
 	void BERDecode(BufferedTransformation &bt);
 	void DEREncode(BufferedTransformation &bt) const;
+
+	void Save(BufferedTransformation &bt) const
+		{DEREncode(bt);}
+	void Load(BufferedTransformation &bt)
+		{BERDecode(bt);}
 
 	Integer CalculateInverse(RandomNumberGenerator &rng, const Integer &x) const;
 
@@ -74,28 +87,7 @@ protected:
 	Integer m_p, m_q, m_u;
 };
 
-//! .
-class EMSA2Pad : public EMSA2HashIdLookup<PK_DeterministicSignatureMessageEncodingMethod>
-{
-public:
-	static const char *StaticAlgorithmName() {return "EMSA2";}
-	
-	unsigned int MaxUnpaddedLength(unsigned int paddedLength) const {return (paddedLength+1)/8-2;}
-
-	void ComputeMessageRepresentative(RandomNumberGenerator &rng, 
-		const byte *recoverableMessage, unsigned int recoverableMessageLength,
-		HashTransformation &hash, HashIdentifier hashIdentifier, bool messageEmpty,
-		byte *representative, unsigned int representativeBitLength) const;
-};
-
-//! EMSA2, for use with RW
-/*! See pssr.h for a list of hash functions supported by this signature standard. */
-struct P1363_EMSA2 : public SignatureStandard
-{
-	typedef EMSA2Pad SignatureMessageEncodingMethod;
-};
-
-//! .
+//! RW
 struct RW
 {
 	static std::string StaticAlgorithmName() {return "RW";}

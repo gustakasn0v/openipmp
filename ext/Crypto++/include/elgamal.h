@@ -1,8 +1,18 @@
+// elgamal.h - written and placed in the public domain by Wei Dai
+
+//! \file elgamal.h
+//! \brief Classes and functions for ElGamal key agreement and encryption schemes
+
 #ifndef CRYPTOPP_ELGAMAL_H
 #define CRYPTOPP_ELGAMAL_H
 
+#include "cryptlib.h"
 #include "modexppc.h"
+#include "integer.h"
+#include "gfpcrypt.h"
+#include "pubkey.h"
 #include "dsa.h"
+#include "misc.h"
 
 NAMESPACE_BEGIN(CryptoPP)
 
@@ -11,17 +21,19 @@ class CRYPTOPP_NO_VTABLE ElGamalBase : public DL_KeyAgreementAlgorithm_DH<Intege
 					public DL_SymmetricEncryptionAlgorithm
 {
 public:
-	void Derive(const DL_GroupParameters<Integer> &groupParams, byte *derivedKey, unsigned int derivedLength, const Integer &agreedElement, const Integer &ephemeralPublicKey, const NameValuePairs &derivationParams) const
+	void Derive(const DL_GroupParameters<Integer> &groupParams, byte *derivedKey, size_t derivedLength, const Integer &agreedElement, const Integer &ephemeralPublicKey, const NameValuePairs &derivationParams) const
 	{
+		CRYPTOPP_UNUSED(groupParams), CRYPTOPP_UNUSED(ephemeralPublicKey), CRYPTOPP_UNUSED(derivationParams);
 		agreedElement.Encode(derivedKey, derivedLength);
 	}
 
-	unsigned int GetSymmetricKeyLength(unsigned int plainTextLength) const
+	size_t GetSymmetricKeyLength(size_t plainTextLength) const
 	{
+		CRYPTOPP_UNUSED(plainTextLength);
 		return GetGroupParameters().GetModulus().ByteCount();
 	}
 
-	unsigned int GetSymmetricCiphertextLength(unsigned int plainTextLength) const
+	size_t GetSymmetricCiphertextLength(size_t plainTextLength) const
 	{
 		unsigned int len = GetGroupParameters().GetModulus().ByteCount();
 		if (plainTextLength <= GetMaxSymmetricPlaintextLength(len))
@@ -30,7 +42,7 @@ public:
 			return 0;
 	}
 
-	unsigned int GetMaxSymmetricPlaintextLength(unsigned int cipherTextLength) const
+	size_t GetMaxSymmetricPlaintextLength(size_t cipherTextLength) const
 	{
 		unsigned int len = GetGroupParameters().GetModulus().ByteCount();
 		if (cipherTextLength == len)
@@ -39,21 +51,23 @@ public:
 			return 0;
 	}
 
-	void SymmetricEncrypt(RandomNumberGenerator &rng, const byte *key, const byte *plainText, unsigned int plainTextLength, byte *cipherText, const NameValuePairs &parameters) const
+	void SymmetricEncrypt(RandomNumberGenerator &rng, const byte *key, const byte *plainText, size_t plainTextLength, byte *cipherText, const NameValuePairs &parameters) const
 	{
+		CRYPTOPP_UNUSED(parameters);
 		const Integer &p = GetGroupParameters().GetModulus();
 		unsigned int modulusLen = p.ByteCount();
 
 		SecByteBlock block(modulusLen-1);
 		rng.GenerateBlock(block, modulusLen-2-plainTextLength);
 		memcpy(block+modulusLen-2-plainTextLength, plainText, plainTextLength);
-		block[modulusLen-2] = plainTextLength;
+		block[modulusLen-2] = (byte)plainTextLength;
 
 		a_times_b_mod_c(Integer(key, modulusLen), Integer(block, modulusLen-1), p).Encode(cipherText, modulusLen);
 	}
 
-	DecodingResult SymmetricDecrypt(const byte *key, const byte *cipherText, unsigned int cipherTextLength, byte *plainText, const NameValuePairs &parameters) const
+	DecodingResult SymmetricDecrypt(const byte *key, const byte *cipherText, size_t cipherTextLength, byte *plainText, const NameValuePairs &parameters) const
 	{
+		CRYPTOPP_UNUSED(parameters);
 		const Integer &p = GetGroupParameters().GetModulus();
 		unsigned int modulusLen = p.ByteCount();
 
@@ -72,19 +86,27 @@ public:
 	}
 
 	virtual const DL_GroupParameters_GFP & GetGroupParameters() const =0;
+	
+#ifndef CRYPTOPP_MAINTAIN_BACKWARDS_COMPATIBILITY_562
+	virtual ~ElGamalBase() {}
+#endif
 };
 
 template <class BASE, class SCHEME_OPTIONS, class KEY>
-class CRYPTOPP_NO_VTABLE ElGamalObjectImpl : public DL_ObjectImplBase<BASE, SCHEME_OPTIONS, KEY>, public ElGamalBase
+class ElGamalObjectImpl : public DL_ObjectImplBase<BASE, SCHEME_OPTIONS, KEY>, public ElGamalBase
 {
 public:
-	unsigned int FixedMaxPlaintextLength() const {return MaxPlaintextLength(FixedCiphertextLength());}
-	unsigned int FixedCiphertextLength() const {return this->CiphertextLength(0);}
+	size_t FixedMaxPlaintextLength() const {return this->MaxPlaintextLength(FixedCiphertextLength());}
+	size_t FixedCiphertextLength() const {return this->CiphertextLength(0);}
 
 	const DL_GroupParameters_GFP & GetGroupParameters() const {return this->GetKey().GetGroupParameters();}
 
 	DecodingResult FixedLengthDecrypt(RandomNumberGenerator &rng, const byte *cipherText, byte *plainText) const
 		{return Decrypt(rng, cipherText, FixedCiphertextLength(), plainText);}
+
+#ifndef CRYPTOPP_MAINTAIN_BACKWARDS_COMPATIBILITY_562
+	virtual ~ElGamalObjectImpl() {}
+#endif
 
 protected:
 	const DL_KeyAgreementAlgorithm<Integer> & GetKeyAgreementAlgorithm() const {return *this;}
@@ -99,34 +121,19 @@ struct ElGamalKeys
 	typedef DL_PublicKey_GFP_OldFormat<DL_CryptoKeys_GFP::PublicKey> PublicKey;
 };
 
-//! ElGamal encryption scheme with non-standard padding
+//! \class ElGamal
+//! \brief ElGamal encryption scheme with non-standard padding
 struct ElGamal
 {
 	typedef DL_CryptoSchemeOptions<ElGamal, ElGamalKeys, int, int, int> SchemeOptions;
 
 	static const char * StaticAlgorithmName() {return "ElgamalEnc/Crypto++Padding";}
 
-	class EncryptorImpl : public ElGamalObjectImpl<DL_EncryptorBase<Integer>,  SchemeOptions, SchemeOptions::PublicKey>, public PublicKeyCopier<SchemeOptions>
-	{
-	public:
-		void CopyKeyInto(SchemeOptions::PublicKey &key) const
-			{key = GetKey();}
-	};
-
-	class DecryptorImpl : public ElGamalObjectImpl<DL_DecryptorBase<Integer>, SchemeOptions, SchemeOptions::PrivateKey>, public PrivateKeyCopier<SchemeOptions>
-	{
-	public:
-		void CopyKeyInto(SchemeOptions::PublicKey &key) const
-			{GetKey().MakePublicKey(key);}
-		void CopyKeyInto(SchemeOptions::PrivateKey &key) const
-			{key = GetKey();}
-	};
-
 	typedef SchemeOptions::GroupParameters GroupParameters;
 	//! implements PK_Encryptor interface
-	typedef PK_FinalTemplate<EncryptorImpl> Encryptor;
+	typedef PK_FinalTemplate<ElGamalObjectImpl<DL_EncryptorBase<Integer>, SchemeOptions, SchemeOptions::PublicKey> > Encryptor;
 	//! implements PK_Decryptor interface
-	typedef PK_FinalTemplate<DecryptorImpl> Decryptor;
+	typedef PK_FinalTemplate<ElGamalObjectImpl<DL_DecryptorBase<Integer>, SchemeOptions, SchemeOptions::PrivateKey> > Decryptor;
 };
 
 typedef ElGamal::Encryptor ElGamalEncryptor;

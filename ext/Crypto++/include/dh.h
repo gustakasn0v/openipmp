@@ -1,9 +1,13 @@
+// dh.h - written and placed in the public domain by Wei Dai
+
+//! \file
+//! \headerfile dh.h
+//! \brief Classes for Diffie-Hellman key exchange
+
 #ifndef CRYPTOPP_DH_H
 #define CRYPTOPP_DH_H
 
-/** \file
-*/
-
+#include "cryptlib.h"
 #include "gfpcrypt.h"
 
 NAMESPACE_BEGIN(CryptoPP)
@@ -17,7 +21,7 @@ class DH_Domain : public DL_SimpleKeyAgreementDomainBase<typename GROUP_PARAMETE
 public:
 	typedef GROUP_PARAMETERS GroupParameters;
 	typedef typename GroupParameters::Element Element;
-	typedef DL_KeyAgreementAlgorithm_DH<Element, COFACTOR_OPTION> KeyAgreementAlgorithm;
+	typedef DL_KeyAgreementAlgorithm_DH<Element, COFACTOR_OPTION> DH_Algorithm;
 	typedef DH_Domain<GROUP_PARAMETERS, COFACTOR_OPTION> Domain;
 
 	DH_Domain() {}
@@ -68,17 +72,25 @@ public:
 			Base::GeneratePublicKey(rng, privateKey2, publicKey2);
 
 			SecByteBlock agreedValue(this->AgreedValueLength()), agreedValue2(this->AgreedValueLength());
-			this->Agree(agreedValue, privateKey, publicKey2);
-			this->Agree(agreedValue2, privateKey2, publicKey);
+			bool agreed1 = this->Agree(agreedValue, privateKey, publicKey2);
+			bool agreed2 = this->Agree(agreedValue2, privateKey2, publicKey);
 
-			if (agreedValue != agreedValue2)
+			if (!agreed1 || !agreed2 || agreedValue != agreedValue2)
 				throw SelfTestFailure(this->AlgorithmName() + ": pairwise consistency test failed");
 		}
 	}
 
+	static std::string CRYPTOPP_API StaticAlgorithmName()
+		{return GroupParameters::StaticAlgorithmNamePrefix() + DH_Algorithm::StaticAlgorithmName();}
+	std::string AlgorithmName() const {return StaticAlgorithmName();}
+	
+#ifndef CRYPTOPP_MAINTAIN_BACKWARDS_COMPATIBILITY_562
+	virtual ~DH_Domain() {}
+#endif
+
 private:
 	const DL_KeyAgreementAlgorithm<Element> & GetKeyAgreementAlgorithm() const
-		{return Singleton<KeyAgreementAlgorithm>().Ref();}
+		{return Singleton<DH_Algorithm>().Ref();}
 	DL_GroupParameters<Element> & AccessAbstractGroupParameters()
 		{return m_groupParameters;}
 

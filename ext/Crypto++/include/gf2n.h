@@ -5,8 +5,9 @@
 
 #include "cryptlib.h"
 #include "secblock.h"
-#include "misc.h"
 #include "algebra.h"
+#include "misc.h"
+#include "asn.h"
 
 #include <iosfwd>
 
@@ -41,33 +42,33 @@ public:
 			and most significant bit as coefficient to x^(WORD_BITS-1)
 			bitLength denotes how much memory to allocate initially
 		*/
-		PolynomialMod2(word value, unsigned int bitLength=WORD_BITS);
+		PolynomialMod2(word value, size_t bitLength=WORD_BITS);
 
 		//! convert from big-endian byte array
-		PolynomialMod2(const byte *encodedPoly, unsigned int byteCount)
+		PolynomialMod2(const byte *encodedPoly, size_t byteCount)
 			{Decode(encodedPoly, byteCount);}
 
 		//! convert from big-endian form stored in a BufferedTransformation
-		PolynomialMod2(BufferedTransformation &encodedPoly, unsigned int byteCount)
+		PolynomialMod2(BufferedTransformation &encodedPoly, size_t byteCount)
 			{Decode(encodedPoly, byteCount);}
 
 		//! create a random polynomial uniformly distributed over all polynomials with degree less than bitcount
-		PolynomialMod2(RandomNumberGenerator &rng, unsigned int bitcount)
+		PolynomialMod2(RandomNumberGenerator &rng, size_t bitcount)
 			{Randomize(rng, bitcount);}
 
 		//! return x^i
-		static PolynomialMod2 Monomial(unsigned i);
+		static PolynomialMod2 CRYPTOPP_API Monomial(size_t i);
 		//! return x^t0 + x^t1 + x^t2
-		static PolynomialMod2 Trinomial(unsigned t0, unsigned t1, unsigned t2);
+		static PolynomialMod2 CRYPTOPP_API Trinomial(size_t t0, size_t t1, size_t t2);
 		//! return x^t0 + x^t1 + x^t2 + x^t3 + x^t4
-		static PolynomialMod2 Pentanomial(unsigned t0, unsigned t1, unsigned t2, unsigned int t3, unsigned int t4);
+		static PolynomialMod2 CRYPTOPP_API Pentanomial(size_t t0, size_t t1, size_t t2, size_t t3, size_t t4);
 		//! return x^(n-1) + ... + x + 1
-		static PolynomialMod2 AllOnes(unsigned n);
+		static PolynomialMod2 CRYPTOPP_API AllOnes(size_t n);
 
 		//!
-		static const PolynomialMod2 &Zero();
+		static const PolynomialMod2 & CRYPTOPP_API Zero();
 		//!
-		static const PolynomialMod2 &One();
+		static const PolynomialMod2 & CRYPTOPP_API One();
 	//@}
 
 	//! \name ENCODE/DECODE
@@ -80,20 +81,20 @@ public:
 		/*! if outputLen < MinEncodedSize, the most significant bytes will be dropped
 			if outputLen > MinEncodedSize, the most significant bytes will be padded
 		*/
-		unsigned int Encode(byte *output, unsigned int outputLen) const;
+		void Encode(byte *output, size_t outputLen) const;
 		//!
-		unsigned int Encode(BufferedTransformation &bt, unsigned int outputLen) const;
+		void Encode(BufferedTransformation &bt, size_t outputLen) const;
 
 		//!
-		void Decode(const byte *input, unsigned int inputLen);
+		void Decode(const byte *input, size_t inputLen);
 		//! 
 		//* Precondition: bt.MaxRetrievable() >= inputLen
-		void Decode(BufferedTransformation &bt, unsigned int inputLen);
+		void Decode(BufferedTransformation &bt, size_t inputLen);
 
 		//! encode value as big-endian octet string
-		void DEREncodeAsOctetString(BufferedTransformation &bt, unsigned int length) const;
+		void DEREncodeAsOctetString(BufferedTransformation &bt, size_t length) const;
 		//! decode value as big-endian octet string
-		void BERDecodeAsOctetString(BufferedTransformation &bt, unsigned int length);
+		void BERDecodeAsOctetString(BufferedTransformation &bt, size_t length);
 	//@}
 
 	//! \name ACCESSORS
@@ -106,16 +107,16 @@ public:
 		unsigned int WordCount() const;
 
 		//! return the n-th bit, n=0 being the least significant bit
-		bool GetBit(unsigned int n) const {return GetCoefficient(n)!=0;}
+		bool GetBit(size_t n) const {return GetCoefficient(n)!=0;}
 		//! return the n-th byte
-		byte GetByte(unsigned int n) const;
+		byte GetByte(size_t n) const;
 
 		//! the zero polynomial will return a degree of -1
-		signed int Degree() const {return BitCount()-1;}
+		signed int Degree() const {return (signed int)(BitCount()-1U);}
 		//! degree + 1
 		unsigned int CoefficientCount() const {return BitCount();}
 		//! return coefficient for x^i
-		int GetCoefficient(unsigned int i) const
+		int GetCoefficient(size_t i) const
 			{return (i/WORD_BITS < reg.size()) ? int(reg[i/WORD_BITS] >> (i % WORD_BITS)) & 1 : 0;}
 		//! return coefficient for x^i
 		int operator[](unsigned int i) const {return GetCoefficient(i);}
@@ -150,15 +151,15 @@ public:
 		PolynomialMod2&  operator>>=(unsigned int);
 
 		//!
-		void Randomize(RandomNumberGenerator &rng, unsigned int bitcount);
+		void Randomize(RandomNumberGenerator &rng, size_t bitcount);
 
 		//!
-		void SetBit(unsigned int i, int value = 1);
+		void SetBit(size_t i, int value = 1);
 		//! set the n-th byte to value
-		void SetByte(unsigned int n, byte value);
+		void SetByte(size_t n, byte value);
 
 		//!
-		void SetCoefficient(unsigned int i, int value) {SetBit(i, value);}
+		void SetCoefficient(size_t i, int value) {SetBit(i, value);}
 
 		//!
 		void swap(PolynomialMod2 &a) {reg.swap(a.reg);}
@@ -216,12 +217,12 @@ public:
 		PolynomialMod2 MultiplicativeInverse() const {return IsUnit() ? One() : Zero();}
 
 		//! greatest common divisor
-		static PolynomialMod2 Gcd(const PolynomialMod2 &a, const PolynomialMod2 &n);
+		static PolynomialMod2 CRYPTOPP_API Gcd(const PolynomialMod2 &a, const PolynomialMod2 &n);
 		//! calculate multiplicative inverse of *this mod n
 		PolynomialMod2 InverseMod(const PolynomialMod2 &) const;
 
 		//! calculate r and q such that (a == d*q + r) && (deg(r) < deg(d))
-		static void Divide(PolynomialMod2 &r, PolynomialMod2 &q, const PolynomialMod2 &a, const PolynomialMod2 &d);
+		static void CRYPTOPP_API Divide(PolynomialMod2 &r, PolynomialMod2 &q, const PolynomialMod2 &a, const PolynomialMod2 &d);
 	//@}
 
 	//! \name INPUT/OUTPUT
@@ -285,7 +286,7 @@ public:
 
 	virtual GF2NP * Clone() const {return new GF2NP(*this);}
 	virtual void DEREncode(BufferedTransformation &bt) const
-		{assert(false);}	// no ASN.1 syntax yet for general polynomial basis
+		{CRYPTOPP_UNUSED(bt); assert(false);}	// no ASN.1 syntax yet for general polynomial basis
 
 	void DEREncodeElement(BufferedTransformation &out, const Element &a) const;
 	void BERDecodeElement(BufferedTransformation &in, Element &a) const;
@@ -300,7 +301,7 @@ public:
 		{return m;}
 
 	unsigned int MaxElementByteLength() const
-		{return BitsToBytes(MaxElementBitLength());}
+		{return (unsigned int)BitsToBytes(MaxElementBitLength());}
 
 	Element SquareRoot(const Element &a) const;
 
@@ -353,15 +354,17 @@ private:
 };
 
 // construct new GF2NP from the ASN.1 sequence Characteristic-two
-CRYPTOPP_DLL GF2NP * BERDecodeGF2NP(BufferedTransformation &bt);
+CRYPTOPP_DLL GF2NP * CRYPTOPP_API BERDecodeGF2NP(BufferedTransformation &bt);
 
 NAMESPACE_END
 
+#ifndef __BORLANDC__
 NAMESPACE_BEGIN(std)
 template<> inline void swap(CryptoPP::PolynomialMod2 &a, CryptoPP::PolynomialMod2 &b)
 {
 	a.swap(b);
 }
 NAMESPACE_END
+#endif
 
 #endif

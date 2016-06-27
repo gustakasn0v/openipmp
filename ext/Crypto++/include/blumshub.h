@@ -1,12 +1,17 @@
+// blumshub.h - written and placed in the public domain by Wei Dai
+
+//! \file
+//! \headerfile blumshub.h
+//! \brief Classes for Blum Blum Shub generator
+
 #ifndef CRYPTOPP_BLUMSHUB_H
 #define CRYPTOPP_BLUMSHUB_H
 
+#include "cryptlib.h"
 #include "modarith.h"
+#include "integer.h"
 
 NAMESPACE_BEGIN(CryptoPP)
-
-class BlumGoldwasserPublicKey;
-class BlumGoldwasserPrivateKey;
 
 //! BlumBlumShub without factorization of the modulus
 class PublicBlumBlumShub : public RandomNumberGenerator,
@@ -17,24 +22,20 @@ public:
 
 	unsigned int GenerateBit();
 	byte GenerateByte();
-
-	void ProcessData(byte *outString, const byte *inString, unsigned int length)
-	{
-		while (length--)
-			*outString++ = *inString ^ GenerateByte();
-	}
+	void GenerateBlock(byte *output, size_t size);
+	void ProcessData(byte *outString, const byte *inString, size_t length);
 
 	bool IsSelfInverting() const {return true;}
 	bool IsForwardTransformation() const {return true;}
+	
+#ifndef CRYPTOPP_MAINTAIN_BACKWARDS_COMPATIBILITY_562
+	virtual ~PublicBlumBlumShub() {}
+#endif
 
 protected:
-	const ModularArithmetic modn;
-	const word maxBits;
+	ModularArithmetic modn;
 	Integer current;
-	int bitsLeft;
-
-	friend class BlumGoldwasserPublicKey;
-	friend class BlumGoldwasserPrivateKey;
+	word maxBits, bitsLeft;
 };
 
 //! BlumBlumShub with factorization of the modulus
@@ -47,6 +48,10 @@ public:
 	
 	bool IsRandomAccess() const {return true;}
 	void Seek(lword index);
+
+#ifndef CRYPTOPP_MAINTAIN_BACKWARDS_COMPATIBILITY_562
+	virtual ~BlumBlumShub() {}
+#endif
 
 protected:
 	const Integer p, q;

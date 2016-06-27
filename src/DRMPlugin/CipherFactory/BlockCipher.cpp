@@ -10,6 +10,7 @@
 */
 
 #include "BlockCipher.h"
+#include "osrng.h"
 
 #if defined (WIN32)
 #include <windows.h>
@@ -123,11 +124,12 @@ CPPAES128CBCEncryptor::~CPPAES128CBCEncryptor() {
 */
 bool CPPAES128CBCEncryptor::Encrypt(ByteT* in, UInt32T inSize, ByteT** out,
     UInt32T* outLen) {
+	CryptoPP::AutoSeededRandomPool rng;
 	encData = "";
 	filter.Put((unsigned char*)in, inSize);
 	filter.MessageEnd();
 	enc.Resynchronize((unsigned char*)iv);
-	enc.GetNextIV((unsigned char*)iv);
+	enc.GetNextIV(rng, (unsigned char*)iv);
 	enc.SetKeyWithIV((unsigned char*)key, keySize, (unsigned char*)iv);
 
   *out = (ByteT*)malloc(encData.size());
@@ -202,11 +204,12 @@ CPPAES128CTREncryptor::~CPPAES128CTREncryptor() {
 */
 bool CPPAES128CTREncryptor::Encrypt(ByteT* in, UInt32T inSize, ByteT** out,
     UInt32T* outLen) {
+	CryptoPP::AutoSeededRandomPool rng;
 	encData = "";
 	filter.Put((unsigned char*)in, inSize);
 	filter.MessageEnd();
 	enc.Resynchronize((unsigned char*)iv);
-	enc.GetNextIV((unsigned char*)iv);
+	enc.GetNextIV(rng, (unsigned char*)iv);
 	enc.SetKeyWithIV((unsigned char*)key, keySize, (unsigned char*)iv);
 
   *out = (ByteT*)malloc(encData.size());

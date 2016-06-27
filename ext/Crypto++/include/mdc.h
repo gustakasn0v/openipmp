@@ -7,10 +7,12 @@
 */
 
 #include "seckey.h"
+#include "secblock.h"
 #include "misc.h"
 
 NAMESPACE_BEGIN(CryptoPP)
 
+//! _
 template <class T>
 struct MDC_Info : public FixedBlockSize<T::DIGESTSIZE>, public FixedKeyLength<T::BLOCKSIZE>
 {
@@ -27,11 +29,10 @@ class MDC : public MDC_Info<T>
 		typedef typename T::HashWordType HashWordType;
 
 	public:
-		void UncheckedSetKey(CipherDir direction, const byte *userKey, unsigned int length)
+		void UncheckedSetKey(const byte *userKey, unsigned int length, const NameValuePairs &params)
 		{
-			assert(direction == ENCRYPTION);
 			this->AssertValidKeyLength(length);
-			memcpy(Key(), userKey, this->KEYLENGTH);
+			memcpy_s(m_key, m_key.size(), userKey, this->KEYLENGTH);
 			T::CorrectEndianess(Key(), Key(), this->KEYLENGTH);
 		}
 
@@ -50,7 +51,7 @@ class MDC : public MDC_Info<T>
 
 		bool IsPermutation() const {return false;}
 
-		unsigned int GetAlignment() const {return sizeof(HashWordType);}
+		unsigned int OptimalDataAlignment() const {return sizeof(HashWordType);}
 
 	private:
 		HashWordType *Key() {return (HashWordType *)m_key.data();}

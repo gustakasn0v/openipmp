@@ -1,12 +1,19 @@
+// seal.h - written and placed in the public domain by Wei Dai
+
+//! \file seal.h
+//! \brief Classes for SEAL stream cipher
+
 #ifndef CRYPTOPP_SEAL_H
 #define CRYPTOPP_SEAL_H
 
 #include "strciphr.h"
+#include "secblock.h"
 
 NAMESPACE_BEGIN(CryptoPP)
 
+//! _
 template <class B = BigEndian>
-struct SEAL_Info : public FixedKeyLength<20, SimpleKeyingInterface::INTERNALLY_GENERATED_IV>
+struct SEAL_Info : public FixedKeyLength<20, SimpleKeyingInterface::INTERNALLY_GENERATED_IV, 4>
 {
 	static const char *StaticAlgorithmName() {return B::ToEnum() == LITTLE_ENDIAN_ORDER ? "SEAL-3.0-LE" : "SEAL-3.0-BE";}
 };
@@ -14,15 +21,11 @@ struct SEAL_Info : public FixedKeyLength<20, SimpleKeyingInterface::INTERNALLY_G
 template <class B = BigEndian>
 class CRYPTOPP_NO_VTABLE SEAL_Policy : public AdditiveCipherConcretePolicy<word32, 256>, public SEAL_Info<B>
 {
-public:
-	unsigned int IVSize() const {return 4;}
-	void GetNextIV(byte *IV) const {UnalignedPutWord(BIG_ENDIAN_ORDER, IV, m_outsideCounter+1);}
-
 protected:
-	void CipherSetKey(const NameValuePairs &params, const byte *key, unsigned int length);
-	void OperateKeystream(KeystreamOperation operation, byte *output, const byte *input, unsigned int iterationCount);
-	void CipherResynchronize(byte *keystreamBuffer, const byte *IV);
-	bool IsRandomAccess() const {return true;}
+	void CipherSetKey(const NameValuePairs &params, const byte *key, size_t length);
+	void OperateKeystream(KeystreamOperation operation, byte *output, const byte *input, size_t iterationCount);
+	void CipherResynchronize(byte *keystreamBuffer, const byte *IV, size_t length);
+	bool CipherIsRandomAccess() const {return true;}
 	void SeekToIteration(lword iterationCount);
 
 private:

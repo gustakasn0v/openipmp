@@ -1,14 +1,17 @@
+// shacal.h - written and placed in the public domain by Wei Dai
+
+//! \file shacal.h
+//! \brief Classes for the SHACAL-2 block cipher
+
 #ifndef CRYPTOPP_SHACAL2_H
 #define CRYPTOPP_SHACAL2_H
-
-/** \file
-*/
 
 #include "seckey.h"
 #include "secblock.h"
 
 NAMESPACE_BEGIN(CryptoPP)
 
+//! _
 struct SHACAL2_Info : public FixedBlockSize<32>, public VariableKeyLength<16, 16, 64>
 {
 	static const char *StaticAlgorithmName() {return "SHACAL-2";}
@@ -20,7 +23,7 @@ class SHACAL2 : public SHACAL2_Info, public BlockCipherDocumentation
 	class CRYPTOPP_NO_VTABLE Base : public BlockCipherImpl<SHACAL2_Info>
 	{
 	public:
-		void UncheckedSetKey(CipherDir direction, const byte *userKey, unsigned int length);
+		void UncheckedSetKey(const byte *userKey, unsigned int length, const NameValuePairs &params);
 
 	protected:
 		FixedSizeSecBlock<word32, 64> m_key;

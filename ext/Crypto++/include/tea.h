@@ -1,14 +1,18 @@
+// tea.h - written and placed in the public domain by Wei Dai
+
+//! \file tea.h
+//! \brief Classes for the TEA, BTEA and XTEA block ciphers
+
 #ifndef CRYPTOPP_TEA_H
 #define CRYPTOPP_TEA_H
 
-/** \file
-*/
-
 #include "seckey.h"
 #include "secblock.h"
+#include "misc.h"
 
 NAMESPACE_BEGIN(CryptoPP)
 
+//! _
 struct TEA_Info : public FixedBlockSize<8>, public FixedKeyLength<16>, public VariableRounds<32>
 {
 	static const char *StaticAlgorithmName() {return "TEA";}
@@ -20,7 +24,7 @@ class TEA : public TEA_Info, public BlockCipherDocumentation
 	class CRYPTOPP_NO_VTABLE Base : public BlockCipherImpl<TEA_Info>
 	{
 	public:
-		void UncheckedSetKey(CipherDir direction, const byte *userKey, unsigned int length, unsigned int rounds);
+		void UncheckedSetKey(const byte *userKey, unsigned int length, const NameValuePairs &params);
 
 	protected:
 		FixedSizeSecBlock<word32, 4> m_k;
@@ -47,6 +51,7 @@ public:
 typedef TEA::Encryption TEAEncryption;
 typedef TEA::Decryption TEADecryption;
 
+//! _
 struct XTEA_Info : public FixedBlockSize<8>, public FixedKeyLength<16>, public VariableRounds<32>
 {
 	static const char *StaticAlgorithmName() {return "XTEA";}
@@ -58,7 +63,7 @@ class XTEA : public XTEA_Info, public BlockCipherDocumentation
 	class CRYPTOPP_NO_VTABLE Base : public BlockCipherImpl<XTEA_Info>
 	{
 	public:
-		void UncheckedSetKey(CipherDir direction, const byte *userKey, unsigned int length, unsigned int rounds);
+		void UncheckedSetKey(const byte *userKey, unsigned int length, const NameValuePairs &params);
 
 	protected:
 		FixedSizeSecBlock<word32, 4> m_k;
@@ -82,6 +87,7 @@ public:
 	typedef BlockCipherFinal<DECRYPTION, Dec> Decryption;
 };
 
+//! _
 struct BTEA_Info : public FixedKeyLength<16>
 {
 	static const char *StaticAlgorithmName() {return "BTEA";}
@@ -94,12 +100,11 @@ class BTEA : public BTEA_Info, public BlockCipherDocumentation
 	class CRYPTOPP_NO_VTABLE Base : public AlgorithmImpl<SimpleKeyingInterfaceImpl<BlockCipher, BTEA_Info>, BTEA_Info>, public BTEA_Info
 	{
 	public:
-		template <class T>
-		static inline void CheckedSetKey(T *obj, CipherDir dir, const byte *key, unsigned int length, const NameValuePairs &param)
+		void UncheckedSetKey(const byte *key, unsigned int length, const NameValuePairs &params)
 		{
-			obj->ThrowIfInvalidKeyLength(length);
-			obj->m_blockSize = param.GetIntValueWithDefault("BlockSize", 60*4);
-			GetUserKey(BIG_ENDIAN_ORDER, obj->m_k.begin(), 4, key, KEYLENGTH);
+			CRYPTOPP_UNUSED(length), CRYPTOPP_UNUSED(params);
+			m_blockSize = params.GetIntValueWithDefault("BlockSize", 60*4);
+			GetUserKey(BIG_ENDIAN_ORDER, m_k.begin(), 4, key, KEYLENGTH);
 		}
 
 		unsigned int BlockSize() const {return m_blockSize;}

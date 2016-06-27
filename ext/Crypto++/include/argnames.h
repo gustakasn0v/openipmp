@@ -1,3 +1,8 @@
+// argnames.h - written and placed in the public domain by Wei Dai
+
+//! \file argnames.h
+//! \brief Standard names for retrieving values by name when working with \p NameValuePairs
+
 #ifndef CRYPTOPP_ARGNAMES_H
 #define CRYPTOPP_ARGNAMES_H
 
@@ -13,7 +18,7 @@ CRYPTOPP_DEFINE_NAME_STRING(ValueNames)			//!< string, a list of value names wit
 CRYPTOPP_DEFINE_NAME_STRING(Version)			//!< int
 CRYPTOPP_DEFINE_NAME_STRING(Seed)				//!< ConstByteArrayParameter
 CRYPTOPP_DEFINE_NAME_STRING(Key)				//!< ConstByteArrayParameter
-CRYPTOPP_DEFINE_NAME_STRING(IV)					//!< const byte *
+CRYPTOPP_DEFINE_NAME_STRING(IV)					//!< ConstByteArrayParameter, also accepts const byte * for backwards compatibility
 CRYPTOPP_DEFINE_NAME_STRING(StolenIV)			//!< byte *
 CRYPTOPP_DEFINE_NAME_STRING(Rounds)				//!< int
 CRYPTOPP_DEFINE_NAME_STRING(FeedbackSize)		//!< int
@@ -42,15 +47,19 @@ CRYPTOPP_DEFINE_NAME_STRING(MultiplicativeInverseOfPrime2ModPrime1)	//!< Integer
 CRYPTOPP_DEFINE_NAME_STRING(QuadraticResidueModPrime1)	//!< Integer
 CRYPTOPP_DEFINE_NAME_STRING(QuadraticResidueModPrime2)	//!< Integer
 CRYPTOPP_DEFINE_NAME_STRING(PutMessage)			//!< bool
+CRYPTOPP_DEFINE_NAME_STRING(TruncatedDigestSize)	//!< int
+CRYPTOPP_DEFINE_NAME_STRING(BlockPaddingScheme)	//!< StreamTransformationFilter::BlockPaddingScheme
 CRYPTOPP_DEFINE_NAME_STRING(HashVerificationFilterFlags)		//!< word32
+CRYPTOPP_DEFINE_NAME_STRING(AuthenticatedDecryptionFilterFlags)	//!< word32
 CRYPTOPP_DEFINE_NAME_STRING(SignatureVerificationFilterFlags)	//!< word32
 CRYPTOPP_DEFINE_NAME_STRING(InputBuffer)		//!< ConstByteArrayParameter
 CRYPTOPP_DEFINE_NAME_STRING(OutputBuffer)		//!< ByteArrayParameter
-CRYPTOPP_DEFINE_NAME_STRING(XMACC_Counter)		//!< word32
 CRYPTOPP_DEFINE_NAME_STRING(InputFileName)		//!< const char *
+CRYPTOPP_DEFINE_NAME_STRING(InputFileNameWide)	//!< const wchar_t *
 CRYPTOPP_DEFINE_NAME_STRING(InputStreamPointer)	//!< std::istream *
 CRYPTOPP_DEFINE_NAME_STRING(InputBinaryMode)	//!< bool
 CRYPTOPP_DEFINE_NAME_STRING(OutputFileName)		//!< const char *
+CRYPTOPP_DEFINE_NAME_STRING(OutputFileNameWide)	//!< const wchar_t *
 CRYPTOPP_DEFINE_NAME_STRING(OutputStreamPointer)	//!< std::ostream *
 CRYPTOPP_DEFINE_NAME_STRING(OutputBinaryMode)	//!< bool
 CRYPTOPP_DEFINE_NAME_STRING(EncodingParameters)	//!< ConstByteArrayParameter
@@ -66,7 +75,12 @@ CRYPTOPP_DEFINE_NAME_STRING(EncodingLookupArray)	//< const byte *
 CRYPTOPP_DEFINE_NAME_STRING(DecodingLookupArray)	//< const byte *
 CRYPTOPP_DEFINE_NAME_STRING(InsertLineBreaks)	//< bool
 CRYPTOPP_DEFINE_NAME_STRING(MaxLineLength)		//< int
-
+CRYPTOPP_DEFINE_NAME_STRING(DigestSize)			//!< int, in bytes
+CRYPTOPP_DEFINE_NAME_STRING(L1KeyLength)		//!< int, in bytes
+CRYPTOPP_DEFINE_NAME_STRING(TableSize)			//!< int, in bytes
+CRYPTOPP_DEFINE_NAME_STRING(Blinding)			//!< bool, timing attack mitigations, ON by default
+CRYPTOPP_DEFINE_NAME_STRING(DerivedKey)			//!< ByteArrayParameter, key derivation, derived key
+CRYPTOPP_DEFINE_NAME_STRING(DerivedKeyLength)	//!< int, key derivation, derived key length in bytes
 DOCUMENTED_NAMESPACE_END
 
 NAMESPACE_END

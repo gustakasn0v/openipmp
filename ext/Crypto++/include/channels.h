@@ -1,10 +1,16 @@
+// channels.h - written and placed in the public domain by Wei Dai
+
+//! \file
+//! \headerfile channels.h
+//! \brief Classes for multiple named channels
+
 #ifndef CRYPTOPP_CHANNELS_H
 #define CRYPTOPP_CHANNELS_H
 
+#include "cryptlib.h"
 #include "simple.h"
 #include "smartptr.h"
-#include <map>
-#include <list>
+#include "stdcpp.h"
 
 NAMESPACE_BEGIN(CryptoPP)
 
@@ -53,8 +59,9 @@ public:
 	typedef std::pair<BufferedTransformation *, value_ptr<std::string> > DefaultRoute;
 	typedef std::list<DefaultRoute> DefaultRouteList;
 
-	typedef RouteMap::const_iterator MapIterator;
-	typedef DefaultRouteList::const_iterator ListIterator;
+	// SunCC workaround: can't use const_iterator here
+	typedef RouteMap::iterator MapIterator;
+	typedef DefaultRouteList::iterator ListIterator;
 };
 
 class ChannelSwitch;
@@ -62,18 +69,23 @@ class ChannelSwitch;
 class ChannelRouteIterator : public ChannelSwitchTypedefs
 {
 public:
-	ChannelSwitch& m_cs;
-	std::string m_channel;
-	bool m_useDefault;
-	MapIterator m_itMapCurrent, m_itMapEnd;
-	ListIterator m_itListCurrent, m_itListEnd;
+	ChannelRouteIterator(ChannelSwitch &cs) : m_cs(cs), m_useDefault(false) {}
 
-	ChannelRouteIterator(ChannelSwitch &cs) : m_cs(cs) {}
 	void Reset(const std::string &channel);
 	bool End() const;
 	void Next();
 	BufferedTransformation & Destination();
 	const std::string & Channel();
+	
+	ChannelSwitch& m_cs;
+	std::string m_channel;
+	bool m_useDefault;
+	MapIterator m_itMapCurrent, m_itMapEnd;
+	ListIterator m_itListCurrent, m_itListEnd;
+	
+protected:
+	// Hide this to see if we break something...
+	ChannelRouteIterator();
 };
 
 //! Route input to different and/or multiple channels based on channel ID
@@ -92,13 +104,13 @@ public:
 
 	void IsolatedInitialize(const NameValuePairs &parameters=g_nullNameValuePairs);
 
-	unsigned int ChannelPut2(const std::string &channel, const byte *begin, unsigned int length, int messageEnd, bool blocking);
-	unsigned int ChannelPutModifiable2(const std::string &channel, byte *begin, unsigned int length, int messageEnd, bool blocking);
+	size_t ChannelPut2(const std::string &channel, const byte *begin, size_t length, int messageEnd, bool blocking);
+	size_t ChannelPutModifiable2(const std::string &channel, byte *begin, size_t length, int messageEnd, bool blocking);
 
 	bool ChannelFlush(const std::string &channel, bool completeFlush, int propagation=-1, bool blocking=true);
 	bool ChannelMessageSeriesEnd(const std::string &channel, int propagation=-1, bool blocking=true);
 
-	byte * ChannelCreatePutSpace(const std::string &channel, unsigned int &size);
+	byte * ChannelCreatePutSpace(const std::string &channel, size_t &size);
 	
 	void AddDefaultRoute(BufferedTransformation &destination);
 	void RemoveDefaultRoute(BufferedTransformation &destination);

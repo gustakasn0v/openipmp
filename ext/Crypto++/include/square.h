@@ -1,14 +1,17 @@
+// square.h - written and placed in the public domain by Wei Dai
+
+//! \file square.h
+//! \brief Classes for the Square block cipher
+
 #ifndef CRYPTOPP_SQUARE_H
 #define CRYPTOPP_SQUARE_H
-
-/** \file
-*/
 
 #include "seckey.h"
 #include "secblock.h"
 
 NAMESPACE_BEGIN(CryptoPP)
 
+//! _
 struct Square_Info : public FixedBlockSize<16>, public FixedKeyLength<16>, FixedRounds<8>
 {
 	static const char *StaticAlgorithmName() {return "Square";}
@@ -20,10 +23,10 @@ class Square : public Square_Info, public BlockCipherDocumentation
 	class CRYPTOPP_NO_VTABLE Base : public BlockCipherImpl<Square_Info>
 	{
 	public:
-		void UncheckedSetKey(CipherDir direction, const byte *userKey, unsigned int length);
+		void UncheckedSetKey(const byte *userKey, unsigned int length, const NameValuePairs &params);
 
 	protected:
-		FixedSizeSecBlock<word32[4], ROUNDS+1> roundkeys;
+		FixedSizeSecBlock<word32, 4*(ROUNDS+1)> m_roundkeys;
 	};
 
 	class CRYPTOPP_NO_VTABLE Enc : public Base

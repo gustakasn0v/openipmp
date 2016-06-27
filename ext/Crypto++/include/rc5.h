@@ -1,14 +1,17 @@
+// rc5.h - written and placed in the public domain by Wei Dai
+
+//! \file rc5.h
+//! \brief Classes for the RC5 block cipher
+
 #ifndef CRYPTOPP_RC5_H
 #define CRYPTOPP_RC5_H
-
-/** \file
-*/
 
 #include "seckey.h"
 #include "secblock.h"
 
 NAMESPACE_BEGIN(CryptoPP)
 
+//! _
 struct RC5_Info : public FixedBlockSize<8>, public VariableKeyLength<16, 0, 255>, public VariableRounds<16>
 {
 	static const char *StaticAlgorithmName() {return "RC5";}
@@ -21,7 +24,7 @@ class RC5 : public RC5_Info, public BlockCipherDocumentation
 	class CRYPTOPP_NO_VTABLE Base : public BlockCipherImpl<RC5_Info>
 	{
 	public:
-		void UncheckedSetKey(CipherDir direction, const byte *userKey, unsigned int length, unsigned int rounds);
+		void UncheckedSetKey(const byte *userKey, unsigned int length, const NameValuePairs &params);
 
 	protected:
 		unsigned int r;       // number of rounds

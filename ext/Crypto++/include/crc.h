@@ -1,3 +1,9 @@
+// crc.h - written and placed in the public domain by Wei Dai
+
+//! \file
+//! \headerfile crc.h
+//! \brief Classes for CRC-32 checksum algorithm
+
 #ifndef CRYPTOPP_CRC32_H
 #define CRYPTOPP_CRC32_H
 
@@ -19,14 +25,16 @@ const word32 CRC32_NEGL = 0xffffffffL;
 class CRC32 : public HashTransformation
 {
 public:
-	enum {DIGESTSIZE = 4};
+	CRYPTOPP_CONSTANT(DIGESTSIZE = 4)
 	CRC32();
-	void Update(const byte *input, unsigned int length);
-	void TruncatedFinal(byte *hash, unsigned int size);
+	void Update(const byte *input, size_t length);
+	void TruncatedFinal(byte *hash, size_t size);
 	unsigned int DigestSize() const {return DIGESTSIZE;}
+    static const char * StaticAlgorithmName() {return "CRC32";}
+    std::string AlgorithmName() const {return StaticAlgorithmName();}
 
 	void UpdateByte(byte b) {m_crc = m_tab[CRC32_INDEX(m_crc) ^ b] ^ CRC32_SHIFTED(m_crc);}
-	byte GetCrcByte(unsigned int i) const {return ((byte *)&(m_crc))[i];}
+	byte GetCrcByte(size_t i) const {return ((byte *)&(m_crc))[i];}
 
 private:
 	void Reset() {m_crc = CRC32_NEGL;}

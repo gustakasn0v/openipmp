@@ -6,13 +6,16 @@
 	ESIGN signature schemes as defined in IEEE P1363a.
 */
 
+#include "cryptlib.h"
 #include "pubkey.h"
 #include "integer.h"
+#include "asn.h"
+#include "misc.h"
 
 NAMESPACE_BEGIN(CryptoPP)
 
-//! .
-class ESIGNFunction : public TrapdoorFunction, public PublicKey, public ASN1CryptoMaterial
+//! _
+class ESIGNFunction : public TrapdoorFunction, public ASN1CryptoMaterial<PublicKey>
 {
 	typedef ESIGNFunction ThisClass;
 
@@ -42,12 +45,13 @@ public:
 	void SetPublicExponent(const Integer &e) {m_e = e;}
 
 protected:
-	unsigned int GetK() const {return m_n.BitCount()/3-1;}
+	// Covertiy finding on overflow. The library allows small values for research purposes.
+	unsigned int GetK() const {return SaturatingSubtract(m_n.BitCount()/3, 1U);}
 
 	Integer m_n, m_e;
 };
 
-//! .
+//! _
 class InvertibleESIGNFunction : public ESIGNFunction, public RandomizedTrapdoorFunctionInverse, public PrivateKey
 {
 	typedef InvertibleESIGNFunction ThisClass;
@@ -81,7 +85,7 @@ protected:
 	Integer m_p, m_q;
 };
 
-//! .
+//! _
 template <class T>
 class EMSA5Pad : public PK_DeterministicSignatureMessageEncodingMethod
 {
@@ -89,13 +93,15 @@ public:
 	static const char *StaticAlgorithmName() {return "EMSA5";}
 	
 	void ComputeMessageRepresentative(RandomNumberGenerator &rng, 
-		const byte *recoverableMessage, unsigned int recoverableMessageLength,
+		const byte *recoverableMessage, size_t recoverableMessageLength,
 		HashTransformation &hash, HashIdentifier hashIdentifier, bool messageEmpty,
-		byte *representative, unsigned int representativeBitLength) const
+		byte *representative, size_t representativeBitLength) const
 	{
+		CRYPTOPP_UNUSED(rng), CRYPTOPP_UNUSED(recoverableMessage), CRYPTOPP_UNUSED(recoverableMessageLength);
+		CRYPTOPP_UNUSED(messageEmpty), CRYPTOPP_UNUSED(hashIdentifier);
 		SecByteBlock digest(hash.DigestSize());
 		hash.Final(digest);
-		unsigned int representativeByteLength = BitsToBytes(representativeBitLength);
+		size_t representativeByteLength = BitsToBytes(representativeBitLength);
 		T mgf;
 		mgf.GenerateAndMask(hash, representative, representativeByteLength, digest, digest.size(), false);
 		if (representativeBitLength % 8 != 0)

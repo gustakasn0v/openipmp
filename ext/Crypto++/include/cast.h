@@ -1,8 +1,10 @@
+// cast.h - written and placed in the public domain by Wei Dai
+
+//! \file cast.h
+//! \brief Classes for the CAST-128 and CAST-256 block ciphers
+
 #ifndef CRYPTOPP_CAST_H
 #define CRYPTOPP_CAST_H
-
-/** \file
-*/
 
 #include "seckey.h"
 #include "secblock.h"
@@ -15,7 +17,7 @@ protected:
 	static const word32 S[8][256];
 };
 
-//! .
+//! algorithm info
 struct CAST128_Info : public FixedBlockSize<8>, public VariableKeyLength<16, 5, 16>
 {
 	static const char *StaticAlgorithmName() {return "CAST-128";}
@@ -27,7 +29,7 @@ class CAST128 : public CAST128_Info, public BlockCipherDocumentation
 	class CRYPTOPP_NO_VTABLE Base : public CAST, public BlockCipherImpl<CAST128_Info>
 	{
 	public:
-		void UncheckedSetKey(CipherDir direction, const byte *userKey, unsigned int length);
+		void UncheckedSetKey(const byte *userKey, unsigned int length, const NameValuePairs &params);
 
 	protected:
 		bool reduced;
@@ -51,7 +53,7 @@ public:
 	typedef BlockCipherFinal<DECRYPTION, Dec> Decryption;
 };
 
-//! .
+//! algorithm info
 struct CAST256_Info : public FixedBlockSize<16>, public VariableKeyLength<16, 16, 32>
 {
 	static const char *StaticAlgorithmName() {return "CAST-256";}
@@ -63,7 +65,7 @@ class CAST256 : public CAST256_Info, public BlockCipherDocumentation
 	class CRYPTOPP_NO_VTABLE Base : public CAST, public BlockCipherImpl<CAST256_Info>
 	{
 	public:
-		void UncheckedSetKey(CipherDir direction, const byte *userKey, unsigned int length = 8);
+		void UncheckedSetKey(const byte *userKey, unsigned int length, const NameValuePairs &params);
 		void ProcessAndXorBlock(const byte *inBlock, const byte *xorBlock, byte *outBlock) const;
 
 	protected:

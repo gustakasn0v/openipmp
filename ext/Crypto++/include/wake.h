@@ -1,3 +1,8 @@
+// wake.h - written and placed in the public domain by Wei Dai
+
+//! \file wake.h
+//! \brief Classes for WAKE stream cipher
+
 #ifndef CRYPTOPP_WAKE_H
 #define CRYPTOPP_WAKE_H
 
@@ -7,10 +12,11 @@
 
 NAMESPACE_BEGIN(CryptoPP)
 
+//! _
 template <class B = BigEndian>
-struct WAKE_Info : public FixedKeyLength<32>
+struct WAKE_OFB_Info : public FixedKeyLength<32>
 {
-	static const char *StaticAlgorithmName() {return B::ToEnum() == LITTLE_ENDIAN_ORDER ? "WAKE-CFB-LE" : "WAKE-CFB-BE";}
+	static const char *StaticAlgorithmName() {return B::ToEnum() == LITTLE_ENDIAN_ORDER ? "WAKE-OFB-LE" : "WAKE-OFB-BE";}
 };
 
 class CRYPTOPP_NO_VTABLE WAKE_Base
@@ -24,34 +30,20 @@ protected:
 };
 
 template <class B = BigEndian>
-class CRYPTOPP_NO_VTABLE WAKE_Policy : public WAKE_Info<B>
-				, public CFB_CipherConcretePolicy<word32, 1>
-				, public AdditiveCipherConcretePolicy<word32, 1, 64>
-				, protected WAKE_Base
+class CRYPTOPP_NO_VTABLE WAKE_Policy : public AdditiveCipherConcretePolicy<word32, 1, 64>, protected WAKE_Base
 {
 protected:
-	void CipherSetKey(const NameValuePairs &params, const byte *key, unsigned int length);
-	// CFB
-	byte * GetRegisterBegin() {return (byte *)&r6;}
-	void Iterate(byte *output, const byte *input, CipherDir dir, unsigned int iterationCount);
+	void CipherSetKey(const NameValuePairs &params, const byte *key, size_t length);
 	// OFB
-	void OperateKeystream(KeystreamOperation operation, byte *output, const byte *input, unsigned int iterationCount);
-	bool IsRandomAccess() const {return false;}
-};
-
-//! <a href="http://www.weidai.com/scan-mirror/cs.html#WAKE-CFB-BE">WAKE-CFB-BE</a>
-template <class B = BigEndian>
-struct WAKE_CFB : public WAKE_Info<B>, public SymmetricCipherDocumentation
-{
-	typedef SymmetricCipherFinal<ConcretePolicyHolder<WAKE_Policy<B>, CFB_EncryptionTemplate<> > > Encryption;
-	typedef SymmetricCipherFinal<ConcretePolicyHolder<WAKE_Policy<B>, CFB_DecryptionTemplate<> > > Decryption;
+	void OperateKeystream(KeystreamOperation operation, byte *output, const byte *input, size_t iterationCount);
+	bool CipherIsRandomAccess() const {return false;}
 };
 
 //! WAKE-OFB
 template <class B = BigEndian>
-struct WAKE_OFB : public WAKE_Info<B>, public SymmetricCipherDocumentation
+struct WAKE_OFB : public WAKE_OFB_Info<B>, public SymmetricCipherDocumentation
 {
-	typedef SymmetricCipherFinal<ConcretePolicyHolder<WAKE_Policy<B>, AdditiveCipherTemplate<> > > Encryption;
+	typedef SymmetricCipherFinal<ConcretePolicyHolder<WAKE_Policy<B>, AdditiveCipherTemplate<> >,  WAKE_OFB_Info<B> > Encryption;
 	typedef Encryption Decryption;
 };
 

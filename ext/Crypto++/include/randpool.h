@@ -3,42 +3,32 @@
 
 #include "cryptlib.h"
 #include "filters.h"
+#include "secblock.h"
+#include "smartptr.h"
+#include "aes.h"
 
 NAMESPACE_BEGIN(CryptoPP)
 
 //! Randomness Pool
-/*! This class can be used to generate
-	pseudorandom bytes after seeding the pool with
-	the Put() methods */
-class CRYPTOPP_DLL RandomPool : public RandomNumberGenerator,
-				   public Bufferless<BufferedTransformation>
+/*! This class can be used to generate cryptographic quality
+	pseudorandom bytes after seeding the pool with IncorporateEntropy() */
+class CRYPTOPP_DLL RandomPool : public RandomNumberGenerator, public NotCopyable
 {
 public:
-	//! poolSize must be greater than 16
-	RandomPool(unsigned int poolSize=384);
+	RandomPool();
 
-	unsigned int Put2(const byte *begin, unsigned int, int messageEnd, bool blocking);
+	bool CanIncorporateEntropy() const {return true;}
+	void IncorporateEntropy(const byte *input, size_t length);
+	void GenerateIntoBufferedTransformation(BufferedTransformation &target, const std::string &channel, lword size);
 
-	bool AnyRetrievable() const {return true;}
-	unsigned long MaxRetrievable() const {return ULONG_MAX;}
-
-	unsigned int TransferTo2(BufferedTransformation &target, unsigned long &transferBytes, const std::string &channel=NULL_CHANNEL, bool blocking=true);
-	unsigned int CopyRangeTo2(BufferedTransformation &target, unsigned long &begin, unsigned long end=ULONG_MAX, const std::string &channel=NULL_CHANNEL, bool blocking=true) const
-	{
-		throw NotImplemented("RandomPool: CopyRangeTo2() is not supported by this store");
-	}
-
-	byte GenerateByte();
-	void GenerateBlock(byte *output, unsigned int size);
-
-	void IsolatedInitialize(const NameValuePairs &parameters) {}
-
-protected:
-	void Stir();
+	// for backwards compatibility. use RandomNumberSource, RandomNumberStore, and RandomNumberSink for other BufferTransformation functionality
+	void Put(const byte *input, size_t length) {IncorporateEntropy(input, length);}
 
 private:
-	SecByteBlock pool, key;
-	unsigned int addPos, getPos;
+	FixedSizeSecBlock<byte, 32> m_key;
+	FixedSizeSecBlock<byte, 16> m_seed;
+	member_ptr<BlockCipher> m_pCipher;
+	bool m_keySet;
 };
 
 NAMESPACE_END

@@ -1,19 +1,24 @@
+// rsa.h - written and placed in the public domain by Wei Dai
+
+//! \file rsa.h
+//! \brief Classes for the RSA cryptosystem
+//! \details This file contains classes that implement the RSA
+//!   ciphers and signature schemes as defined in PKCS #1 v2.0.
+
 #ifndef CRYPTOPP_RSA_H
 #define CRYPTOPP_RSA_H
 
-/** \file
-	This file contains classes that implement the RSA
-	ciphers and signature schemes as defined in PKCS #1 v2.0.
-*/
-
+#include "cryptlib.h"
+#include "pubkey.h"
+#include "integer.h"
 #include "pkcspad.h"
 #include "oaep.h"
-#include "integer.h"
+#include "emsa2.h"
 #include "asn.h"
 
 NAMESPACE_BEGIN(CryptoPP)
 
-//! .
+//! _
 class CRYPTOPP_DLL RSAFunction : public TrapdoorFunction, public X509PublicKey
 {
 	typedef RSAFunction ThisClass;
@@ -24,8 +29,8 @@ public:
 
 	// X509PublicKey
 	OID GetAlgorithmID() const;
-	void BERDecodeKey(BufferedTransformation &bt);
-	void DEREncodeKey(BufferedTransformation &bt) const;
+	void BERDecodePublicKey(BufferedTransformation &bt, bool parametersPresent, size_t size);
+	void DEREncodePublicKey(BufferedTransformation &bt) const;
 
 	// CryptoMaterial
 	bool Validate(RandomNumberGenerator &rng, unsigned int level) const;
@@ -48,7 +53,7 @@ protected:
 	Integer m_n, m_e;
 };
 
-//! .
+//! _
 class CRYPTOPP_DLL InvertibleRSAFunction : public RSAFunction, public TrapdoorFunctionInverse, public PKCS8PrivateKey
 {
 	typedef InvertibleRSAFunction ThisClass;
@@ -65,8 +70,13 @@ public:
 		{PKCS8PrivateKey::BERDecode(bt);}
 	void DEREncode(BufferedTransformation &bt) const
 		{PKCS8PrivateKey::DEREncode(bt);}
-	void BERDecodeKey(BufferedTransformation &bt);
-	void DEREncodeKey(BufferedTransformation &bt) const;
+	void Load(BufferedTransformation &bt)
+		{PKCS8PrivateKey::BERDecode(bt);}
+	void Save(BufferedTransformation &bt) const
+		{PKCS8PrivateKey::DEREncode(bt);}
+	OID GetAlgorithmID() const {return RSAFunction::GetAlgorithmID();}
+	void BERDecodePrivateKey(BufferedTransformation &bt, bool parametersPresent, size_t size);
+	void DEREncodePrivateKey(BufferedTransformation &bt) const;
 
 	// TrapdoorFunctionInverse
 	Integer CalculateInverse(RandomNumberGenerator &rng, const Integer &x) const;
@@ -97,10 +107,24 @@ protected:
 	Integer m_d, m_p, m_q, m_dp, m_dq, m_u;
 };
 
-//! .
+class CRYPTOPP_DLL RSAFunction_ISO : public RSAFunction
+{
+public:
+	Integer ApplyFunction(const Integer &x) const;
+	Integer PreimageBound() const {return ++(m_n>>1);}
+};
+
+class CRYPTOPP_DLL InvertibleRSAFunction_ISO : public InvertibleRSAFunction
+{
+public:
+	Integer CalculateInverse(RandomNumberGenerator &rng, const Integer &x) const;
+	Integer PreimageBound() const {return ++(m_n>>1);}
+};
+
+//! RSA
 struct CRYPTOPP_DLL RSA
 {
-	static std::string StaticAlgorithmName() {return "RSA";}
+	static const char * CRYPTOPP_API StaticAlgorithmName() {return "RSA";}
 	typedef RSAFunction PublicKey;
 	typedef InvertibleRSAFunction PrivateKey;
 };
@@ -118,6 +142,18 @@ struct RSASS : public TF_SS<STANDARD, H, RSA>
 {
 };
 
+struct CRYPTOPP_DLL RSA_ISO
+{
+	static const char * CRYPTOPP_API StaticAlgorithmName() {return "RSA-ISO";}
+	typedef RSAFunction_ISO PublicKey;
+	typedef InvertibleRSAFunction_ISO PrivateKey;
+};
+
+template <class H>
+struct RSASS_ISO : public TF_SS<P1363_EMSA2, H, RSA_ISO>
+{
+};
+
 // The two RSA encryption schemes defined in PKCS #1 v2.0
 typedef RSAES<PKCS1v15>::Decryptor RSAES_PKCS1v15_Decryptor;
 typedef RSAES<PKCS1v15>::Encryptor RSAES_PKCS1v15_Encryptor;
@@ -129,11 +165,13 @@ typedef RSAES<OAEP<SHA> >::Encryptor RSAES_OAEP_SHA_Encryptor;
 typedef RSASS<PKCS1v15, SHA>::Signer RSASSA_PKCS1v15_SHA_Signer;
 typedef RSASS<PKCS1v15, SHA>::Verifier RSASSA_PKCS1v15_SHA_Verifier;
 
-typedef RSASS<PKCS1v15, MD2>::Signer RSASSA_PKCS1v15_MD2_Signer;
-typedef RSASS<PKCS1v15, MD2>::Verifier RSASSA_PKCS1v15_MD2_Verifier;
+namespace Weak {
+typedef RSASS<PKCS1v15, Weak1::MD2>::Signer RSASSA_PKCS1v15_MD2_Signer;
+typedef RSASS<PKCS1v15, Weak1::MD2>::Verifier RSASSA_PKCS1v15_MD2_Verifier;
 
-typedef RSASS<PKCS1v15, MD5>::Signer RSASSA_PKCS1v15_MD5_Signer;
-typedef RSASS<PKCS1v15, MD5>::Verifier RSASSA_PKCS1v15_MD5_Verifier;
+typedef RSASS<PKCS1v15, Weak1::MD5>::Signer RSASSA_PKCS1v15_MD5_Signer;
+typedef RSASS<PKCS1v15, Weak1::MD5>::Verifier RSASSA_PKCS1v15_MD5_Verifier;
+}
 
 NAMESPACE_END
 

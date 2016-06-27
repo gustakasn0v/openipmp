@@ -1,20 +1,24 @@
 // lubyrack.h - written and placed in the public domain by Wei Dai
 
+//! \file lubyrack.h
+//! \brief Classes for the Luby-Rackoff block cipher
+	
 #ifndef CRYPTOPP_LUBYRACK_H
 #define CRYPTOPP_LUBYRACK_H
-
-/** \file */
 
 #include "simple.h"
 #include "secblock.h"
 
 NAMESPACE_BEGIN(CryptoPP)
 
-template <class T> struct DigestSizeDoubleWorkaround {enum {RESULT = 2*T::DIGESTSIZE};};	// VC60 workaround
+template <class T> struct DigestSizeDoubleWorkaround 	// VC60 workaround
+{
+	CRYPTOPP_CONSTANT(RESULT = 2*T::DIGESTSIZE)
+};
 
-//! .
+//! algorithm info
 template <class T>
-struct LR_Info : public VariableKeyLength<16, 0, 2*(UINT_MAX/2), 2>, public FixedBlockSize<DigestSizeDoubleWorkaround<T>::RESULT>
+struct LR_Info : public VariableKeyLength<16, 0, 2*(INT_MAX/2), 2>, public FixedBlockSize<DigestSizeDoubleWorkaround<T>::RESULT>
 {
 	static std::string StaticAlgorithmName() {return std::string("LR/")+T::StaticAlgorithmName();}
 };
@@ -27,7 +31,7 @@ class LR : public LR_Info<T>, public BlockCipherDocumentation
 	{
 	public:
 		// VC60 workaround: have to define these functions within class definition
-		void UncheckedSetKey(CipherDir direction, const byte *userKey, unsigned int length)
+		void UncheckedSetKey(const byte *userKey, unsigned int length, const NameValuePairs &params)
 		{
 			this->AssertValidKeyLength(length);
 
@@ -38,7 +42,7 @@ class LR : public LR_Info<T>, public BlockCipherDocumentation
 		}
 
 	protected:
-		enum GCC4FIX4 {S=T::DIGESTSIZE};
+		CRYPTOPP_CONSTANT(S=T::DIGESTSIZE)
 		unsigned int L;	// key length / 2
 		SecByteBlock key;
 
@@ -84,7 +88,7 @@ class LR : public LR_Info<T>, public BlockCipherDocumentation
 			if (xorBlock)
 				xorbuf(outBlock, xorBlock, this->buffer, 2*this->S);
 			else
-				memcpy(outBlock, this->buffer, 2*this->S);
+				memcpy_s(outBlock, 2*this->S, this->buffer, 2*this->S);
 		}
 	};
 

@@ -1,8 +1,10 @@
+// safer.h - written and placed in the public domain by Wei Dai
+
+//! \file safer.h
+//! \brief Classes for the SAFER block cipher
+
 #ifndef CRYPTOPP_SAFER_H
 #define CRYPTOPP_SAFER_H
-
-/** \file
-*/
 
 #include "seckey.h"
 #include "secblock.h"
@@ -16,10 +18,12 @@ public:
 	class CRYPTOPP_NO_VTABLE Base : public BlockCipher
 	{
 	public:
-		unsigned int GetAlignment() const {return 1;}
-		void UncheckedSetKey(CipherDir dir, const byte *userkey, unsigned int length, unsigned nof_rounds);
+		unsigned int OptimalDataAlignment() const {return 1;}
+		void UncheckedSetKey(const byte *userkey, unsigned int length, const NameValuePairs &params);
 
-		bool strengthened;
+	protected:
+		virtual bool Strengthened() const =0;
+
 		SecByteBlock keySchedule;
 		static const byte exp_tab[256];
 		static const byte log_tab[256];
@@ -38,56 +42,39 @@ public:
 	};
 };
 
+template <class BASE, class INFO, bool STR>
+class CRYPTOPP_NO_VTABLE SAFER_Impl : public BlockCipherImpl<INFO, BASE>
+{
+protected:
+	bool Strengthened() const {return STR;}
+};
+
+//! _
 struct SAFER_K_Info : public FixedBlockSize<8>, public VariableKeyLength<16, 8, 16, 8>, public VariableRounds<10, 1, 13>
 {
 	static const char *StaticAlgorithmName() {return "SAFER-K";}
-	static unsigned int DefaultRounds(unsigned int keylength) {return keylength == 8 ? 6 : 10;}
 };
 
 /// <a href="http://www.weidai.com/scan-mirror/cs.html#SAFER-K">SAFER-K</a>
 class SAFER_K : public SAFER_K_Info, public SAFER, public BlockCipherDocumentation
 {
-	class CRYPTOPP_NO_VTABLE Enc : public BlockCipherImpl<SAFER_K_Info, SAFER::Enc>
-	{
-	public:
-		Enc() {strengthened = false;}
-	};
-
-	class CRYPTOPP_NO_VTABLE Dec : public BlockCipherImpl<SAFER_K_Info, SAFER::Dec>
-	{
-	public:
-		Dec() {strengthened = false;}
-	};
-
 public:
-	typedef BlockCipherFinal<ENCRYPTION, Enc> Encryption;
-	typedef BlockCipherFinal<DECRYPTION, Dec> Decryption;
+	typedef BlockCipherFinal<ENCRYPTION, SAFER_Impl<Enc, SAFER_K_Info, false> > Encryption;
+	typedef BlockCipherFinal<DECRYPTION, SAFER_Impl<Dec, SAFER_K_Info, false> > Decryption;
 };
 
+//! _
 struct SAFER_SK_Info : public FixedBlockSize<8>, public VariableKeyLength<16, 8, 16, 8>, public VariableRounds<10, 1, 13>
 {
 	static const char *StaticAlgorithmName() {return "SAFER-SK";}
-	static unsigned int DefaultRounds(unsigned int keylength) {return keylength == 8 ? 8 : 10;}
 };
 
 /// <a href="http://www.weidai.com/scan-mirror/cs.html#SAFER-SK">SAFER-SK</a>
 class SAFER_SK : public SAFER_SK_Info, public SAFER, public BlockCipherDocumentation
 {
-	class CRYPTOPP_NO_VTABLE Enc : public BlockCipherImpl<SAFER_SK_Info, SAFER::Enc>
-	{
-	public:
-		Enc() {strengthened = true;}
-	};
-
-	class CRYPTOPP_NO_VTABLE Dec : public BlockCipherImpl<SAFER_SK_Info, SAFER::Dec>
-	{
-	public:
-		Dec() {strengthened = true;}
-	};
-
 public:
-	typedef BlockCipherFinal<ENCRYPTION, Enc> Encryption;
-	typedef BlockCipherFinal<DECRYPTION, Dec> Decryption;
+	typedef BlockCipherFinal<ENCRYPTION, SAFER_Impl<Enc, SAFER_SK_Info, true> > Encryption;
+	typedef BlockCipherFinal<DECRYPTION, SAFER_Impl<Dec, SAFER_SK_Info, true> > Decryption;
 };
 
 typedef SAFER_K::Encryption SAFER_K_Encryption;

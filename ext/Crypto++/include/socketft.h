@@ -1,10 +1,9 @@
 #ifndef CRYPTOPP_SOCKETFT_H
 #define CRYPTOPP_SOCKETFT_H
 
-#include "config.h"
-
 #ifdef SOCKETS_AVAILABLE
 
+#include "cryptlib.h"
 #include "network.h"
 #include "queue.h"
 
@@ -77,8 +76,9 @@ public:
 	bool Connect(const sockaddr* psa, socklen_t saLen);
 	bool Accept(Socket& s, sockaddr *psa=NULL, socklen_t *psaLen=NULL);
 	void GetSockName(sockaddr *psa, socklen_t *psaLen);
-	unsigned int Send(const byte* buf, unsigned int bufLen, int flags=0);
-	unsigned int Receive(byte* buf, unsigned int bufLen, int flags=0);
+	void GetPeerName(sockaddr *psa, socklen_t *psaLen);
+	unsigned int Send(const byte* buf, size_t bufLen, int flags=0);
+	unsigned int Receive(byte* buf, size_t bufLen, int flags=0);
 	void ShutDown(int how = SD_SEND);
 
 	void IOCtl(long cmd, unsigned long *argp);
@@ -89,10 +89,12 @@ public:
 	void CheckAndHandleError_int(const char *operation, int result) const
 		{if (result == SOCKET_ERROR) HandleError(operation);}
 	void CheckAndHandleError(const char *operation, socket_t result) const
-		{if (result == SOCKET_ERROR) HandleError(operation);}
+		{if (result == static_cast<socket_t>(SOCKET_ERROR)) HandleError(operation);}
 #ifdef USE_WINDOWS_STYLE_SOCKETS
 	void CheckAndHandleError(const char *operation, BOOL result) const
 		{assert(result==TRUE || result==FALSE); if (!result) HandleError(operation);}
+	void CheckAndHandleError(const char *operation, bool result) const
+		{if (!result) HandleError(operation);}
 #endif
 
 	//! look up the port number given its name, returns 0 if not found
@@ -117,7 +119,7 @@ class SocketsInitializer
 {
 public:
 	SocketsInitializer() {Socket::StartSockets();}
-	~SocketsInitializer() {try {Socket::ShutdownSockets();} catch (...) {}}
+	~SocketsInitializer() {try {Socket::ShutdownSockets();} catch (const Exception&) {assert(0);}}
 };
 
 class SocketReceiver : public NetworkReceiver
@@ -128,14 +130,15 @@ public:
 #ifdef USE_BERKELEY_STYLE_SOCKETS
 	bool MustWaitToReceive() {return true;}
 #else
+	~SocketReceiver();
 	bool MustWaitForResult() {return true;}
 #endif
-	bool Receive(byte* buf, unsigned int bufLen);
+	bool Receive(byte* buf, size_t bufLen);
 	unsigned int GetReceiveResult();
 	bool EofReceived() const {return m_eofReceived;}
 
 	unsigned int GetMaxWaitObjectCount() const {return 1;}
-	void GetWaitObjects(WaitObjectContainer &container);
+	void GetWaitObjects(WaitObjectContainer &container, CallStack const& callStack);
 
 private:
 	Socket &m_s;
@@ -159,14 +162,17 @@ public:
 #ifdef USE_BERKELEY_STYLE_SOCKETS
 	bool MustWaitToSend() {return true;}
 #else
+	~SocketSender();
 	bool MustWaitForResult() {return true;}
+	bool MustWaitForEof() { return true; }
+	bool EofSent();
 #endif
-	void Send(const byte* buf, unsigned int bufLen);
+	void Send(const byte* buf, size_t bufLen);
 	unsigned int GetSendResult();
-	void SendEof() {m_s.ShutDown(SD_SEND);}
+	void SendEof();
 
 	unsigned int GetMaxWaitObjectCount() const {return 1;}
-	void GetWaitObjects(WaitObjectContainer &container);
+	void GetWaitObjects(WaitObjectContainer &container, CallStack const& callStack);
 
 private:
 	Socket &m_s;
@@ -180,7 +186,7 @@ private:
 #endif
 };
 
-//! .
+//! socket-based implementation of NetworkSource
 class SocketSource : public NetworkSource, public Socket
 {
 public:
@@ -196,7 +202,7 @@ private:
 	SocketReceiver m_receiver;
 };
 
-//! .
+//! socket-based implementation of NetworkSink
 class SocketSink : public NetworkSink, public Socket
 {
 public:

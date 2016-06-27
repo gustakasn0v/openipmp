@@ -1,14 +1,17 @@
+// mars.h - written and placed in the public domain by Wei Dai
+
+//! \file mars.h
+//! \brief Classes for the MARS block cipher (IBM AES submission)
+
 #ifndef CRYPTOPP_MARS_H
 #define CRYPTOPP_MARS_H
-
-/** \file
-*/
 
 #include "seckey.h"
 #include "secblock.h"
 
 NAMESPACE_BEGIN(CryptoPP)
 
+//! _
 struct MARS_Info : public FixedBlockSize<16>, public VariableKeyLength<16, 16, 56, 4>
 {
 	static const char *StaticAlgorithmName() {return "MARS";}
@@ -20,12 +23,12 @@ class MARS : public MARS_Info, public BlockCipherDocumentation
 	class CRYPTOPP_NO_VTABLE Base : public BlockCipherImpl<MARS_Info>
 	{
 	public:
-		void UncheckedSetKey(CipherDir direction, const byte *userKey, unsigned int length);
+		void UncheckedSetKey(const byte *userKey, unsigned int length, const NameValuePairs &params);
 
 	protected:
 		static const word32 Sbox[512];
 
-		FixedSizeSecBlock<word32, 40> EK;
+		FixedSizeSecBlock<word32, 40> m_k;
 	};
 
 	class CRYPTOPP_NO_VTABLE Enc : public Base

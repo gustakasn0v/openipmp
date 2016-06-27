@@ -1,12 +1,18 @@
+// modarith.h - written and placed in the public domain by Wei Dai
+
+//! \file modarith.h
+//! \brief Class file for performing modular arithmetic.
+
 #ifndef CRYPTOPP_MODARITH_H
 #define CRYPTOPP_MODARITH_H
 
 // implementations are in integer.cpp
 
 #include "cryptlib.h"
-#include "misc.h"
 #include "integer.h"
 #include "algebra.h"
+#include "secblock.h"
+#include "misc.h"
 
 NAMESPACE_BEGIN(CryptoPP)
 
@@ -14,7 +20,10 @@ CRYPTOPP_DLL_TEMPLATE_CLASS AbstractGroup<Integer>;
 CRYPTOPP_DLL_TEMPLATE_CLASS AbstractRing<Integer>;
 CRYPTOPP_DLL_TEMPLATE_CLASS AbstractEuclideanDomain<Integer>;
 
-//! .
+//! \class ModularArithmetic
+//! \brief Ring of congruence classes modulo n
+//! \note this implementation represents each congruence class as the smallest
+//!   non-negative integer in that class
 class CRYPTOPP_DLL ModularArithmetic : public AbstractRing<Integer>
 {
 public:
@@ -23,10 +32,9 @@ public:
 	typedef Integer Element;
 
 	ModularArithmetic(const Integer &modulus = Integer::One())
-		: modulus(modulus), result((word)0, modulus.reg.size()) {}
-
+		: AbstractRing<Integer>(), m_modulus(modulus), m_result((word)0, modulus.reg.size()) {}
 	ModularArithmetic(const ModularArithmetic &ma)
-		: modulus(ma.modulus), result((word)0, modulus.reg.size()) {}
+		: AbstractRing<Integer>(), m_modulus(ma.m_modulus), m_result((word)0, ma.m_modulus.reg.size()) {}
 
 	ModularArithmetic(BufferedTransformation &bt);	// construct from BER encoded parameters
 
@@ -37,13 +45,14 @@ public:
 	void DEREncodeElement(BufferedTransformation &out, const Element &a) const;
 	void BERDecodeElement(BufferedTransformation &in, Element &a) const;
 
-	const Integer& GetModulus() const {return modulus;}
-	void SetModulus(const Integer &newModulus) {modulus = newModulus; result.reg.resize(modulus.reg.size());}
+	const Integer& GetModulus() const {return m_modulus;}
+	void SetModulus(const Integer &newModulus)
+		{m_modulus = newModulus; m_result.reg.resize(m_modulus.reg.size());}
 
 	virtual bool IsMontgomeryRepresentation() const {return false;}
 
 	virtual Integer ConvertIn(const Integer &a) const
-		{return a%modulus;}
+		{return a%m_modulus;}
 
 	virtual Integer ConvertOut(const Integer &a) const
 		{return a;}
@@ -73,16 +82,16 @@ public:
 		{return Integer::One();}
 
 	const Integer& Multiply(const Integer &a, const Integer &b) const
-		{return result1 = a*b%modulus;}
+		{return m_result1 = a*b%m_modulus;}
 
 	const Integer& Square(const Integer &a) const
-		{return result1 = a.Squared()%modulus;}
+		{return m_result1 = a.Squared()%m_modulus;}
 
 	bool IsUnit(const Integer &a) const
-		{return Integer::Gcd(a, modulus).IsUnit();}
+		{return Integer::Gcd(a, m_modulus).IsUnit();}
 
 	const Integer& MultiplicativeInverse(const Integer &a) const
-		{return result1 = a.InverseMod(modulus);}
+		{return m_result1 = a.InverseMod(m_modulus);}
 
 	const Integer& Divide(const Integer &a, const Integer &b) const
 		{return Multiply(a, MultiplicativeInverse(b));}
@@ -92,31 +101,39 @@ public:
 	void SimultaneousExponentiate(Element *results, const Element &base, const Integer *exponents, unsigned int exponentsCount) const;
 
 	unsigned int MaxElementBitLength() const
-		{return (modulus-1).BitCount();}
+		{return (m_modulus-1).BitCount();}
 
 	unsigned int MaxElementByteLength() const
-		{return (modulus-1).ByteCount();}
+		{return (m_modulus-1).ByteCount();}
 
 	Element RandomElement( RandomNumberGenerator &rng , const RandomizationParameter &ignore_for_now = 0 ) const
 		// left RandomizationParameter arg as ref in case RandomizationParameter becomes a more complicated struct
-	{ 
-		return Element( rng , Integer( (long) 0) , modulus - Integer( (long) 1 )   ) ; 
+	{
+		CRYPTOPP_UNUSED(ignore_for_now);
+		return Element(rng, Integer::Zero(), m_modulus - Integer::One()) ; 
 	}   
 
 	bool operator==(const ModularArithmetic &rhs) const
-		{return modulus == rhs.modulus;}
+		{return m_modulus == rhs.m_modulus;}
 
 	static const RandomizationParameter DefaultRandomizationParameter ;
+	
+#ifndef CRYPTOPP_MAINTAIN_BACKWARDS_COMPATIBILITY_562
+	virtual ~ModularArithmetic() {}
+#endif
 
 protected:
-	Integer modulus;
-	mutable Integer result, result1;
+	Integer m_modulus;
+	mutable Integer m_result, m_result1;
 
 };
 
 // const ModularArithmetic::RandomizationParameter ModularArithmetic::DefaultRandomizationParameter = 0 ;
 
-//! do modular arithmetics in Montgomery representation for increased speed
+//! \class MontgomeryRepresentation
+//! \brief Performs modular arithmetic in Montgomery representation for increased speed
+//! \details The Montgomery representation represents each congruence class <tt>[a]</tt> as
+//!   <tt>a*r%n</tt>, where r is a convenient power of 2.
 class CRYPTOPP_DLL MontgomeryRepresentation : public ModularArithmetic
 {
 public:
@@ -127,12 +144,12 @@ public:
 	bool IsMontgomeryRepresentation() const {return true;}
 
 	Integer ConvertIn(const Integer &a) const
-		{return (a<<(WORD_BITS*modulus.reg.size()))%modulus;}
+		{return (a<<(WORD_BITS*m_modulus.reg.size()))%m_modulus;}
 
 	Integer ConvertOut(const Integer &a) const;
 
 	const Integer& MultiplicativeIdentity() const
-		{return result1 = Integer::Power2(WORD_BITS*modulus.reg.size())%modulus;}
+		{return m_result1 = Integer::Power2(WORD_BITS*m_modulus.reg.size())%m_modulus;}
 
 	const Integer& Multiply(const Integer &a, const Integer &b) const;
 
@@ -146,9 +163,13 @@ public:
 	void SimultaneousExponentiate(Element *results, const Element &base, const Integer *exponents, unsigned int exponentsCount) const
 		{AbstractRing<Integer>::SimultaneousExponentiate(results, base, exponents, exponentsCount);}
 
+#ifndef CRYPTOPP_MAINTAIN_BACKWARDS_COMPATIBILITY_562
+	virtual ~MontgomeryRepresentation() {}
+#endif
+
 private:
-	Integer u;
-	mutable SecAlignedWordBlock workspace;
+	Integer m_u;
+	mutable IntegerSecBlock m_workspace;
 };
 
 NAMESPACE_END

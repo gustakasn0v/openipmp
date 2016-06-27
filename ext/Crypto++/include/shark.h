@@ -1,18 +1,18 @@
+// shark.h - written and placed in the public domain by Wei Dai
+
+//! \file shark.h
+//! \brief Classes for the SHARK block cipher
+
 #ifndef CRYPTOPP_SHARK_H
 #define CRYPTOPP_SHARK_H
 
-/** \file
-*/
-
 #include "config.h"
-
-#ifdef WORD64_AVAILABLE
-
 #include "seckey.h"
 #include "secblock.h"
 
 NAMESPACE_BEGIN(CryptoPP)
 
+//! _
 struct SHARK_Info : public FixedBlockSize<8>, public VariableKeyLength<16, 1, 16>, public VariableRounds<6, 2>
 {
 	static const char *StaticAlgorithmName() {return "SHARK-E";}
@@ -24,7 +24,7 @@ class SHARK : public SHARK_Info, public BlockCipherDocumentation
 	class CRYPTOPP_NO_VTABLE Base : public BlockCipherImpl<SHARK_Info>
 	{
 	public:
-		void UncheckedSetKey(CipherDir dir, const byte *key, unsigned int length, unsigned int rounds);
+		void UncheckedSetKey(const byte *key, unsigned int length, const NameValuePairs &param);
 
 	protected:
 		unsigned int m_rounds;
@@ -64,5 +64,4 @@ typedef SHARK::Decryption SHARKDecryption;
 
 NAMESPACE_END
 
-#endif
 #endif

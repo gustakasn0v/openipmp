@@ -1,14 +1,17 @@
+// gost.h - written and placed in the public domain by Wei Dai
+
+//! \file gost.h
+//! \brief Classes for the GIST block cipher
+
 #ifndef CRYPTOPP_GOST_H
 #define CRYPTOPP_GOST_H
-
-/** \file
-*/
 
 #include "seckey.h"
 #include "secblock.h"
 
 NAMESPACE_BEGIN(CryptoPP)
 
+//! _
 struct GOST_Info : public FixedBlockSize<8>, public FixedKeyLength<32>
 {
 	static const char *StaticAlgorithmName() {return "GOST";}
@@ -20,13 +23,13 @@ class GOST : public GOST_Info, public BlockCipherDocumentation
 	class CRYPTOPP_NO_VTABLE Base : public BlockCipherImpl<GOST_Info>
 	{
 	public:
-		void UncheckedSetKey(CipherDir direction, const byte *userKey, unsigned int length);
+		void UncheckedSetKey(const byte *userKey, unsigned int length, const NameValuePairs &params);
 
 	protected:
 		static void PrecalculateSTable();
 
 		static const byte sBox[8][16];
-		static bool sTableCalculated;
+		static volatile bool sTableCalculated;
 		static word32 sTable[4][256];
 
 		FixedSizeSecBlock<word32, 8> key;

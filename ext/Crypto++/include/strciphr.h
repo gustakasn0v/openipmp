@@ -14,7 +14,7 @@
 	(since it's an additive cipher, i.e., it xors a keystream into the plaintext).
 	See this line in seal.h:
 
-	typedef SymmetricCipherFinal<ConcretePolicyHolder<SEAL_Policy<B>, AdditiveCipherTemplate<> > > Encryption;
+	typedef SymmetricCipherFinal\<ConcretePolicyHolder\<SEAL_Policy\<B\>, AdditiveCipherTemplate\<\> \> \> Encryption;
 
 	AdditiveCipherTemplate and CFB_CipherTemplate are designed so that they don't need
 	to take a policy class as a template parameter (although this is allowed), so that
@@ -28,6 +28,14 @@
 #ifndef CRYPTOPP_STRCIPHR_H
 #define CRYPTOPP_STRCIPHR_H
 
+#include "config.h"
+
+#if CRYPTOPP_MSC_VERSION
+# pragma warning(push)
+# pragma warning(disable: 4127 4189)
+#endif
+
+#include "cryptlib.h"
 #include "seckey.h"
 #include "secblock.h"
 #include "argnames.h"
@@ -39,6 +47,7 @@ class CRYPTOPP_NO_VTABLE AbstractPolicyHolder : public BASE
 {
 public:
 	typedef POLICY_INTERFACE PolicyInterface;
+	virtual ~AbstractPolicyHolder() {}
 
 protected:
 	virtual const POLICY_INTERFACE & GetPolicy() const =0;
@@ -53,89 +62,104 @@ protected:
 	POLICY_INTERFACE & AccessPolicy() {return *this;}
 };
 
-enum KeystreamOperation {WRITE_KEYSTREAM, XOR_KEYSTREAM, XOR_KEYSTREAM_INPLACE};
+enum KeystreamOperationFlags {OUTPUT_ALIGNED=1, INPUT_ALIGNED=2, INPUT_NULL = 4};
+enum KeystreamOperation {
+	WRITE_KEYSTREAM				= INPUT_NULL, 
+	WRITE_KEYSTREAM_ALIGNED		= INPUT_NULL | OUTPUT_ALIGNED, 
+	XOR_KEYSTREAM				= 0, 
+	XOR_KEYSTREAM_INPUT_ALIGNED = INPUT_ALIGNED, 
+	XOR_KEYSTREAM_OUTPUT_ALIGNED= OUTPUT_ALIGNED, 
+	XOR_KEYSTREAM_BOTH_ALIGNED	= OUTPUT_ALIGNED | INPUT_ALIGNED};
 
 struct CRYPTOPP_DLL CRYPTOPP_NO_VTABLE AdditiveCipherAbstractPolicy
 {
-	virtual unsigned int GetAlignment() const =0;
+	virtual ~AdditiveCipherAbstractPolicy() {}
+	virtual unsigned int GetAlignment() const {return 1;}
 	virtual unsigned int GetBytesPerIteration() const =0;
+	virtual unsigned int GetOptimalBlockSize() const {return GetBytesPerIteration();}
 	virtual unsigned int GetIterationsToBuffer() const =0;
-	virtual void WriteKeystream(byte *keystreamBuffer, unsigned int iterationCount) =0;
+	virtual void WriteKeystream(byte *keystream, size_t iterationCount)
+		{OperateKeystream(KeystreamOperation(INPUT_NULL | (KeystreamOperationFlags)IsAlignedOn(keystream, GetAlignment())), keystream, NULL, iterationCount);}
 	virtual bool CanOperateKeystream() const {return false;}
-	virtual void OperateKeystream(KeystreamOperation operation, byte *output, const byte *input, unsigned int iterationCount) {assert(false);}
-	virtual void CipherSetKey(const NameValuePairs &params, const byte *key, unsigned int length) =0;
-	virtual void CipherResynchronize(byte *keystreamBuffer, const byte *iv) {throw NotImplemented("StreamTransformation: this object doesn't support resynchronization");}
-	virtual bool IsRandomAccess() const =0;
-	virtual void SeekToIteration(lword iterationCount) {assert(!IsRandomAccess()); throw NotImplemented("StreamTransformation: this object doesn't support random access");}
+	virtual void OperateKeystream(KeystreamOperation operation, byte *output, const byte *input, size_t iterationCount)
+		{CRYPTOPP_UNUSED(operation); CRYPTOPP_UNUSED(output); CRYPTOPP_UNUSED(input); CRYPTOPP_UNUSED(iterationCount); assert(false);}
+	virtual void CipherSetKey(const NameValuePairs &params, const byte *key, size_t length) =0;
+	virtual void CipherResynchronize(byte *keystreamBuffer, const byte *iv, size_t length)
+		{CRYPTOPP_UNUSED(keystreamBuffer); CRYPTOPP_UNUSED(iv); CRYPTOPP_UNUSED(length); throw NotImplemented("SimpleKeyingInterface: this object doesn't support resynchronization");}
+	virtual bool CipherIsRandomAccess() const =0;
+	virtual void SeekToIteration(lword iterationCount)
+		{CRYPTOPP_UNUSED(iterationCount); assert(!CipherIsRandomAccess()); throw NotImplemented("StreamTransformation: this object doesn't support random access");}
 };
 
 template <typename WT, unsigned int W, unsigned int X = 1, class BASE = AdditiveCipherAbstractPolicy>
 struct CRYPTOPP_NO_VTABLE AdditiveCipherConcretePolicy : public BASE
 {
 	typedef WT WordType;
+	CRYPTOPP_CONSTANT(BYTES_PER_ITERATION = sizeof(WordType) * W)
 
-	unsigned int GetAlignment() const {return sizeof(WordType);}
-	unsigned int GetBytesPerIteration() const {return sizeof(WordType) * W;}
+#if !(CRYPTOPP_BOOL_X86 || CRYPTOPP_BOOL_X64)
+	unsigned int GetAlignment() const {return GetAlignmentOf<WordType>();}
+#endif
+	unsigned int GetBytesPerIteration() const {return BYTES_PER_ITERATION;}
 	unsigned int GetIterationsToBuffer() const {return X;}
-	void WriteKeystream(byte *buffer, unsigned int iterationCount)
-		{OperateKeystream(WRITE_KEYSTREAM, buffer, NULL, iterationCount);}
 	bool CanOperateKeystream() const {return true;}
-	virtual void OperateKeystream(KeystreamOperation operation, byte *output, const byte *input, unsigned int iterationCount) =0;
-
-	template <class B>
-	struct KeystreamOutput
-	{
-		KeystreamOutput(KeystreamOperation operation, byte *output, const byte *input)
-			: m_operation(operation), m_output(output), m_input(input) {}
-
-		inline KeystreamOutput & operator()(WordType keystreamWord)
-		{
-			assert(IsAligned<WordType>(m_input));
-			assert(IsAligned<WordType>(m_output));
-
-			if (!NativeByteOrderIs(B::ToEnum()))
-				keystreamWord = ByteReverse(keystreamWord);
-
-			if (m_operation == WRITE_KEYSTREAM)
-				*(WordType*)m_output = keystreamWord;
-			else if (m_operation == XOR_KEYSTREAM)
-			{
-				*(WordType*)m_output = keystreamWord ^ *(WordType*)m_input;
-				m_input += sizeof(WordType);
-			}
-			else if (m_operation == XOR_KEYSTREAM_INPLACE)
-				*(WordType*)m_output ^= keystreamWord;
-
-			m_output += sizeof(WordType);
-
-			return *this;
-		}
-
-		KeystreamOperation m_operation;
-		byte *m_output;
-		const byte *m_input;
-	};
+	virtual void OperateKeystream(KeystreamOperation operation, byte *output, const byte *input, size_t iterationCount) =0;
 };
 
-template <class BASE = AbstractPolicyHolder<AdditiveCipherAbstractPolicy, TwoBases<SymmetricCipher, RandomNumberGenerator> > >
-class CRYPTOPP_NO_VTABLE AdditiveCipherTemplate : public BASE
+// use these to implement OperateKeystream
+#define CRYPTOPP_KEYSTREAM_OUTPUT_WORD(x, b, i, a)	\
+	PutWord(bool(x & OUTPUT_ALIGNED), b, output+i*sizeof(WordType), (x & INPUT_NULL) ? (a) : (a) ^ GetWord<WordType>(bool(x & INPUT_ALIGNED), b, input+i*sizeof(WordType)));
+#define CRYPTOPP_KEYSTREAM_OUTPUT_XMM(x, i, a)	{\
+	__m128i t = (x & INPUT_NULL) ? a : _mm_xor_si128(a, (x & INPUT_ALIGNED) ? _mm_load_si128((__m128i *)input+i) : _mm_loadu_si128((__m128i *)input+i));\
+	if (x & OUTPUT_ALIGNED) _mm_store_si128((__m128i *)output+i, t);\
+	else _mm_storeu_si128((__m128i *)output+i, t);}
+#define CRYPTOPP_KEYSTREAM_OUTPUT_SWITCH(x, y)	\
+	switch (operation)							\
+	{											\
+		case WRITE_KEYSTREAM:					\
+			x(WRITE_KEYSTREAM)					\
+			break;								\
+		case XOR_KEYSTREAM:						\
+			x(XOR_KEYSTREAM)					\
+			input += y;							\
+			break;								\
+		case XOR_KEYSTREAM_INPUT_ALIGNED:		\
+			x(XOR_KEYSTREAM_INPUT_ALIGNED)		\
+			input += y;							\
+			break;								\
+		case XOR_KEYSTREAM_OUTPUT_ALIGNED:		\
+			x(XOR_KEYSTREAM_OUTPUT_ALIGNED)		\
+			input += y;							\
+			break;								\
+		case WRITE_KEYSTREAM_ALIGNED:			\
+			x(WRITE_KEYSTREAM_ALIGNED)			\
+			break;								\
+		case XOR_KEYSTREAM_BOTH_ALIGNED:		\
+			x(XOR_KEYSTREAM_BOTH_ALIGNED)		\
+			input += y;							\
+			break;								\
+	}											\
+	output += y;
+
+template <class BASE = AbstractPolicyHolder<AdditiveCipherAbstractPolicy, SymmetricCipher> >
+class CRYPTOPP_NO_VTABLE AdditiveCipherTemplate : public BASE, public RandomNumberGenerator
 {
 public:
-    byte GenerateByte();
-    void ProcessData(byte *outString, const byte *inString, unsigned int length);
-	void Resynchronize(const byte *iv);
-	unsigned int OptimalBlockSize() const {return this->GetPolicy().GetBytesPerIteration();}
-	unsigned int GetOptimalNextBlockSize() const {return this->m_leftOver;}
+	void GenerateBlock(byte *output, size_t size);
+    void ProcessData(byte *outString, const byte *inString, size_t length);
+	void Resynchronize(const byte *iv, int length=-1);
+	unsigned int OptimalBlockSize() const {return this->GetPolicy().GetOptimalBlockSize();}
+	unsigned int GetOptimalNextBlockSize() const {return (unsigned int)this->m_leftOver;}
 	unsigned int OptimalDataAlignment() const {return this->GetPolicy().GetAlignment();}
 	bool IsSelfInverting() const {return true;}
 	bool IsForwardTransformation() const {return true;}
-	bool IsRandomAccess() const {return this->GetPolicy().IsRandomAccess();}
+	bool IsRandomAccess() const {return this->GetPolicy().CipherIsRandomAccess();}
 	void Seek(lword position);
 
 	typedef typename BASE::PolicyInterface PolicyInterface;
 
 protected:
-	void UncheckedSetKey(const NameValuePairs &params, const byte *key, unsigned int length, const byte *iv);
+	void UncheckedSetKey(const byte *key, unsigned int length, const NameValuePairs &params);
 
 	unsigned int GetBufferByteSize(const PolicyInterface &policy) const {return policy.GetBytesPerIteration() * policy.GetIterationsToBuffer();}
 
@@ -143,24 +167,24 @@ protected:
 	inline byte * KeystreamBufferEnd() {return (this->m_buffer.data() + this->m_buffer.size());}
 
 	SecByteBlock m_buffer;
-	unsigned int m_leftOver;
+	size_t m_leftOver;
 };
-
-CRYPTOPP_DLL_TEMPLATE_CLASS TwoBases<SymmetricCipher, RandomNumberGenerator>;
-CRYPTOPP_DLL_TEMPLATE_CLASS AbstractPolicyHolder<AdditiveCipherAbstractPolicy, TwoBases<SymmetricCipher, RandomNumberGenerator> >;
-CRYPTOPP_DLL_TEMPLATE_CLASS AdditiveCipherTemplate<>;
 
 class CRYPTOPP_DLL CRYPTOPP_NO_VTABLE CFB_CipherAbstractPolicy
 {
 public:
+	virtual ~CFB_CipherAbstractPolicy() {}
 	virtual unsigned int GetAlignment() const =0;
 	virtual unsigned int GetBytesPerIteration() const =0;
 	virtual byte * GetRegisterBegin() =0;
 	virtual void TransformRegister() =0;
 	virtual bool CanIterate() const {return false;}
-	virtual void Iterate(byte *output, const byte *input, CipherDir dir, unsigned int iterationCount) {assert(false);}
-	virtual void CipherSetKey(const NameValuePairs &params, const byte *key, unsigned int length) =0;
-	virtual void CipherResynchronize(const byte *iv) {throw NotImplemented("StreamTransformation: this object doesn't support resynchronization");}
+	virtual void Iterate(byte *output, const byte *input, CipherDir dir, size_t iterationCount)
+		{CRYPTOPP_UNUSED(output); CRYPTOPP_UNUSED(input); CRYPTOPP_UNUSED(dir); CRYPTOPP_UNUSED(iterationCount);
+		 assert(false); /*throw 0;*/ throw Exception(Exception::OTHER_ERROR, "SimpleKeyingInterface: unexpected error");}
+	virtual void CipherSetKey(const NameValuePairs &params, const byte *key, size_t length) =0;
+	virtual void CipherResynchronize(const byte *iv, size_t length)
+		{CRYPTOPP_UNUSED(iv); CRYPTOPP_UNUSED(length); throw NotImplemented("SimpleKeyingInterface: this object doesn't support resynchronization");}
 };
 
 template <typename WT, unsigned int W, class BASE = CFB_CipherAbstractPolicy>
@@ -189,11 +213,16 @@ struct CRYPTOPP_NO_VTABLE CFB_CipherConcretePolicy : public BASE
 
 			if (m_dir == ENCRYPTION)
 			{
-				WordType ct = *(const WordType *)m_input ^ registerWord;
-				registerWord = ct;
-				*(WordType*)m_output = ct;
-				m_input += sizeof(WordType);
-				m_output += sizeof(WordType);
+				if (m_input == NULL)
+					assert(m_output == NULL);
+				else
+				{
+					WordType ct = *(const WordType *)m_input ^ registerWord;
+					registerWord = ct;
+					*(WordType*)m_output = ct;
+					m_input += sizeof(WordType);
+					m_output += sizeof(WordType);
+				}
 			}
 			else
 			{
@@ -219,10 +248,10 @@ template <class BASE>
 class CRYPTOPP_NO_VTABLE CFB_CipherTemplate : public BASE
 {
 public:
-	void ProcessData(byte *outString, const byte *inString, unsigned int length);
-	void Resynchronize(const byte *iv);
+	void ProcessData(byte *outString, const byte *inString, size_t length);
+	void Resynchronize(const byte *iv, int length=-1);
 	unsigned int OptimalBlockSize() const {return this->GetPolicy().GetBytesPerIteration();}
-	unsigned int GetOptimalNextBlockSize() const {return m_leftOver;}
+	unsigned int GetOptimalNextBlockSize() const {return (unsigned int)m_leftOver;}
 	unsigned int OptimalDataAlignment() const {return this->GetPolicy().GetAlignment();}
 	bool IsRandomAccess() const {return false;}
 	bool IsSelfInverting() const {return false;}
@@ -230,25 +259,25 @@ public:
 	typedef typename BASE::PolicyInterface PolicyInterface;
 
 protected:
-	virtual void CombineMessageAndShiftRegister(byte *output, byte *reg, const byte *message, unsigned int length) =0;
+	virtual void CombineMessageAndShiftRegister(byte *output, byte *reg, const byte *message, size_t length) =0;
 
-	void UncheckedSetKey(const NameValuePairs &params, const byte *key, unsigned int length, const byte *iv);
+	void UncheckedSetKey(const byte *key, unsigned int length, const NameValuePairs &params);
 
-	unsigned int m_leftOver;
+	size_t m_leftOver;
 };
 
 template <class BASE = AbstractPolicyHolder<CFB_CipherAbstractPolicy, SymmetricCipher> >
 class CRYPTOPP_NO_VTABLE CFB_EncryptionTemplate : public CFB_CipherTemplate<BASE>
 {
 	bool IsForwardTransformation() const {return true;}
-	void CombineMessageAndShiftRegister(byte *output, byte *reg, const byte *message, unsigned int length);
+	void CombineMessageAndShiftRegister(byte *output, byte *reg, const byte *message, size_t length);
 };
 
 template <class BASE = AbstractPolicyHolder<CFB_CipherAbstractPolicy, SymmetricCipher> >
 class CRYPTOPP_NO_VTABLE CFB_DecryptionTemplate : public CFB_CipherTemplate<BASE>
 {
 	bool IsForwardTransformation() const {return false;}
-	void CombineMessageAndShiftRegister(byte *output, byte *reg, const byte *message, unsigned int length);
+	void CombineMessageAndShiftRegister(byte *output, byte *reg, const byte *message, size_t length);
 };
 
 template <class BASE>
@@ -258,56 +287,39 @@ public:
 	unsigned int MandatoryBlockSize() const {return this->OptimalBlockSize();}
 };
 
-// for Darwin
-CRYPTOPP_DLL_TEMPLATE_CLASS CFB_CipherTemplate<AbstractPolicyHolder<CFB_CipherAbstractPolicy, SymmetricCipher> >;
-CRYPTOPP_DLL_TEMPLATE_CLASS CFB_EncryptionTemplate<>;
-CRYPTOPP_DLL_TEMPLATE_CLASS CFB_DecryptionTemplate<>;
-
+//! _
 template <class BASE, class INFO = BASE>
 class SymmetricCipherFinal : public AlgorithmImpl<SimpleKeyingInterfaceImpl<BASE, INFO>, INFO>
 {
 public:
  	SymmetricCipherFinal() {}
 	SymmetricCipherFinal(const byte *key)
-		{SetKey(key, this->DEFAULT_KEYLENGTH);}
-	SymmetricCipherFinal(const byte *key, unsigned int length)
-		{SetKey(key, length);}
-	SymmetricCipherFinal(const byte *key, unsigned int length, const byte *iv)
+		{this->SetKey(key, this->DEFAULT_KEYLENGTH);}
+	SymmetricCipherFinal(const byte *key, size_t length)
+		{this->SetKey(key, length);}
+	SymmetricCipherFinal(const byte *key, size_t length, const byte *iv)
 		{this->SetKeyWithIV(key, length, iv);}
-
-	void SetKey(const byte *key, unsigned int length, const NameValuePairs &params = g_nullNameValuePairs)
-	{
-		this->ThrowIfInvalidKeyLength(length);
-		this->UncheckedSetKey(params, key, length, this->GetIVAndThrowIfInvalid(params));
-	}
 
 	Clonable * Clone() const {return static_cast<SymmetricCipher *>(new SymmetricCipherFinal<BASE, INFO>(*this));}
 };
 
-template <class S>
-void AdditiveCipherTemplate<S>::UncheckedSetKey(const NameValuePairs &params, const byte *key, unsigned int length, const byte *iv)
-{
-	PolicyInterface &policy = this->AccessPolicy();
-	policy.CipherSetKey(params, key, length);
-	m_leftOver = 0;
-	m_buffer.New(GetBufferByteSize(policy));
+NAMESPACE_END
 
-	if (this->IsResynchronizable())
-		policy.CipherResynchronize(m_buffer, iv);
-}
+#ifdef CRYPTOPP_MANUALLY_INSTANTIATE_TEMPLATES
+#include "strciphr.cpp"
+#endif
 
-template <class BASE>
-void CFB_CipherTemplate<BASE>::UncheckedSetKey(const NameValuePairs &params, const byte *key, unsigned int length, const byte *iv)
-{
-	PolicyInterface &policy = this->AccessPolicy();
-	policy.CipherSetKey(params, key, length);
-
-	if (this->IsResynchronizable())
-		policy.CipherResynchronize(iv);
-
-	m_leftOver = policy.GetBytesPerIteration();
-}
+NAMESPACE_BEGIN(CryptoPP)
+CRYPTOPP_DLL_TEMPLATE_CLASS AbstractPolicyHolder<AdditiveCipherAbstractPolicy, SymmetricCipher>;
+CRYPTOPP_DLL_TEMPLATE_CLASS AdditiveCipherTemplate<AbstractPolicyHolder<AdditiveCipherAbstractPolicy, SymmetricCipher> >;
+CRYPTOPP_DLL_TEMPLATE_CLASS CFB_CipherTemplate<AbstractPolicyHolder<CFB_CipherAbstractPolicy, SymmetricCipher> >;
+CRYPTOPP_DLL_TEMPLATE_CLASS CFB_EncryptionTemplate<AbstractPolicyHolder<CFB_CipherAbstractPolicy, SymmetricCipher> >;
+CRYPTOPP_DLL_TEMPLATE_CLASS CFB_DecryptionTemplate<AbstractPolicyHolder<CFB_CipherAbstractPolicy, SymmetricCipher> >;
 
 NAMESPACE_END
+
+#if CRYPTOPP_MSC_VERSION
+# pragma warning(pop)
+#endif
 
 #endif

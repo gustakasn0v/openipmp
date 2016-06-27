@@ -1,15 +1,18 @@
+// serpent.h - written and placed in the public domain by Wei Dai
+
+//! \file serpent.h
+//! \brief Classes for the Serpent block cipher
+
 #ifndef CRYPTOPP_SERPENT_H
 #define CRYPTOPP_SERPENT_H
-
-/** \file
-*/
 
 #include "seckey.h"
 #include "secblock.h"
 
 NAMESPACE_BEGIN(CryptoPP)
 
-struct Serpent_Info : public FixedBlockSize<16>, public VariableKeyLength<16, 1, 32>, public FixedRounds<32>
+//! _
+struct Serpent_Info : public FixedBlockSize<16>, public VariableKeyLength<16, 0, 32>, public FixedRounds<32>
 {
 	static const char *StaticAlgorithmName() {return "Serpent";}
 };
@@ -20,10 +23,10 @@ class Serpent : public Serpent_Info, public BlockCipherDocumentation
 	class CRYPTOPP_NO_VTABLE Base : public BlockCipherImpl<Serpent_Info>
 	{
 	public:
-		void UncheckedSetKey(CipherDir direction, const byte *userKey, unsigned int length);
+		void UncheckedSetKey(const byte *userKey, unsigned int length, const NameValuePairs &params);
 
 	protected:
-		FixedSizeSecBlock<word32, 140> m_key;
+		FixedSizeSecBlock<word32, 33*4> m_key;
 	};
 
 	class CRYPTOPP_NO_VTABLE Enc : public Base

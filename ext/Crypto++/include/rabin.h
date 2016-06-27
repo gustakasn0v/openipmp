@@ -1,16 +1,20 @@
+// rabin.h - written and placed in the public domain by Wei Dai
+
+//! \file
+//! \headerfile rabin.h
+//! \brief Classes for Rabin encryption and signature schemes
+
 #ifndef CRYPTOPP_RABIN_H
 #define CRYPTOPP_RABIN_H
 
-/** \file
-*/
-
+#include "cryptlib.h"
 #include "oaep.h"
 #include "pssr.h"
 #include "integer.h"
 
 NAMESPACE_BEGIN(CryptoPP)
 
-//! Rabin
+//! _
 class RabinFunction : public TrapdoorFunction, public PublicKey
 {
 	typedef RabinFunction ThisClass;
@@ -42,7 +46,7 @@ protected:
 	Integer m_n, m_r, m_s;
 };
 
-//! Invertible Rabin
+//! _
 class InvertibleRabinFunction : public RabinFunction, public TrapdoorFunctionInverse, public PrivateKey
 {
 	typedef InvertibleRabinFunction ThisClass;
@@ -77,7 +81,7 @@ protected:
 	Integer m_p, m_q, m_u;
 };
 
-//! .
+//! Rabin
 struct Rabin
 {
 	static std::string StaticAlgorithmName() {return "Rabin-Crypto++Variant";}
@@ -85,24 +89,22 @@ struct Rabin
 	typedef InvertibleRabinFunction PrivateKey;
 };
 
-//! .
+//! Rabin encryption
 template <class STANDARD>
 struct RabinES : public TF_ES<STANDARD, Rabin>
 {
 };
 
-//! .
+//! Rabin signature
 template <class STANDARD, class H>
 struct RabinSS : public TF_SS<STANDARD, H, Rabin>
 {
 };
 
-class SHA;
-
 // More typedefs for backwards compatibility
-
-typedef RabinES<OAEP<SHA> >::Decryptor RabinDecryptor;
-typedef RabinES<OAEP<SHA> >::Encryptor RabinEncryptor;
+class SHA1;
+typedef RabinES<OAEP<SHA1> >::Decryptor RabinDecryptor;
+typedef RabinES<OAEP<SHA1> >::Encryptor RabinEncryptor;
 
 NAMESPACE_END
 
