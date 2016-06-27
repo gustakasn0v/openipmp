@@ -207,7 +207,7 @@ IXMLAttribute* XMLElement::AddAttribute(const std::string& name, const
     \returns  Child element with given path. If zero, failed.
 */
 IXMLElement* XMLElement::AddChildElement(const std::string& path) {
-  char* dot = strchr(path.data(), '.');
+  char* dot = const_cast<char*>(strchr(path.data(), '.'));
   if (dot != NULL) {
     IXMLElement* elem = AddChildElement(std::string(path.begin(), std::string::const_iterator(dot)));
     if (elem == 0) {
@@ -331,7 +331,7 @@ IXMLElement* XMLElement::GetChildElement(const std::string& path) {
   if (path == "") {
     return this;
   }
-  char* dot = strchr(path.data(), '.');
+  char* dot = const_cast<char*>(strchr(path.data(), '.'));
   if (dot != NULL) {
     std::vector<IXMLElement*> elems = GetChildElementsByName(std::string(path.begin(), std::string::const_iterator(dot)));
     if ((elems.size() == 0) || (elems.size() > 1)) {
