@@ -13,7 +13,7 @@ fi
 # Install keystore is 'keystore' is given as argument to deploy
 if [ $1 ]
 then
-    if (( $1==keystore )) 
+    if [ $1==keystore ]
     then
 	if [ -f ${JBOSS_HOME}/conf ]
 	then
