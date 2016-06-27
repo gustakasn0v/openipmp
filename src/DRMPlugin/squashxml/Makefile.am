@@ -42,4 +42,4 @@ libSquashXML_a_SOURCES = \
 
 INCLUDES = -I../../../ext/squashxml/include -I../../../ext/xerces/include
 
-AM_CXXFLAGS = -DLINUX
+AM_CXXFLAGS = -DLINUX -fPIC

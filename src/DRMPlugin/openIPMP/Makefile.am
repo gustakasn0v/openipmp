@@ -152,4 +152,4 @@ libopenIPMP_a_SOURCES = \
 
 INCLUDES = -I../../client/include -I../../../ext/openssl/include -I../../../ext/squashxml/include -I../../../ext/xerces/include
 
-AM_CXXFLAGS = -DLINUX -DUNIXSTYLE
+AM_CXXFLAGS = -DLINUX -DUNIXSTYLE -fPIC

@@ -6,4 +6,4 @@ libOpenIPMPKeyManager_a_SOURCES = OpenIPMPKeyManager.h OpenIPMPKeyManager.cpp
 
 INCLUDES = -I../include -I../CipherFactory -I../OpenIPMPMessengerFactory
 
-AM_CXXFLAGS = -DLINUX
+AM_CXXFLAGS = -DLINUX -fPIC

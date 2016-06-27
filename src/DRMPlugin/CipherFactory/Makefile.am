@@ -6,4 +6,4 @@ libCipherFactory_a_SOURCES = CipherFactory.h CipherFactory.cpp BlockCipher.h Blo
 
 INCLUDES = -I../SRTPCrypto -I../../../ext/srtp/include -I../../../ext/Crypto++/include -I../include -I../../../ext/openssl/include
 
-AM_CXXFLAGS = -DLINUX -DNDEBUG
+AM_CXXFLAGS = -DLINUX -DNDEBUG -fPIC
