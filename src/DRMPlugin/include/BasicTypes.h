@@ -30,7 +30,7 @@
 */
 #pragma warning(disable: 4786)
 
-#include <string>
+#include <cstring>
 #include <algorithm>
 
 #include <strstream>

@@ -15,6 +15,7 @@
 #include <string>
 #include <iostream>
 #include "IThreadSync.h"
+#include <stdio.h>
 
 //! DRMPlugin namespace. All DRM plugin code resides in it.
 namespace DRMPlugin {
