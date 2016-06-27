@@ -514,7 +514,7 @@ bool OpenIPMPKeyManager::AddLicense(std::string& contentID, IXMLElement* xmlDoc)
 */
 bool OpenIPMPKeyManager::ParseHostIPPort(const std::string& hostURL,
     std::string& hostIP, int* hostPort) {
-  char* colon = strchr(hostURL.data(), ':');
+  char* colon = const_cast<char*>(strchr(hostURL.data(), ':'));
   if (colon == NULL) {
     return false;
   }
@@ -544,7 +544,7 @@ bool OpenIPMPKeyManager::ParseLicense(const std::string& license, std::string& u
   char *semi1, *semi2;
   char *hyphen1, *hyphen2;
 
-  semi1 = strchr(license.data(), ';');
+  semi1 = const_cast<char*>(strchr(license.data(), ';'));
   if (semi1 == NULL) {
     return false;
   }
@@ -555,7 +555,7 @@ bool OpenIPMPKeyManager::ParseLicense(const std::string& license, std::string& u
     return false;
   }
   std::string startDate = std::string(std::string::iterator(semi1), std::string::iterator(semi2));
-  hyphen1 = strchr(startDate.data(), '-');
+  hyphen1 = const_cast<char*>(strchr(startDate.data(), '-'));
   if (hyphen1 == NULL) {
     return false;
   }
@@ -574,7 +574,7 @@ bool OpenIPMPKeyManager::ParseLicense(const std::string& license, std::string& u
     return false;
   }
   std::string endDate = std::string(std::string::iterator(semi2), std::string::iterator(semi1));
-  hyphen1 = strchr(endDate.data(), '-');
+  hyphen1 = const_cast<char*>(strchr(endDate.data(), '-'));
   if (hyphen1 == NULL) {
     return false;
   }
