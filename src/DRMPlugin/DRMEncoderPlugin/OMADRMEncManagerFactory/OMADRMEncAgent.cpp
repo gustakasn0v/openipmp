@@ -380,7 +380,7 @@ bool OMADRMEncAgent::ParseLicense(const std::string& license, std::string& devic
     SPtr<ODDStart>& oddStart, SPtr<ODDEnd>& oddEnd) {
   char *semi1, *semi2;
 
-  semi1 = strchr(license.data(), ';');
+  semi1 = const_cast<char*>(strchr(license.data(), ';'));
   if (semi1 == NULL) {
     return false;
   }

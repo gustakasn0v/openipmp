@@ -221,7 +221,7 @@ bool OpenIPMPDOIContentInfoManager::GetContentInfo(IXMLElement* xmlDoc, std::str
 */
 bool OpenIPMPDOIContentInfoManager::ParseHostIPPort(const std::string& hostURL,
     std::string& hostIP, int& hostPort) {
-  char* colon = strchr(hostURL.data(), ':');
+  char* colon = const_cast<char*>(strchr(hostURL.data(), ':'));
   if (colon == NULL) {
     return false;
   }
