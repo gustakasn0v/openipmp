@@ -6,4 +6,4 @@ libBase64Factory_a_SOURCES = Base64Factory.h Base64Factory.cpp
 
 INCLUDES = -I../include
 
-AM_CXXFLAGS = -DLINUX
+AM_CXXFLAGS = -DLINUX -fPIC
