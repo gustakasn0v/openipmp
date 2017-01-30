@@ -21,8 +21,6 @@ export var_ri_chain="$(base64 $CURR_DIR/../../Demo/data/riCertSigned.der)"
 export var_ri_key="$(base64 $CURR_DIR/../../Demo/data/riKey.der)"
 export var_ri_ctx="$(base64 $CURR_DIR/../../Demo/data/ri_context.xml)"
 
-echo "SET @device_ca:=FROM_BASE64('$var_device_ca');INSERT INTO DEVICE_CA ( CERT ) VALUES ( @device_ca );"
-
 # Use the following to add trusted device (client) CA certificates.
 # Replace *.der file names with CA certificate file names. Paths must
 # be given with forward slashes (unix style).
