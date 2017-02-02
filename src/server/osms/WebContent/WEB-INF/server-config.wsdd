@@ -4,7 +4,7 @@
   <parameter name="sendMultiRefs" value="false"/>
   <parameter name="disablePrettyXML" value="true"/>
   <parameter name="adminPassword" value="admin"/>
-  <parameter name="attachments.Directory" value="D:\tools\openipmp2\src\server\osms\.deployables\openipmp\WEB-INF\attachments"/>
+  <parameter name="attachments.Directory" value="/opt/jboss/openipmp/src/server/osms/.deployables/openipmp/WEB-INF/attachments"/>
   <parameter name="dotNetSoapEncFix" value="true"/>
   <parameter name="enableNamespacePrefixOptimization" value="true"/>
   <parameter name="sendXMLDeclaration" value="true"/>
