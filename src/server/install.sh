@@ -23,12 +23,6 @@ then
 	chmod +x $ANT_HOME/bin/ant
 fi
 
-# make directories
-mkdir $JBOSS_HOME/server
-mkdir $JBOSS_HOME/server/default
-mkdir $JBOSS_HOME/server/default/deploy
-mkdir $JBOSS_HOME/server/default/lib
-
 cd ./OMADRMWS
 if [ ! -x ./install_OMADRM.sh ]
 then
@@ -48,11 +42,6 @@ cd ..
 export MYSQL_USER=
 export MYSQL_PASS=
 export ANT_HOME=
-
-echo "Deploying openIPMP"
-cp $JBOSS_HOME/server/default/deploy/* $JBOSS_HOME/standalone/deployments/
-cp $JBOSS_HOME/server/default/lib/* $JBOSS_HOME/standalone/lib/ext/
-
 echo "openIPMP server installation COMPLETED"
 
 exit 0
