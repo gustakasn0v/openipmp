@@ -117,7 +117,7 @@
 		</Audit>
 
 		<Encoder>
-			<Path>C:\MP4Creator\mp4creator.exe</Path>
+			<Path>/usr/bin/mp4creator</Path>
 		</Encoder>
 		<ExternalAuth>
 		<SPEAuthUser>false</SPEAuthUser>
