@@ -39,6 +39,8 @@ fi
 ./install_OSMS.sh $MYSQL_USER $MYSQL_PASS
 cd ..
 
+ln -s $JBOSS_HOME/bin/lib $JBOSS_HOME/server/lib
+
 export MYSQL_USER=
 export MYSQL_PASS=
 export ANT_HOME=
