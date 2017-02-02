@@ -4,7 +4,7 @@
   <parameter name="sendMultiRefs" value="false"/>
   <parameter name="disablePrettyXML" value="true"/>
   <parameter name="adminPassword" value="admin"/>
-  <parameter name="attachments.Directory" value="C:\eclipse\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\webapps\OMADRMWS\WEB-INF\attachments"/>
+  <parameter name="attachments.Directory" value="/opt/eclipse/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/webapps/OMADRMWS/WEB-INF/attachments"/>
   <parameter name="dotNetSoapEncFix" value="true"/>
   <parameter name="enableNamespacePrefixOptimization" value="true"/>
   <parameter name="sendXMLDeclaration" value="true"/>
