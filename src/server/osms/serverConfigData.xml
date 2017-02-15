@@ -6,7 +6,7 @@
 		<Database>
 			<Provider>MYSQL</Provider>
 			<Driver>com.mysql.jdbc.Driver</Driver>
-			<ConnectURL>jdbc:mysql://localhost:3306/OSMS</ConnectURL>
+			<ConnectURL>jdbc:mysql://localhost:3306/OSMS?zeroDateTimeBehavior=convertToNull</ConnectURL>
 			<UserName>osms</UserName>
 			<Password>openipmp</Password>
 		</Database>
@@ -114,7 +114,12 @@
 		<Audit>
 			<CreateUser>TestCreateUser</CreateUser>
 			<UpdateUser>TestUpdateUser</UpdateUser>
-		</Audit>		<Encoder>			<Path>C:\MP4Creator\mp4creator.exe</Path>		</Encoder>		<ExternalAuth>
+		</Audit>
+
+		<Encoder>
+			<Path>/usr/bin/mp4creator</Path>
+		</Encoder>
+		<ExternalAuth>
 		<SPEAuthUser>false</SPEAuthUser>
 	</ExternalAuth>
 

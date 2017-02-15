@@ -27,6 +27,8 @@ fi
 ./uninstall_OSMS.sh $MYSQL_USER $MYSQL_PASS
 cd ..
 
+rm -rf $JBOSS_HOME/server/lib
+
 export MYSQL_USER=
 export MYSQL_PASS=
 echo "openIPMP server uninstall COMPLETED"

@@ -1,6 +1,6 @@
 <databases>
 	<mySqlDriver>com.mysql.jdbc.Driver</mySqlDriver>
-	<mySqlPath>jdbc:mysql://localhost/OMADRM</mySqlPath>
+	<mySqlPath>jdbc:mysql://localhost/OMADRM?zeroDateTimeBehavior=convertToNull</mySqlPath>
 	<mySqlUser>omadrm</mySqlUser>
 	<mySqlPass>omadrm</mySqlPass>
 	<ri>
